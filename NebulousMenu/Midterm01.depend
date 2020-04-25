@@ -1,0 +1,110 @@
+# depslib dependency file v1.0
+1585828986 source:c:\users\flore\desktop\cscixxx_projects\midterm01\main.cpp
+	<windows.h>
+	<GLScene.h>
+	<stdlib.h>
+	<iostream>
+	<windows.h>
+	<StateManager.h>
+
+1585791676 c:\users\flore\desktop\cscixxx_projects\midterm01\include\glscene.h
+	<string.h>
+	<windows.h>
+	<GL/glut.h>
+	<StateManager.h>
+
+1583996036 c:\users\flore\desktop\cscixxx_projects\common\include\gl\glut.h
+	<windows.h>
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1585805314 c:\users\flore\desktop\cscixxx_projects\midterm01\include\statemanager.h
+
+1585795726 source:c:\users\flore\desktop\cscixxx_projects\midterm01\src\_charac.cpp
+	"_charac.h"
+
+1585795726 c:\users\flore\desktop\cscixxx_projects\midterm01\include\_charac.h
+
+1585805708 source:c:\users\flore\desktop\cscixxx_projects\midterm01\src\gllight.cpp
+	"GLLight.h"
+
+1585791676 c:\users\flore\desktop\cscixxx_projects\midterm01\include\gllight.h
+	<GLScene.h>
+
+1585791677 source:c:\users\flore\desktop\cscixxx_projects\midterm01\src\menu.cpp
+	"Menu.h"
+
+1585791676 c:\users\flore\desktop\cscixxx_projects\midterm01\include\menu.h
+
+1585828898 source:c:\users\flore\desktop\cscixxx_projects\midterm01\src\glscene.cpp
+	<GLLight.h>
+	"GLScene.h"
+	<Inputs.h>
+	<Model.h>
+	<Parallax.h>
+	<player.h>
+	<Objects.h>
+
+1585791676 c:\users\flore\desktop\cscixxx_projects\midterm01\include\inputs.h
+	<windows.h>
+	<Model.h>
+	<Parallax.h>
+	<player.h>
+	<StateManager.h>
+
+1585791676 c:\users\flore\desktop\cscixxx_projects\midterm01\include\model.h
+	<windows.h>
+	<GL/glut.h>
+
+1585791676 c:\users\flore\desktop\cscixxx_projects\midterm01\include\parallax.h
+	<iostream>
+	<windows.h>
+	<textureLoader.h>
+
+1585791677 c:\users\flore\desktop\cscixxx_projects\midterm01\include\textureloader.h
+	<SOIL.h>
+	<GL/gl.h>
+	<iostream>
+
+1585798283 c:\users\flore\desktop\cscixxx_projects\common\include\soil.h
+
+1585804551 c:\users\flore\desktop\cscixxx_projects\midterm01\include\player.h
+	<GL/gl.h>
+	<TextureLoader.h>
+
+1585791676 c:\users\flore\desktop\cscixxx_projects\midterm01\include\objects.h
+	<GL/gl.h>
+	<textureLoader.h>
+	<Timer.h>
+	<player.h>
+
+1585791677 c:\users\flore\desktop\cscixxx_projects\midterm01\include\timer.h
+	<time.h>
+
+1585819666 source:c:\users\flore\desktop\cscixxx_projects\midterm01\src\inputs.cpp
+	"Inputs.h"
+
+1585819762 source:c:\users\flore\desktop\cscixxx_projects\midterm01\src\model.cpp
+	"Model.h"
+	<textureLoader.h>
+
+1585819841 source:c:\users\flore\desktop\cscixxx_projects\midterm01\src\objects.cpp
+	"Objects.h"
+
+1585822512 source:c:\users\flore\desktop\cscixxx_projects\midterm01\src\parallax.cpp
+	"Parallax.h"
+
+1585825243 source:c:\users\flore\desktop\cscixxx_projects\midterm01\src\player.cpp
+	"player.h"
+	<Timer.h>
+
+1585791678 source:c:\users\flore\desktop\cscixxx_projects\midterm01\src\statemanager.cpp
+	"StateManager.h"
+
+1585791678 source:c:\users\flore\desktop\cscixxx_projects\midterm01\src\textureloader.cpp
+	"textureLoader.h"
+
+1585791678 source:c:\users\flore\desktop\cscixxx_projects\midterm01\src\timer.cpp
+	"Timer.h"
+
