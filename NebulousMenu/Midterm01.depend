@@ -108,3 +108,104 @@
 1585791678 source:c:\users\flore\desktop\cscixxx_projects\midterm01\src\timer.cpp
 	"Timer.h"
 
+1587844383 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\main.cpp
+	<windows.h>
+	<GLScene.h>
+	<stdlib.h>
+	<iostream>
+	<windows.h>
+	<StateManager.h>
+
+1587844383 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\glscene.h
+	<string.h>
+	<windows.h>
+	<GL/glut.h>
+	<StateManager.h>
+
+1587844383 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\statemanager.h
+
+1587844383 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\_charac.cpp
+	"_charac.h"
+
+1587844383 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\_charac.h
+
+1587844383 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\gllight.cpp
+	"GLLight.h"
+
+1587844383 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\gllight.h
+	<GLScene.h>
+
+1587844383 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\glscene.cpp
+	<GLLight.h>
+	"GLScene.h"
+	<Inputs.h>
+	<Model.h>
+	<Parallax.h>
+	<player.h>
+	<Objects.h>
+
+1587844383 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\inputs.h
+	<windows.h>
+	<Model.h>
+	<Parallax.h>
+	<player.h>
+	<StateManager.h>
+
+1587844383 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\model.h
+	<windows.h>
+	<GL/glut.h>
+
+1587844383 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\parallax.h
+	<iostream>
+	<windows.h>
+	<textureLoader.h>
+
+1587844383 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\textureloader.h
+	<SOIL.h>
+	<GL/gl.h>
+	<iostream>
+
+1587844383 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\player.h
+	<GL/gl.h>
+	<TextureLoader.h>
+
+1587844383 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\objects.h
+	<GL/gl.h>
+	<textureLoader.h>
+	<Timer.h>
+	<player.h>
+
+1587844383 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\timer.h
+	<time.h>
+
+1587844383 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\inputs.cpp
+	"Inputs.h"
+
+1587844383 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\menu.cpp
+	"Menu.h"
+
+1587844383 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\menu.h
+
+1587844383 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\model.cpp
+	"Model.h"
+	<textureLoader.h>
+
+1587844383 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\objects.cpp
+	"Objects.h"
+
+1587844383 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\parallax.cpp
+	"Parallax.h"
+
+1587844383 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\player.cpp
+	"player.h"
+	<Timer.h>
+
+1587844383 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\statemanager.cpp
+	"StateManager.h"
+
+1587844383 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\textureloader.cpp
+	"textureLoader.h"
+
+1587844383 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\timer.cpp
+	"Timer.h"
+
