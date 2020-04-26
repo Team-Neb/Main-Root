@@ -11,11 +11,13 @@ _enms::_enms()
 
     rotateX = rotateY = rotateZ = 0;
 
-    frames = 4;
+    frames = 7;
 
     xMin = yMin = 0.0;
-    xMax = 1;
-    yMax = 1;
+    xMax = 1.0/(float)frames;
+    yMax = 0.5;
+    action = 0;
+    xMove = 0.01;
 
 }
 
@@ -65,14 +67,14 @@ void _enms::actions(){
     switch(action){
     case 0:
         if(TE->getTicks()>60){
-            xMin += 0.25;
-            xMax += 0.25;
-            yMin = 0.0;
-            yMax = 0.25;
+            xMin += 1.0/frames;
+            xMax += 1.0/frames;
+            yMin = 0.5;
+            yMax = 1.0;
 
             if(xMax >= 1){
                 xMin = 0;
-                xMax = 0.25;
+                xMax = 1.0/frames;
                 TE->reset();
             }
         }
@@ -82,10 +84,10 @@ void _enms::actions(){
 
     case 1:
         if(TE->getTicks()>60){
-            xMin -= 1.0/frames;
-            xMax -= 1.0/frames;
+            xMin += 1.0/frames;
+            xMax += 1.0/frames;
             yMin = 0.0;
-            yMax = 0.25;
+            yMax = 0.5;
 
             if(xMax >= 1){
                 xMin = 0;

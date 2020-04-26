@@ -32,7 +32,7 @@ player::player()
 
     xPos = -0.5;
     yPos = -1.3;
-    zPos = -3.0;
+    zPos = -5.0;
 
     lastKeyHit = false; // Check the last key arrow hit to set the current pos for player.
 

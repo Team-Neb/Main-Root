@@ -44,6 +44,7 @@ GLint GLScene::initGL()
     glClearColor(184.0f/255.0f, 213.0f/255.0f, 238.0f/255.0f, 1.0f); // Input the background color
     glClearDepth(1.0f);      // To choose what is in the front and in the back like layers
     glEnable(GL_DEPTH_TEST); // To calculate the depth perception
+    glDepthFunc(GL_LEQUAL);
 
     glEnable(GL_COLOR_MATERIAL); // This is for rendering the base color of an object (glColor3f)
     GLLight Light(GL_LIGHT0);
@@ -56,15 +57,15 @@ GLint GLScene::initGL()
     tlt->parallaxInit("images/title.png");
     menu->parallaxInit("images/FrontMenu.jpg");
     help->parallaxInit("images/help.jpg");
-    enmsTex->loadTexture("images/zombies.png");
+    enmsTex->loadTexture("images/mon.png");
 
-    glPushMatrix();
+
     for(int i = 0; i < 10; i++){
         enms[i].initEnemy(enmsTex->tex);
-        enms[i].placeEnemy((float)(rand()/float(RAND_MAX))*5-2.5, -0.2, -1);
-        enms[i].xSize = enms[i].ySize =0.15;
+        enms[i].placeEnemy((float)(rand()/float(RAND_MAX))*5-2.5, -1.3, -2.0);
+        enms[i].xSize = enms[i].ySize = float(rand()%12)/65.0;
     }
-    glPopMatrix();
+
 
     return true;
 
@@ -114,37 +115,36 @@ GLint GLScene::drawGLScene()
             ply->playerActions(); // render actions
         glPopMatrix();
 
-        glPushMatrix();
+
         for(int i = 0; i < 10; i++){
             if(enms[i].xPos< -2.0){
                 enms[i].action = 0;
                 enms[i].xMove= 0.005;
                 enms[i].rotateZ = 0;
-                enms[i].yPos = -0.2;
+                enms[i].yPos = 0;
             }
             else if(enms[i].xPos > 2.0){
                 enms[i].action = 1;
                 enms[i].xMove = -0.005;
                 enms[i].rotateZ = 0;
-                enms[i].yPos = -0.2;
+                enms[i].yPos = 0;
             }
 
             enms[i].xPos += enms[i].xMove;
             enms[i].actions();
         }
-        glPopMatrix();
+
 
         break;
 
     case PAUSED: // pop up pause menu
 
         glPushMatrix();
+        plx -> drawSquare(screenHeight, screenWidth);// drawing the game behind the pop screen
+        glPopMatrix();
+        glPushMatrix();
         glScaled(.75, .75, 1.0); // reduced scaling to reduce size
         pause -> drawPopUp(screenHeight, screenWidth);
-        glPopMatrix();
-
-        glPushMatrix();
-        plx -> drawSquare(screenHeight, screenWidth);// drawing the game behind the pop screen
         glPopMatrix();
 
         break;
