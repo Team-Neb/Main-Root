@@ -1,0 +1,105 @@
+#include "_enms.h"
+
+_enms::_enms()
+{
+    //ctor
+    xPos = yPos = 0;
+    zPos = -1;
+
+    xSize = 1;
+    ySize = 1;
+
+    rotateX = rotateY = rotateZ = 0;
+
+    frames = 4;
+
+    xMin = yMin = 0.0;
+    xMax = 1;
+    yMax = 1;
+
+}
+
+_enms::~_enms()
+{
+    //dtor
+}
+void _enms::drawEnemy(){
+    glBindTexture(GL_TEXTURE_2D, EnemyTex);
+
+    glPushMatrix();
+        glTranslatef(xPos,yPos,zPos);
+        glRotatef(rotateX,1.0,0.0,0.0);
+        glRotatef(rotateY,0.0,1.0,0.0);
+        glRotatef(rotateZ,0.0,0.0,1.0);
+        glScalef(xSize,ySize,1);
+
+    glBegin(GL_POLYGON);
+        glTexCoord2f(xMin,yMin);
+        glVertex3f(1.0, 1.0, 0.0);
+        glTexCoord2f(xMax,yMin);
+        glVertex3f(-1.0, 1.0, 0.0);
+        glTexCoord2f(xMax,yMax);
+        glVertex3f(-1.0, -1.0, 0.0);
+        glTexCoord2f(xMin,yMax);
+        glVertex3f(1.0, -1.0, 0.0);
+
+    glEnd();
+    glPopMatrix();
+
+}
+
+void _enms::placeEnemy(float x, float y, float z){
+    xPos = x;
+    yPos = y;
+    zPos = z;
+}
+
+void _enms::initEnemy(GLuint tex){
+
+    EnemyTex = tex;
+    TE->start();
+
+}
+
+void _enms::actions(){
+    switch(action){
+    case 0:
+        if(TE->getTicks()>60){
+            xMin += 0.25;
+            xMax += 0.25;
+            yMin = 0.0;
+            yMax = 0.25;
+
+            if(xMax >= 1){
+                xMin = 0;
+                xMax = 0.25;
+                TE->reset();
+            }
+        }
+            drawEnemy();
+
+        break;
+
+    case 1:
+        if(TE->getTicks()>60){
+            xMin -= 1.0/frames;
+            xMax -= 1.0/frames;
+            yMin = 0.0;
+            yMax = 0.25;
+
+            if(xMax >= 1){
+                xMin = 0;
+                xMax = 1.0/frames;
+                TE->reset();
+            }
+        }
+            drawEnemy();
+
+        break;
+    }
+
+}
+
+bool _enms::isEnemyLive(){
+
+}

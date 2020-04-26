@@ -9,7 +9,7 @@
 #include<Parallax.h>
 #include<player.h>
 #include <Objects.h>
-
+#include <_enms.h>
 
 Inputs *KbMs = new Inputs();
 Model *Mdl = new Model();
@@ -21,7 +21,8 @@ Parallax *tlt = new Parallax();
 Parallax *menu = new Parallax();
 Parallax *help = new Parallax();
 
-
+textureLoader *enmsTex = new textureLoader();
+_enms enms[10];
 
 
 
@@ -55,6 +56,15 @@ GLint GLScene::initGL()
     tlt->parallaxInit("images/title.png");
     menu->parallaxInit("images/FrontMenu.jpg");
     help->parallaxInit("images/help.jpg");
+    enmsTex->loadTexture("images/zombies.png");
+
+    glPushMatrix();
+    for(int i = 0; i < 10; i++){
+        enms[i].initEnemy(enmsTex->tex);
+        enms[i].placeEnemy((float)(rand()/float(RAND_MAX))*5-2.5, -0.2, -1);
+        enms[i].xSize = enms[i].ySize =0.15;
+    }
+    glPopMatrix();
 
     return true;
 
@@ -98,9 +108,32 @@ GLint GLScene::drawGLScene()
         plx -> drawSquare(screenHeight, screenWidth);
         glPopMatrix();
 
-        glTranslated(ply->xPos, ply->yPos , ply->zPos);
-        ply->drawPlayer(); // render character
-        ply->playerActions(); // render actions
+        glPushMatrix();
+            glTranslated(ply->xPos, ply->yPos , ply->zPos);
+            ply->drawPlayer(); // render character
+            ply->playerActions(); // render actions
+        glPopMatrix();
+
+        glPushMatrix();
+        for(int i = 0; i < 10; i++){
+            if(enms[i].xPos< -2.0){
+                enms[i].action = 0;
+                enms[i].xMove= 0.005;
+                enms[i].rotateZ = 0;
+                enms[i].yPos = -0.2;
+            }
+            else if(enms[i].xPos > 2.0){
+                enms[i].action = 1;
+                enms[i].xMove = -0.005;
+                enms[i].rotateZ = 0;
+                enms[i].yPos = -0.2;
+            }
+
+            enms[i].xPos += enms[i].xMove;
+            enms[i].actions();
+        }
+        glPopMatrix();
+
         break;
 
     case PAUSED: // pop up pause menu
