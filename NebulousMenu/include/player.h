@@ -26,6 +26,8 @@ class player
         float xMin, yMin, xMax, yMax;
 
         float xPos, yPos, zPos;
+        int frames;
+        bool lastKeyHit;
 
     protected:
 

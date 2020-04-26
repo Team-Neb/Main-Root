@@ -194,6 +194,10 @@ void Inputs::playerAction(player* ply)
         break;
 
 
+        case 0X41: // A for Attack
+        ply->actionTrigger = "Attack";
+            break;
+
         case VK_UP:
         ply->actionTrigger = "Jump"; // to be fixed
         break;

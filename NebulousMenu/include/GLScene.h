@@ -1,7 +1,7 @@
 #ifndef GLSCENE_H
 #define GLSCENE_H
 #include <string.h>
-#include<windows.h>
+#include <windows.h>
 #include <GL/glut.h>
 #include <StateManager.h>
 

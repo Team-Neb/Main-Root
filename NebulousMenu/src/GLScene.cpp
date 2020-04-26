@@ -49,7 +49,7 @@ GLint GLScene::initGL()
     Light.setLight(GL_LIGHT0); // create light instance
 
    // images to import for game states
-    ply->playerInit("images/hero.png");
+    ply->playerInit("images/walkAndattack.png");
     plx->parallaxInit("images/par.png");
     pause->parallaxInit("images/pause.jpg");
     tlt->parallaxInit("images/title.png");

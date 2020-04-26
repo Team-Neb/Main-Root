@@ -23,13 +23,18 @@ player::player()
     vertices[3].y = 1.0;
     vertices[3].z = -1.0;
 
-    xMin=yMin=0.0;
+
+    frames = 10;
+    xMin= 0.0;
+    yMin=0.5;
     xMax=yMax=1.0;
 
 
     xPos = -0.5;
-    yPos = -0.7;
-    zPos = -1.0;
+    yPos = -1.3;
+    zPos = -3.0;
+
+    lastKeyHit = false; // Check the last key arrow hit to set the current pos for player.
 
 }
 
@@ -72,11 +77,11 @@ void player::playerInit(char *fileName)
     T->loadTexture(fileName);
     Time->start();
 
-    xMin=0.25;
-    xMax = 0.0;
+    /*xMin=0.0;
+    xMax = 0.1;
 
     yMin = -1.0;
-    yMax = 1.0;
+    yMax = 1.0;*/
 
 }
 
@@ -84,42 +89,68 @@ void player::playerActions()
 {
     if (actionTrigger == "stand")
     {
-        xMin=0.0;
-        xMax = 0.25;
+        if (lastKeyHit == false){
+            xMin=0.0;
+            xMax = 0.1;
 
-        yMin = 0.5;
-        yMax = 0.75;
+            yMin = 0.5;
+            yMax = 1;
+        }
 
-        yPos = -0.6; // will work on a jump functionality
+        else{
+            xMin=0.0;
+            xMax = -0.1;
+
+            yMin = 0.5;
+            yMax = 1;
+        }
+
+
+
+        //yPos = -0.6; // will work on a jump functionality
     }
     if (actionTrigger == "Left")
     {
 
-        if(Time -> getTicks()>80) // edit variable to increase speed
+        if(Time -> getTicks()>60) // edit variable to increase speed
         {
 
-        xMin -= 0.25;
-        xMax -= 0.25;
+        xMin = xMax;
+        xMax -= 0.1;
 
-        yMin = 0.25;
-        yMax = 0.50;
+        yMin = 0.5;
+        yMax = 1.0;
 
         Time ->reset();
         }
+        lastKeyHit = !false; // toggle the direction of the player for stand idle when the last key hit to Left
     }
 
     if (actionTrigger == "Right")
     {
-        if(Time -> getTicks()>80)
+        if(Time -> getTicks()>60)
         {
 
-        xMin += 0.25;
-        xMax += 0.25;
+        xMin = xMax;
+        xMax += 0.1;
+        yMin = 0.5;
+        yMax = 1.0;
 
         Time ->reset();
         }
+        lastKeyHit = !true; // toggle the direction of the player for stand idle when the last key hit to Right
+    }
 
+    if (actionTrigger == "Attack"){
+        if(Time -> getTicks()>60){
+            xMin += 0.1;
+            xMax += 0.1;
 
+            yMin = 0.0;
+            yMax = 0.5;
+
+            Time->reset();
+        }
     }
 }
 
