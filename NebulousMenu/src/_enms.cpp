@@ -98,6 +98,14 @@ void _enms::actions(){
             drawEnemy();
 
         break;
+
+        case 9: // enemies die
+        xMin = 0;
+        xMax = 0;
+        yMin = 0;
+        yMax = 0;
+        drawEnemy();
+        break;
     }
 
 }

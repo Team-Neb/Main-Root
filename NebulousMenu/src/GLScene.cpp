@@ -1,7 +1,4 @@
-// Omar Flores Estrada
-// 191T Game Development
-// Dr. Dhanyu
-// Midterm 01
+
 #include <GLLight.h>
 #include "GLScene.h"
 #include<Inputs.h>
@@ -10,6 +7,7 @@
 #include<player.h>
 #include <Objects.h>
 #include <_enms.h>
+#include <_checkCollision.h>
 
 Inputs *KbMs = new Inputs();
 Model *Mdl = new Model();
@@ -20,6 +18,8 @@ StateManager *stateManager = new StateManager;
 Parallax *tlt = new Parallax();
 Parallax *menu = new Parallax();
 Parallax *help = new Parallax();
+
+_checkCollision *hit = new _checkCollision();
 
 textureLoader *enmsTex = new textureLoader();
 _enms enms[10];
@@ -62,7 +62,7 @@ GLint GLScene::initGL()
 
     for(int i = 0; i < 10; i++){
         enms[i].initEnemy(enmsTex->tex);
-        enms[i].placeEnemy((float)(rand()/float(RAND_MAX))*5-2.5, -1.3, -2.0);
+        enms[i].placeEnemy((float)(rand()/float(RAND_MAX))*5-2.5, -0.5, -2.0);
         enms[i].xSize = enms[i].ySize = float(rand()%12)/65.0;
     }
 
@@ -121,16 +121,29 @@ GLint GLScene::drawGLScene()
                 enms[i].action = 0;
                 enms[i].xMove= 0.005;
                 enms[i].rotateZ = 0;
-                enms[i].yPos = 0;
+                enms[i].yPos = -0.5;
             }
             else if(enms[i].xPos > 2.0){
                 enms[i].action = 1;
                 enms[i].xMove = -0.005;
                 enms[i].rotateZ = 0;
-                enms[i].yPos = 0;
+                enms[i].yPos = -0.5;
             }
 
             enms[i].xPos += enms[i].xMove;
+
+            if (ply->actionTrigger == "Attack" && ply->xPos > enms[i].xPos){
+                if(hit->isLinearCollision(ply->xPos, enms[i].xPos)){
+                    enms[i].action = 9; // enemies die
+                }
+            }
+
+
+            if (ply->actionTrigger == "Attack" && ply->xPos < enms[i].xPos){
+                if(hit->isLinearCollision(ply->xPos, enms[i].xPos)){
+                    enms[i].action = 9; // enemies die
+                }
+            }
             enms[i].actions();
         }
 
