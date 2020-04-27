@@ -8,6 +8,7 @@
 #include <Objects.h>
 #include <_enms.h>
 #include <_checkCollision.h>
+#include <HealthBar.h>
 
 Inputs *KbMs = new Inputs();
 Model *Mdl = new Model();
@@ -20,6 +21,7 @@ Parallax *menu = new Parallax();
 Parallax *help = new Parallax();
 
 _checkCollision *hit = new _checkCollision();
+HealthBar *healthBar = new HealthBar();
 
 textureLoader *enmsTex = new textureLoader();
 _enms enms[10];
@@ -57,7 +59,9 @@ GLint GLScene::initGL()
     tlt->parallaxInit("images/title.png");
     menu->parallaxInit("images/FrontMenu.jpg");
     help->parallaxInit("images/help.jpg");
+    healthBar->initHealthBar("images/heartBar.png");
     enmsTex->loadTexture("images/mon.png");
+
 
 
     for(int i = 0; i < 10; i++){
@@ -109,12 +113,15 @@ GLint GLScene::drawGLScene()
         plx -> drawSquare(screenHeight, screenWidth);
         glPopMatrix();
 
+
+        healthBar->drawHealthBar();
+
+
         glPushMatrix();
             glTranslated(ply->xPos, ply->yPos , ply->zPos);
             ply->drawPlayer(); // render character
             ply->playerActions(); // render actions
         glPopMatrix();
-
 
         for(int i = 0; i < 10; i++){
             if(enms[i].xPos< -2.0){

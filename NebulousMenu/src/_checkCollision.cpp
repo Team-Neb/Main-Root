@@ -12,7 +12,7 @@ _checkCollision::~_checkCollision()
 
 bool _checkCollision::isLinearCollision(float x1, float x2) // abs(xpos_e - xpos_p) = 0.2 then True/ else False. Only work on x axis
 {
-    if(fabs(x1 - x2 < 0.001)) return true;
+    if(fabs(x1 - x2 < 0.1)) return true;
     return false;
 }
 

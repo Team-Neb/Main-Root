@@ -135,7 +135,7 @@
 1587844383 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\gllight.h
 	<GLScene.h>
 
-1587955888 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\glscene.cpp
+1587963515 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\glscene.cpp
 	<GLLight.h>
 	"GLScene.h"
 	<Inputs.h>
@@ -145,6 +145,7 @@
 	<Objects.h>
 	<_enms.h>
 	<_checkCollision.h>
+	<HealthBar.h>
 
 1587844383 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\inputs.h
 	<windows.h>
@@ -198,7 +199,7 @@
 1587844383 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\parallax.cpp
 	"Parallax.h"
 
-1587955787 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\player.cpp
+1587956776 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\player.cpp
 	"player.h"
 	<Timer.h>
 
@@ -219,7 +220,7 @@
 
 1571634702 c:\users\ntt16\desktop\csci course\game dev\nebulous\common\include\soil.h
 
-1587955641 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\_enms.cpp
+1587956523 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\_enms.cpp
 	"_enms.h"
 
 1587947214 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\_enms.h
@@ -229,9 +230,17 @@
 	<windows.h>
 	<math.h>
 
-1587948608 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\_checkcollision.cpp
+1587960010 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\_checkcollision.cpp
 	"_checkCollision.h"
 
-1587948596 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\_checkcollision.h
+1587956523 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\_checkcollision.h
 	<math.h>
+
+1587963509 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\healthbar.cpp
+	"HealthBar.h"
+
+1587962487 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\healthbar.h
+	<GL/gl.h>
+	<textureLoader.h>
+	<player.h>
 

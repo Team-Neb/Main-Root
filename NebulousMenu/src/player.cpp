@@ -60,9 +60,6 @@ void player::drawPlayer()
 
     glTexCoord2f(xMin, yMin);
     glVertex3f(vertices[3].x, vertices[3].y, vertices[3].z);
-
-
-
     glEnd();
     glPopMatrix();
 
