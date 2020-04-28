@@ -2,14 +2,13 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="Midterm01" />
+		<Option title="NebulousMenu" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option extended_obj_names="1" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/Midterm01" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="C:/Users/flore/Desktop/cscixxx_Projects/common/bin" />
+				<Option output="bin/Debug/NebulousMenu" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="C:/Users/Richard/Documents/CSCI191/Common/bin" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -17,13 +16,10 @@
 					<Add option="-g" />
 					<Add directory="include" />
 				</Compiler>
-				<Linker>
-					<Add library="../Common/lib/glut32.lib" />
-				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/Midterm01" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="C:/Users/flore/Desktop/cscixxx_Projects/common/bin" />
+				<Option output="bin/Release/NebulousMenu" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="C:/Users/Richard/Documents/CSCI191/Common/bin" />
 				<Option object_output="obj/Release/" />
 				<Option type="0" />
 				<Option compiler="gcc" />
@@ -38,18 +34,16 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add directory="../Common/include" />
+			<Add directory="C:/Users/Richard/Documents/CSCI191/Common/include" />
 		</Compiler>
 		<Linker>
-			<Add library="../Common/lib/libSOIL.a" />
-			<Add library="../Common/lib/glut32.lib" />
+			<Add library="../../CSCI191/Common/lib/libSOIL.a" />
+			<Add library="glut32" />
 			<Add library="opengl32" />
 			<Add library="glu32" />
 			<Add library="winmm" />
 			<Add library="gdi32" />
-			<Add library="../Common/lib/libirrKlang.a" />
-			<Add library="../Common/lib/irrKlang.lib" />
-			<Add directory="../Common" />
+			<Add directory="C:/Users/Richard/Documents/CSCI191/Common/lib" />
 		</Linker>
 		<Unit filename="include/GLLight.h" />
 		<Unit filename="include/GLScene.h" />
@@ -60,10 +54,10 @@
 		<Unit filename="include/Parallax.h" />
 		<Unit filename="include/StateManager.h" />
 		<Unit filename="include/Timer.h" />
-		<Unit filename="include/_Sound.h" />
 		<Unit filename="include/_charac.h" />
 		<Unit filename="include/_checkCollision.h" />
 		<Unit filename="include/_enms.h" />
+		<Unit filename="include/_npc.h" />
 		<Unit filename="include/player.h" />
 		<Unit filename="include/textureLoader.h" />
 		<Unit filename="main.cpp" />
@@ -76,16 +70,17 @@
 		<Unit filename="src/Parallax.cpp" />
 		<Unit filename="src/StateManager.cpp" />
 		<Unit filename="src/Timer.cpp" />
-		<Unit filename="src/_Sound.cpp" />
 		<Unit filename="src/_charac.cpp" />
 		<Unit filename="src/_checkCollision.cpp" />
 		<Unit filename="src/_enms.cpp" />
+		<Unit filename="src/_npc.cpp" />
 		<Unit filename="src/player.cpp" />
 		<Unit filename="src/textureLoader.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
 			<debugger />
+			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

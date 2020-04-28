@@ -8,7 +8,8 @@
 #include <Objects.h>
 #include <_enms.h>
 #include <_checkCollision.h>
-#include<_Sound.h>
+#include <_npc.h>
+#include <Timer.h>
 
 Inputs *KbMs = new Inputs();
 Model *Mdl = new Model();
@@ -19,27 +20,17 @@ StateManager *stateManager = new StateManager;
 Parallax *tlt = new Parallax();
 Parallax *menu = new Parallax();
 Parallax *help = new Parallax();
-Parallax *storyOne = new Parallax();
-Parallax *storyTwo = new Parallax();
-Parallax *storyThree = new Parallax();
-Parallax *storyFour = new Parallax();
-Parallax *storyFive = new Parallax();
-Parallax *continueScreen = new Parallax();
-
-
-
-
-// implement story slides thru parallax
 
 _checkCollision *hit = new _checkCollision();
 
 textureLoader *enmsTex = new textureLoader();
 _enms enms[10];
 
-// Sound adding
 
-_Sound *snds = new _Sound();
 
+// init second enemy object
+_npc *enemy2 = new _npc();
+textureLoader *enemy2Tex = new textureLoader();
 
 GLScene::GLScene()
 {
@@ -73,25 +64,18 @@ GLint GLScene::initGL()
     menu->parallaxInit("images/FrontMenu.jpg");
     help->parallaxInit("images/help.jpg");
     enmsTex->loadTexture("images/mon.png");
-
-    storyOne->parallaxInit("images/scene01.png");
-    storyTwo->parallaxInit("images/scene02.jpg");
-    storyThree->parallaxInit("images/scene03.png");
-    storyFour->parallaxInit("images/scene04.png");
-    storyFive->parallaxInit("images/scene05.png");
-
-    // Here is where we'll load story slides for the narrative
+    enemy2Tex->loadTexture("images/monster2.png");  // load the image to the second enemy monster
 
 
-    for(int i = 0; i < 10; i++){
+    for(int i = 0; i < 1; i++){
         enms[i].initEnemy(enmsTex->tex);
         enms[i].placeEnemy((float)(rand()/float(RAND_MAX))*5-2.5, -0.5, -2.0);
         enms[i].xSize = enms[i].ySize = float(rand()%12)/65.0;
     }
 
-    snds->initSounds();
-    snds->playMusic("sounds/WiiTheme.mp3"); // Switch back to sounds/NebulousTheme.mp3
-
+    // placing the enemy and initializing it's values
+    enemy2->initEnemy(enemy2Tex->tex);
+    enemy2->placeEnemy(-1.37, -1.45, -5.0);
 
     return true;
 
@@ -130,43 +114,7 @@ GLint GLScene::drawGLScene()
         glPopMatrix();
         break;
 
-    case STORY1:
-        glPushMatrix();
-        glScaled(.33, 1, 1.0);
-        storyOne->drawSquare(screenWidth,screenHeight);
-        glPopMatrix();
-        break;
-
-    case STORY2:
-        glPushMatrix();
-        glScaled(.33, 1, 1.0);
-        storyTwo->drawSquare(screenWidth,screenHeight);
-        glPopMatrix();
-        break;
-
-    case STORY3:
-        glPushMatrix();
-        glScaled(.33, 1, 1.0);
-        storyThree->drawSquare(screenWidth,screenHeight);
-        glPopMatrix();
-        break;
-
-    case STORY4:
-        glPushMatrix();
-        glScaled(.33, 1, 1.0);
-        storyFour->drawSquare(screenWidth,screenHeight);
-        glPopMatrix();
-        break;
-
-    case STORY5:
-        glPushMatrix();
-        glScaled(.33, 1, 1.0);
-        storyFive->drawSquare(screenWidth,screenHeight);
-        glPopMatrix();
-        break;
-
     case GAME:
-
         glPushMatrix();
         plx -> drawSquare(screenHeight, screenWidth);
         glPopMatrix();
@@ -178,7 +126,7 @@ GLint GLScene::drawGLScene()
         glPopMatrix();
 
 
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 1; i++){
             if(enms[i].xPos< -2.0){
                 enms[i].action = 0;
                 enms[i].xMove= 0.005;
@@ -210,6 +158,16 @@ GLint GLScene::drawGLScene()
         }
 
 
+        if(ply->hasPlayerAttacked() ){
+            //check if player sword collided with enemy
+            enemy2->swordCollisionCheck(ply->xPos, ply->getPlayerDirection());
+            ply->setPlayerAttackStatus(false);
+        }
+
+        // This will update the position of the enemy and check for collision
+        // If collision was done by movement - then it will update the action variable
+        // of the enemy2. The next time it updates - the enemy will perform the appropiate action
+        enemy2->actions(ply->xPos);
         break;
 
     case PAUSED: // pop up pause menu
@@ -258,7 +216,7 @@ int GLScene::winMsg(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             {
                 KbMs ->wParam = wParam;    //second variable refernces one here other is in a differnt file
                 KbMs -> keyPressed(Mdl, stateManager);
-                KbMs -> keyPressed(snds);
+
 
             if (stateManager->_gameState == GAME) // The game cannot be controlled while paused
                 {
@@ -323,43 +281,3 @@ case WM_LBUTTONDOWN:
 
 }
 
-
-/*
-
-GLvoid GLScene::drawGLScene(_Sound* snd)
-{
-    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-    glLoadIdentity();
-    stateManager->_gameState;
-    _Sound -> _gameState;
-    //  State manager used to manipulate game states
-    switch(stateManager->_gameState){
-    case LANDING:
-
-
-        break;
-
-    case MENU:
-
-
-        break;
-
-    case HELP:
-
-        break;
-
-    case GAME:
-
-
-        break;
-
-    case PAUSED: // pop up pause menu
-
-        break;
-        default:
-        break;
-
-
-    }
-}
-*/

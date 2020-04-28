@@ -36,6 +36,9 @@ player::player()
 
     lastKeyHit = false; // Check the last key arrow hit to set the current pos for player.
 
+    this->playerSwingSword = false;
+    this->playerDir = 1;
+
 }
 
 player::~player()
@@ -149,8 +152,30 @@ void player::playerActions()
             yMin = 0.0;
             yMax = 0.5;
 
+            this->playerSwingSword = true;
+
             Time->reset();
         }
     }
 }
 
+bool player::hasPlayerAttacked()
+{
+    return this->playerSwingSword;
+}
+
+void player::setPlayerAttackStatus(bool status)
+{
+    this->playerSwingSword = status;
+}
+
+
+int player::getPlayerDirection()
+{
+    return this->playerDir;
+}
+
+void player::setPlayerDirection(int direction)
+{
+    this->playerDir = direction;
+}

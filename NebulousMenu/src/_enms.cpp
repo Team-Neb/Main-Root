@@ -19,6 +19,10 @@ _enms::_enms()
     action = 0;
     xMove = 0.01;
 
+
+    enemyHealth = 20;   // Player deals 10 damage each strike
+    enemyHit = false;
+
 }
 
 _enms::~_enms()
@@ -78,7 +82,7 @@ void _enms::actions(){
                 TE->reset();
             }
         }
-            drawEnemy();
+        drawEnemy();
 
         break;
 
@@ -95,7 +99,7 @@ void _enms::actions(){
                 TE->reset();
             }
         }
-            drawEnemy();
+        drawEnemy();
 
         break;
 
@@ -111,5 +115,18 @@ void _enms::actions(){
 }
 
 bool _enms::isEnemyLive(){
+
+}
+bool _enms::getHitStatus()
+{
+    return enemyHit;
+}
+
+int _enms::getHealth()
+{
+    return enemyHealth;
+}
+void _enms::updateEnemy()
+{
 
 }

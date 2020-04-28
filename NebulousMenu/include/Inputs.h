@@ -5,7 +5,6 @@
 #include <Parallax.h>
 #include<player.h>
 #include <StateManager.h>
-#include<_Sound.h>
 
 class Inputs
 {
@@ -13,12 +12,8 @@ class Inputs
         Inputs();
         virtual ~Inputs();
 
-        void keyPressed( StateManager*, _Sound*);
-
         void keyPressed(Model *, StateManager*);
-        void keyPressed(_Sound *);
-        void keyUp(); // key up function to pause soon
-
+        void keyUp();
 
         void manualParallax(Parallax *, float); //move parallax by keys
 

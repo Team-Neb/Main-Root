@@ -1,5 +1,4 @@
 #include "Inputs.h"
-#include<_Sound.h>
 
 Inputs::Inputs()
 {
@@ -66,29 +65,6 @@ void Inputs::keyPressed(Model * Mdl, StateManager *stateManager)
             }
             break;
 
-        case VK_SPACE:
-            if (stateManager-> _gameState == STORY1)
-            {
-                stateManager->_gameState = STORY2;
-            }
-            else if (stateManager->_gameState == STORY2)
-            {
-                stateManager->_gameState = STORY3;
-            }
-            else if (stateManager->_gameState == STORY3)
-            {
-                stateManager->_gameState = STORY4;
-            }
-            else if (stateManager->_gameState == STORY4)
-            {
-                stateManager->_gameState = STORY5;
-            }
-            else if (stateManager->_gameState == STORY5)
-            {
-                stateManager->_gameState = GAME;
-            }
-            break;
-
         case VK_RETURN: //Enter key commands
 
             if (stateManager->_gameState == LANDING)
@@ -105,7 +81,7 @@ void Inputs::keyPressed(Model * Mdl, StateManager *stateManager)
         case 0x4E: //N for new game
             if (stateManager->_gameState == MENU)
             {
-                stateManager->_gameState = STORY1;
+                stateManager->_gameState = GAME;
             }
 
         case 0x48: //H for help page
@@ -211,10 +187,12 @@ void Inputs::playerAction(player* ply)
     {
         case VK_LEFT:
         ply->actionTrigger = "Left";
+        ply->setPlayerDirection(-1);
         break;
 
         case VK_RIGHT:
         ply->actionTrigger = "Right";
+        ply->setPlayerDirection(1);
         break;
 
 
@@ -233,94 +211,6 @@ void Inputs::playerAction(player* ply)
 
     }
 
-}
-
-void Inputs::keyPressed(_Sound* snd) // SOUND EFFECTS CONFIGS
-{
-    switch(wParam)
-    {
-        case 0X41: // A for Attack
-        snd->playSound("sounds/SwordSwing01.mp3");
-            break;
-
-        case VK_SPACE:
-            snd->playSound("sounds/MenuSound.mp3");
-            break;
-
-        case VK_RETURN:
-        snd->playSound("sounds/MenuSound.mp3");
-            break;
-
-        case 0x4E:
-        snd->playSound("sounds/MenuSound2.mp3");
-            break;
-
-        case VK_ESCAPE:
-        snd->playSound("sounds/MenuSound2.mp3");
-            break;
-
-        case 0x48:
-        snd->playSound("sounds/HelpSound.mp3");
-            break;
-
-    }
-
-}
-
-// DIFFERENT MUSIC FOR DIFFERENT SCENES ? ///
-
-void Inputs::keyPressed(StateManager *stateManager, _Sound* snd)
-{
-    switch(wParam){
-
-        case VK_ESCAPE: //pause the game and open popup also quit the program for certain states
-            if (stateManager->_gameState == GAME)
-            {
-                snd->playSound("sounds/OptionSound.mp3");
-            }
-
-            else if (stateManager->_gameState == PAUSED)
-            {
-                snd->playSound("sounds/OptionSound.mp3");
-            }
-            else if (stateManager->_gameState == HELP)
-            {
-                snd->playSound("sounds/OptionSound.mp3");
-            }
-            else if (stateManager->_gameState == MENU)
-            {
-                snd->playSound("sounds/OptionSound.mp3");
-            }
-            break;
-
-        case VK_RETURN:            //Enter key commands
-
-            if (stateManager->_gameState == LANDING)
-            {
-                snd->playSound("sounds/OptionSound.mp3");
-                break;
-            }
-            else if (stateManager->_gameState == PAUSED)
-            {
-                snd->playSound("sounds/OptionSound.mp3");
-            }
-
-            break;
-
-        case 0x4E: //N for new game
-            if (stateManager->_gameState == MENU)
-            {
-                snd->playSound("sounds/OptionSound.mp3");
-            }
-
-        case 0x48: //H for help page
-            if (stateManager->_gameState == MENU)
-            {
-                snd->playSound("sounds/OptionSound.mp3");
-            }
-
-
-    }
 }
 
 
