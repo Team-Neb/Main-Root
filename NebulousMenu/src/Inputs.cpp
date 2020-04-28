@@ -1,4 +1,5 @@
 #include "Inputs.h"
+#include<_Sound.h>
 
 Inputs::Inputs()
 {
@@ -209,6 +210,90 @@ void Inputs::playerAction(player* ply)
 
     }
 
+}
+
+void Inputs::keyPressed(_Sound* snd) // SOUND EFFECTS CONFIGS
+{
+    switch(wParam)
+    {
+        case 0X41: // A for Attack
+        snd->playSound("sounds/SwordSwing01.mp3");
+            break;
+
+        case VK_RETURN:
+        snd->playSound("sounds/MenuSound.mp3");
+            break;
+
+        case 0x4E:
+        snd->playSound("sounds/MenuSound2.mp3");
+            break;
+
+        case VK_ESCAPE:
+        snd->playSound("sounds/MenuSound2.mp3");
+            break;
+
+        case 0x48:
+        snd->playSound("sounds/HelpSound.mp3");
+            break;
+
+    }
+
+}
+
+// DIFFERENT MUSIC FOR DIFFERENT SCENES ? ///
+
+void Inputs::keyPressed(StateManager *stateManager, _Sound* snd)
+{
+    switch(wParam){
+
+        case VK_ESCAPE: //pause the game and open popup also quit the program for certain states
+            if (stateManager->_gameState == GAME)
+            {
+                snd->playSound("sounds/OptionSound.mp3");
+            }
+
+            else if (stateManager->_gameState == PAUSED)
+            {
+                snd->playSound("sounds/OptionSound.mp3");
+            }
+            else if (stateManager->_gameState == HELP)
+            {
+                snd->playSound("sounds/OptionSound.mp3");
+            }
+            else if (stateManager->_gameState == MENU)
+            {
+                snd->playSound("sounds/OptionSound.mp3");
+            }
+            break;
+
+        case VK_RETURN:            //Enter key commands
+
+            if (stateManager->_gameState == LANDING)
+            {
+                snd->playSound("sounds/OptionSound.mp3");
+                break;
+            }
+            else if (stateManager->_gameState == PAUSED)
+            {
+                snd->playSound("sounds/OptionSound.mp3");
+            }
+
+            break;
+
+        case 0x4E: //N for new game
+            if (stateManager->_gameState == MENU)
+            {
+                snd->playSound("sounds/OptionSound.mp3");
+            }
+
+        case 0x48: //H for help page
+            if (stateManager->_gameState == MENU)
+            {
+                snd->playSound("sounds/OptionSound.mp3");
+            }
+
+
+    }
 }
 
 

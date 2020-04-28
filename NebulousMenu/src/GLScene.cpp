@@ -8,6 +8,7 @@
 #include <Objects.h>
 #include <_enms.h>
 #include <_checkCollision.h>
+#include<_Sound.h>
 
 Inputs *KbMs = new Inputs();
 Model *Mdl = new Model();
@@ -18,12 +19,25 @@ StateManager *stateManager = new StateManager;
 Parallax *tlt = new Parallax();
 Parallax *menu = new Parallax();
 Parallax *help = new Parallax();
+Parallax *storyOne = new Parallax();
+Parallax *storyTwo = new Parallax();
+Parallax *storyThree = new Parallax();
+Parallax *storyFour = new Parallax();
+Parallax *continueScreen = new Parallax();
+
+
+
+
+// implement story slides thru parallax
 
 _checkCollision *hit = new _checkCollision();
 
 textureLoader *enmsTex = new textureLoader();
 _enms enms[10];
 
+// Sound adding
+
+_Sound *snds = new _Sound();
 
 
 GLScene::GLScene()
@@ -59,12 +73,17 @@ GLint GLScene::initGL()
     help->parallaxInit("images/help.jpg");
     enmsTex->loadTexture("images/mon.png");
 
+    // Here is where we'll load story slides for the narrative
+
 
     for(int i = 0; i < 10; i++){
         enms[i].initEnemy(enmsTex->tex);
         enms[i].placeEnemy((float)(rand()/float(RAND_MAX))*5-2.5, -0.5, -2.0);
         enms[i].xSize = enms[i].ySize = float(rand()%12)/65.0;
     }
+
+    snds->initSounds();
+    snds->playMusic("sounds/WiiTheme.mp3"); // Switch back to sounds/NebulousTheme.mp3
 
 
     return true;
@@ -105,6 +124,7 @@ GLint GLScene::drawGLScene()
         break;
 
     case GAME:
+
         glPushMatrix();
         plx -> drawSquare(screenHeight, screenWidth);
         glPopMatrix();
@@ -196,7 +216,7 @@ int GLScene::winMsg(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             {
                 KbMs ->wParam = wParam;    //second variable refernces one here other is in a differnt file
                 KbMs -> keyPressed(Mdl, stateManager);
-
+                KbMs -> keyPressed(snds);
 
             if (stateManager->_gameState == GAME) // The game cannot be controlled while paused
                 {
@@ -261,3 +281,43 @@ case WM_LBUTTONDOWN:
 
 }
 
+
+/*
+
+GLvoid GLScene::drawGLScene(_Sound* snd)
+{
+    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+    glLoadIdentity();
+    stateManager->_gameState;
+    _Sound -> _gameState;
+    //  State manager used to manipulate game states
+    switch(stateManager->_gameState){
+    case LANDING:
+
+
+        break;
+
+    case MENU:
+
+
+        break;
+
+    case HELP:
+
+        break;
+
+    case GAME:
+
+
+        break;
+
+    case PAUSED: // pop up pause menu
+
+        break;
+        default:
+        break;
+
+
+    }
+}
+*/
