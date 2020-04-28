@@ -9,6 +9,9 @@
 #include <_enms.h>
 #include <_checkCollision.h>
 #include <HealthBar.h>
+#include <_npc.h>
+#include <Timer.h>
+
 
 Inputs *KbMs = new Inputs();
 Model *Mdl = new Model();
@@ -26,6 +29,9 @@ HealthBar *healthBar = new HealthBar();
 textureLoader *enmsTex = new textureLoader();
 _enms enms[10];
 
+// init second enemy object
+_npc *enemy2 = new _npc();
+textureLoader *enemy2Tex = new textureLoader();
 
 
 GLScene::GLScene()
@@ -61,6 +67,7 @@ GLint GLScene::initGL()
     help->parallaxInit("images/help.jpg");
     healthBar->initHealthBar("images/heartBar.png");
     enmsTex->loadTexture("images/mon.png");
+    enemy2Tex->loadTexture("images/monster2.png");  // load the image to the second enemy monster
 
 
 
@@ -70,6 +77,9 @@ GLint GLScene::initGL()
         enms[i].xSize = enms[i].ySize = float(rand()%12)/65.0;
     }
 
+    // placing the enemy and initializing it's values
+    enemy2->initEnemy(enemy2Tex->tex);
+    enemy2->placeEnemy(-1.37, -1.45, -5.0);
 
     return true;
 
@@ -153,6 +163,17 @@ GLint GLScene::drawGLScene()
             }
             enms[i].actions();
         }
+
+        if(ply->hasPlayerAttacked() ){
+            //check if player sword collided with enemy
+            enemy2->swordCollisionCheck(ply->xPos, ply->getPlayerDirection());
+            ply->setPlayerAttackStatus(false);
+        }
+
+        // This will update the position of the enemy and check for collision
+        // If collision was done by movement - then it will update the action variable
+        // of the enemy2. The next time it updates - the enemy will perform the appropiate action
+        enemy2->actions(ply->xPos);
 
 
         break;

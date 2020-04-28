@@ -29,9 +29,16 @@ class player
         int frames;
         bool lastKeyHit;
 
+
+        bool hasPlayerAttacked();
+        void setPlayerAttackStatus(bool);
+        int getPlayerDirection();
+        void setPlayerDirection(int);
     protected:
 
     private:
+        bool playerSwingSword;
+        int playerDir;      // -1 or 1; determines whether facing left or right
 };
 
 #endif // PLAYER_H
