@@ -102,6 +102,13 @@ void Inputs::keyPressed(Model * Mdl, StateManager *stateManager)
 
             break;
 
+        case 0x46: //F for skipping intro
+            if (stateManager->_gameState == STORY1)
+            {
+                stateManager->_gameState = GAME;
+            }
+            break;
+
         case 0x4E: //N for new game
             if (stateManager->_gameState == MENU)
             {

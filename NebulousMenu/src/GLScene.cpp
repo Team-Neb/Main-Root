@@ -68,7 +68,7 @@ GLint GLScene::initGL()
    // images to import for game states
     ply->playerInit("images/walkAndattack.png");
     plx->parallaxInit("images/par.png");
-    pause->parallaxInit("images/pause.jpg");
+    pause->parallaxInit("images/pause.png");
     tlt->parallaxInit("images/title.png");
     menu->parallaxInit("images/FrontMenu.jpg");
     help->parallaxInit("images/help.jpg");
