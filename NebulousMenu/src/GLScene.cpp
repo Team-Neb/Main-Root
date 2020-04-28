@@ -23,6 +23,7 @@ Parallax *storyOne = new Parallax();
 Parallax *storyTwo = new Parallax();
 Parallax *storyThree = new Parallax();
 Parallax *storyFour = new Parallax();
+Parallax *storyFive = new Parallax();
 Parallax *continueScreen = new Parallax();
 
 
@@ -73,6 +74,12 @@ GLint GLScene::initGL()
     help->parallaxInit("images/help.jpg");
     enmsTex->loadTexture("images/mon.png");
 
+    storyOne->parallaxInit("images/scene01.png");
+    storyTwo->parallaxInit("images/scene02.jpg");
+    storyThree->parallaxInit("images/scene03.png");
+    storyFour->parallaxInit("images/scene04.png");
+    storyFive->parallaxInit("images/scene05.png");
+
     // Here is where we'll load story slides for the narrative
 
 
@@ -120,6 +127,41 @@ GLint GLScene::drawGLScene()
         glPushMatrix();
         glScaled(.33, 1, 1.0);
         help->drawSquare(screenWidth,screenHeight);
+        glPopMatrix();
+        break;
+
+    case STORY1:
+        glPushMatrix();
+        glScaled(.33, 1, 1.0);
+        storyOne->drawSquare(screenWidth,screenHeight);
+        glPopMatrix();
+        break;
+
+    case STORY2:
+        glPushMatrix();
+        glScaled(.33, 1, 1.0);
+        storyTwo->drawSquare(screenWidth,screenHeight);
+        glPopMatrix();
+        break;
+
+    case STORY3:
+        glPushMatrix();
+        glScaled(.33, 1, 1.0);
+        storyThree->drawSquare(screenWidth,screenHeight);
+        glPopMatrix();
+        break;
+
+    case STORY4:
+        glPushMatrix();
+        glScaled(.33, 1, 1.0);
+        storyFour->drawSquare(screenWidth,screenHeight);
+        glPopMatrix();
+        break;
+
+    case STORY5:
+        glPushMatrix();
+        glScaled(.33, 1, 1.0);
+        storyFive->drawSquare(screenWidth,screenHeight);
         glPopMatrix();
         break;
 

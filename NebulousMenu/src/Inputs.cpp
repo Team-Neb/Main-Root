@@ -66,6 +66,29 @@ void Inputs::keyPressed(Model * Mdl, StateManager *stateManager)
             }
             break;
 
+        case VK_SPACE:
+            if (stateManager-> _gameState == STORY1)
+            {
+                stateManager->_gameState = STORY2;
+            }
+            else if (stateManager->_gameState == STORY2)
+            {
+                stateManager->_gameState = STORY3;
+            }
+            else if (stateManager->_gameState == STORY3)
+            {
+                stateManager->_gameState = STORY4;
+            }
+            else if (stateManager->_gameState == STORY4)
+            {
+                stateManager->_gameState = STORY5;
+            }
+            else if (stateManager->_gameState == STORY5)
+            {
+                stateManager->_gameState = GAME;
+            }
+            break;
+
         case VK_RETURN: //Enter key commands
 
             if (stateManager->_gameState == LANDING)
@@ -82,7 +105,7 @@ void Inputs::keyPressed(Model * Mdl, StateManager *stateManager)
         case 0x4E: //N for new game
             if (stateManager->_gameState == MENU)
             {
-                stateManager->_gameState = GAME;
+                stateManager->_gameState = STORY1;
             }
 
         case 0x48: //H for help page
@@ -218,6 +241,10 @@ void Inputs::keyPressed(_Sound* snd) // SOUND EFFECTS CONFIGS
     {
         case 0X41: // A for Attack
         snd->playSound("sounds/SwordSwing01.mp3");
+            break;
+
+        case VK_SPACE:
+            snd->playSound("sounds/MenuSound.mp3");
             break;
 
         case VK_RETURN:
