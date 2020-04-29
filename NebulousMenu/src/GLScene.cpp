@@ -27,7 +27,7 @@ _checkCollision *hit = new _checkCollision();
 HealthBar *healthBar = new HealthBar();
 
 textureLoader *enmsTex = new textureLoader();
-_enms enms[5];
+_enms enms[1];
 
 // init second enemy object
 _npc *enemy2 = new _npc();
@@ -71,7 +71,7 @@ GLint GLScene::initGL()
 
 
 
-    for(int i = 0; i < 5; i++){
+    for(int i = 0; i < 1; i++){
         enms[i].initEnemy(enmsTex->tex);
         enms[i].placeEnemy((float)(rand()/float(RAND_MAX))*5-2.5, -0.5, -2.0);
         enms[i].xSize = enms[i].ySize = float(rand()%12)/65.0;
@@ -135,7 +135,7 @@ GLint GLScene::drawGLScene()
             ply->playerActions(); // render actions
         glPopMatrix();
 
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < 1; i++){
             if(enms[i].xPos< -2.0){
                 enms[i].action = 0;
                 enms[i].xMove= 0.005;
@@ -160,9 +160,6 @@ GLint GLScene::drawGLScene()
                     enms[i].action = 9; // enemies die
                     //cout << enms[i].xPos+ enms[i].xSize/2 << endl;
                 }
-                else{
-                    ply->health =4;
-                }
             }
 
             // check on right
@@ -170,19 +167,17 @@ GLint GLScene::drawGLScene()
                 if(hit->isLinearCollision(ply->xPos, enms[i].xPos)){
                     enms[i].action = 9; // enemies die
                 }
-                else{
-                    ply->health =3;
-                }
             }
-           /* else if (ply->actionTrigger == "stand" || ply->actionTrigger == "Left" || ply->actionTrigger == "Right" && ply->xPos - ply->xSize/2 == enms[i].xPos + enms[i].xSize/2){
+            else if ((ply->actionTrigger == "stand" || ply->actionTrigger == "Left" || ply->actionTrigger == "Right") && (fabs(ply->xPos  - enms[i].xPos + enms[i].xSize/2 < 0.0000001))){
                 ply-> health -=1;
             }
-            else if (ply->actionTrigger == "stand" || ply->actionTrigger == "Left" || ply->actionTrigger == "Right" && ply->xPos + ply->xSize/2 == enms[i].xPos + enms[i].xSize/2){
+            else if ((ply->actionTrigger == "stand" || ply->actionTrigger == "Left" || ply->actionTrigger == "Right") && (ply->xPos  == enms[i].xPos + enms[i].xSize/2)){
                 ply-> health -=1;
-            }*/
-            //cout<< ply->health;
+            }
+
             enms[i].actions();
         }
+        cout<< ply->health;
         healthBar->healthBarActions(ply->health);
         healthBar->drawHealthBar();
 
@@ -216,10 +211,7 @@ GLint GLScene::drawGLScene()
 
 
     }
-    //plx -> scroll("left", 0.0001);
-
-
-
+        //plx -> scroll("left", 0.0001);
 
 }
 
