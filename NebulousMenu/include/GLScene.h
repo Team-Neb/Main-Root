@@ -24,6 +24,7 @@ class GLScene
     protected:
 
     private:
+        void spawnEnemies(int);
         int level;
         bool is_level_complete;
 };

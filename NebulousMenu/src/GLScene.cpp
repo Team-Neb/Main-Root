@@ -76,12 +76,8 @@ GLint GLScene::initGL()
     // Apply the texture image to the handler
     enemy2Tex->loadTexture("images/monster2.png");  // load the image to the second enemy monster
 
-    // Create level 2 enemy objects
-    for(int i = 0; i < 1; i++){
-        enemyType2.push_back(new _npc());
-        enemyType2[i]->initEnemy(enemy2Tex->tex);
-        enemyType2[i]->placeEnemy(-1.37, -1.45, -5.0);
-    }
+    // Create enemy objects for the first level
+    this->spawnEnemies(this->level);
 
     // INITIALIZE THE BACKGROUND GAME LEVEL SCENES
     gameLevel[0]->parallaxInit("images/par.png");
@@ -156,6 +152,12 @@ GLint GLScene::drawGLScene()
             }
         glPopMatrix();
 
+        // If the level has changed - spawn the next type of enemies
+        if(this->is_level_complete){
+            this->spawnEnemies(this->level);
+            this->is_level_complete = false;
+        }
+
         glPushMatrix();
             glTranslated(ply->xPos, ply->yPos , ply->zPos);
             ply->drawPlayer(); // render character
@@ -211,6 +213,9 @@ GLint GLScene::drawGLScene()
         // Current implementation is just a single enemy - eventually check vector length
         // to see if all enemy objects have been destroyed
         if(enemyType2[0]->action == 9 && !this->is_level_complete){
+            delete enemyType2[0];       // delete enemy object
+            enemyType2[0] = nullptr;    // no dangling pointers
+            enemyType2.pop_back();      // remove from vector array
             this->level += 1;
             this->is_level_complete = true;
         }
@@ -327,4 +332,29 @@ case WM_LBUTTONDOWN:
     }
 
 }
+
+
+void GLScene::spawnEnemies(int level)
+{
+    switch(level){
+
+        // Stevens enemy objects go in here.
+        // My enemy objects are placed in level 1 as place holder for now
+        case 1:
+            for(int i = 0; i < 1; i++){
+                enemyType2.push_back(new _npc());
+                enemyType2[i]->initEnemy(enemy2Tex->tex);
+                enemyType2[i]->placeEnemy(-1.37, -1.45, -5.0);
+            }
+            break;
+        case 2:
+            for(int i = 0; i < 1; i++){
+                enemyType2.push_back(new _npc());
+                enemyType2[i]->initEnemy(enemy2Tex->tex);
+                enemyType2[i]->placeEnemy(-1.37, -1.45, -5.0);
+            }
+            break;
+    }
+}
+
 
