@@ -5,15 +5,17 @@ textureLoader *heartTex = new textureLoader();
 HealthBar::HealthBar(){
     //ctor
 
-    xPos = -6;
-    yPos = 18;
-    zPos = -1;
+    xPos = -0.6;//-6.0;
+    yPos = 0.35;//18.0;
+    zPos = -1;//-1.0;
 
     frames = 5;
     xMin = 0;
     yMin = 0;
     xMax = 1;
     yMax = 1;
+    xSize = 0.1;
+    ySize = 0.02;
 }
 
 HealthBar::~HealthBar()
@@ -24,9 +26,10 @@ void HealthBar::drawHealthBar(){
 
     heartTex->binder();
 
-    glPushMatrix();
-    glScalef(0.1,0.02,1);
     glTranslatef(xPos,yPos,zPos);
+    glScalef(xSize,ySize,1);
+
+    glPushMatrix();
     glBegin(GL_POLYGON);
         glTexCoord2f(xMin,yMin);
         glVertex3f(1.0, 1.0, 0.0);
@@ -50,5 +53,32 @@ void HealthBar::initHealthBar(char* fileName){
 
 
 void HealthBar::healthBarActions(int health){
+    switch(health){
 
+    case 5:
+        default:
+        //drawHealthBar();
+        break;
+
+    case 4:
+        xMax = 0.8;
+        xSize = 0.08;
+        //drawHealthBar();
+        break;
+    case 3:
+        xMax = 0.6;
+        xSize = 0.06;
+        break;
+    case 2:
+        xMax = 0.4;
+        xSize = 0.04;
+        break;
+    case 1:
+        xMin = 0;
+        xMax = 0.2;
+        xSize = 0.02;
+        //drawHealthBar();
+        break;
+
+    }
 }

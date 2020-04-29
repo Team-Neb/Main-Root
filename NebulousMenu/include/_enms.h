@@ -31,6 +31,7 @@ class _enms
 
         float xMove;                            // moving speed on x axis
         int action;                             // to make action for enemy
+        bool enemyFacing;                        // flag of enemy facing left or right, False = Right, True = Left
 
         Timer *TE = new Timer();
 

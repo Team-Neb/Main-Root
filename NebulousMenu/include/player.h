@@ -23,11 +23,12 @@ class player
 
         string actionTrigger;
         vec vertices[4];
-        float xMin, yMin, xMax, yMax;
+        float xMin, yMin, xMax, yMax, xSize, ySize;
 
         float xPos, yPos, zPos;
         int frames;
-        bool lastKeyHit;
+        bool lastKeyHit; // False = facing right, True = facing left
+        int health;      // player health
 
 
         bool hasPlayerAttacked();

@@ -21,6 +21,7 @@ class GLScene
         float screenWidth, screenHeight;
 
 
+
     protected:
 
     private:

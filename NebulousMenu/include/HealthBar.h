@@ -21,6 +21,7 @@ class HealthBar
         float xPos, yPos, zPos;
         float xMin, yMin, xMax, yMax;
         float frames;
+        float xSize, ySize;
 
     protected:
 

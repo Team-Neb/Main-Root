@@ -27,7 +27,7 @@ _checkCollision *hit = new _checkCollision();
 HealthBar *healthBar = new HealthBar();
 
 textureLoader *enmsTex = new textureLoader();
-_enms enms[10];
+_enms enms[5];
 
 // init second enemy object
 _npc *enemy2 = new _npc();
@@ -71,10 +71,16 @@ GLint GLScene::initGL()
 
 
 
-    for(int i = 0; i < 10; i++){
+    for(int i = 0; i < 5; i++){
         enms[i].initEnemy(enmsTex->tex);
         enms[i].placeEnemy((float)(rand()/float(RAND_MAX))*5-2.5, -0.5, -2.0);
         enms[i].xSize = enms[i].ySize = float(rand()%12)/65.0;
+        if (enms[i].xSize < 0){
+            enms[i].enemyFacing  = false;       // facing right, come from left side of player
+        }
+        else{
+            enms[i].enemyFacing = true;         // facing left, come from right side of player
+        }
     }
 
     // placing the enemy and initializing it's values
@@ -123,48 +129,64 @@ GLint GLScene::drawGLScene()
         plx -> drawSquare(screenHeight, screenWidth);
         glPopMatrix();
 
-
-        healthBar->drawHealthBar();
-
-
         glPushMatrix();
             glTranslated(ply->xPos, ply->yPos , ply->zPos);
             ply->drawPlayer(); // render character
             ply->playerActions(); // render actions
         glPopMatrix();
 
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 5; i++){
             if(enms[i].xPos< -2.0){
                 enms[i].action = 0;
                 enms[i].xMove= 0.005;
                 enms[i].rotateZ = 0;
+                enms[i].enemyFacing = false;
                 enms[i].yPos = -0.5;
             }
             else if(enms[i].xPos > 2.0){
                 enms[i].action = 1;
                 enms[i].xMove = -0.005;
                 enms[i].rotateZ = 0;
+                enms[i].enemyFacing = true;
                 enms[i].yPos = -0.5;
             }
 
             enms[i].xPos += enms[i].xMove;
 
-            if (ply->actionTrigger == "Attack" && ply->xPos > enms[i].xPos){
+            // check on left. Check if A press, player position - half the size of player is less the position of enms x position + half of enemy size,
+            // and check last key hit is true, meant player facing left, and check enemy facing right.
+            if (ply->actionTrigger == "Attack" && ply->xPos - ply->xSize/2 < enms[i].xPos + enms[i].xSize/2 && ply->lastKeyHit == true && enms[i].enemyFacing == false){
                 if(hit->isLinearCollision(ply->xPos, enms[i].xPos)){
                     enms[i].action = 9; // enemies die
+                    //cout << enms[i].xPos+ enms[i].xSize/2 << endl;
+                }
+                else{
+                    ply->health =4;
                 }
             }
 
-
-            if (ply->actionTrigger == "Attack" && ply->xPos < enms[i].xPos){
+            // check on right
+            else if (ply->actionTrigger == "Attack" && ply->xPos + ply->xSize/2 > enms[i].xPos - enms[i].xSize/2 && ply->lastKeyHit == false && enms[i].enemyFacing == true){
                 if(hit->isLinearCollision(ply->xPos, enms[i].xPos)){
                     enms[i].action = 9; // enemies die
                 }
+                else{
+                    ply->health =3;
+                }
             }
+           /* else if (ply->actionTrigger == "stand" || ply->actionTrigger == "Left" || ply->actionTrigger == "Right" && ply->xPos - ply->xSize/2 == enms[i].xPos + enms[i].xSize/2){
+                ply-> health -=1;
+            }
+            else if (ply->actionTrigger == "stand" || ply->actionTrigger == "Left" || ply->actionTrigger == "Right" && ply->xPos + ply->xSize/2 == enms[i].xPos + enms[i].xSize/2){
+                ply-> health -=1;
+            }*/
+            //cout<< ply->health;
             enms[i].actions();
         }
+        healthBar->healthBarActions(ply->health);
+        healthBar->drawHealthBar();
 
-        if(ply->hasPlayerAttacked() ){
+        /*if(ply->hasPlayerAttacked() ){
             //check if player sword collided with enemy
             enemy2->swordCollisionCheck(ply->xPos, ply->getPlayerDirection());
             ply->setPlayerAttackStatus(false);
@@ -173,7 +195,7 @@ GLint GLScene::drawGLScene()
         // This will update the position of the enemy and check for collision
         // If collision was done by movement - then it will update the action variable
         // of the enemy2. The next time it updates - the enemy will perform the appropiate action
-        enemy2->actions(ply->xPos);
+        enemy2->actions(ply->xPos);*/
 
 
         break;
