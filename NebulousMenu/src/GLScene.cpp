@@ -373,7 +373,6 @@ void GLScene::spawnEnemies(int level)
                 enemyType2.push_back(new _npc());
                 enemyType2[i]->initEnemy(enemy2Tex->tex);
                 enemyType2[i]->placeEnemyRandom();
-                //enemyType2[i]->placeEnemy(-1.37, -1.45, -5.0);
             }
             break;
         default:

@@ -152,11 +152,10 @@ int _npc::getHealth()
     return enemyHealth;
 }
 
-
+// Based on the direction the enemy is facing/moving towards
+// Check the edge of the quad/ hitbox
 void _npc::checkCollision(float playerPosX)
 {
-    // Based on the direction the enemy is facing/moving towards
-    // Check the edge of the quad/ hitbox
 
     //Check right edge of enemy hitbox is inside the hitbox of the player
     if(this->action == 0){
@@ -165,21 +164,15 @@ void _npc::checkCollision(float playerPosX)
             this->action = 10;                          // give new action to the enemy after movement collision
             this->enemyHit = true;
             cout<<"ENEMY HAS BEEN HIT FROM THE RIGHT EDGE"<<endl;
-            //cout<<"enemyPos: "<<this->xPos<<endl;
-            //cout<<"playerPos: "<<playerPosX<<endl;
         }
     // Check left edge
     }else if(this->action == 1){
-        // The higher the number is - the farther the enemy object will be before being "deleted"
-        // The lower the number is - the closer the enemy object will be before being "deleted"
+
         if( ((this->xPos) >= (playerPosX)) && ((this->xPos) <= (playerPosX + 1.25)) ){
             this->previousAction = this->action;
             this->action = 10;
             this->enemyHit = true;
-
             cout<<"ENEMY HAS BEEN HIT FROM THE LEFT EDGE"<<endl;
-            //cout<<"enemyPos: "<<this->xPos<<endl;
-            //cout<<"playerPos: "<<playerPosX<<endl;
         }
     }else{}
 }
@@ -191,18 +184,15 @@ void _npc::checkCollision(float playerPosX)
 // depending on player direction
 void _npc::swordCollisionCheck(float playerPosX, int direction)
 {
-
     switch(direction){
         case -1:
             if( (this->xPos + 0.25) <= (playerPosX + 0.75) && (this->xPos + 0.25) >= (playerPosX - 0.15)){
                 this->action = 9;
-                this->enemyHit = true;
             }
             break;
         case 1:
             if( (this->xPos) >= (playerPosX + 0.75) && (this->xPos) <= (playerPosX + 1.4) ) {
                 this->action = 9;
-                this->enemyHit = true;
             }
             break;
         default:
