@@ -35,6 +35,7 @@ class _npc
         bool getHitStatus();
         int getHealth();
         void swordCollisionCheck(float, int);
+        void placeEnemyRandom();
 
     protected:
 
@@ -44,6 +45,7 @@ class _npc
 
         int enemyHealth;
         bool enemyHit;
+        int previousAction;
 
         float XPOS_MAX;
         float XPOS_MIN;

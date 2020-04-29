@@ -149,6 +149,9 @@ GLint GLScene::drawGLScene()
                     break;
                 case 2:
                     gameLevel[1]->drawSquare(screenHeight, screenWidth);
+                    break;
+                default:
+                    break;
             }
         glPopMatrix();
 
@@ -163,6 +166,7 @@ GLint GLScene::drawGLScene()
             ply->drawPlayer(); // render character
             ply->playerActions(); // render actions
         glPopMatrix();
+
 
 
         for(int i = 0; i < 1; i++){
@@ -216,8 +220,15 @@ GLint GLScene::drawGLScene()
             delete enemyType2[0];       // delete enemy object
             enemyType2[0] = nullptr;    // no dangling pointers
             enemyType2.pop_back();      // remove from vector array
-            this->level += 1;
-            this->is_level_complete = true;
+
+            if(enemyType2.empty()){
+                    // Put this if statement to prevent game from crashing after 2nd level
+                    if(this->level != 2){
+                        this->level += 1;
+                    }
+                this->is_level_complete = true;
+
+            }
         }
 
         break;
@@ -351,8 +362,11 @@ void GLScene::spawnEnemies(int level)
             for(int i = 0; i < 1; i++){
                 enemyType2.push_back(new _npc());
                 enemyType2[i]->initEnemy(enemy2Tex->tex);
-                enemyType2[i]->placeEnemy(-1.37, -1.45, -5.0);
+                enemyType2[i]->placeEnemyRandom();
+                //enemyType2[i]->placeEnemy(-1.37, -1.45, -5.0);
             }
+            break;
+        default:
             break;
     }
 }

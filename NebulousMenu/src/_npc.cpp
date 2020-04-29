@@ -17,12 +17,19 @@ _npc::_npc()
     xMax = 1.0/(float)frames;
     yMax = 1;
 
+    // The left and right bounds for this object
+    XPOS_MAX = 4.0;
+    XPOS_MIN = -4.0;
 
-    XPOS_MAX = 2;    // The left and right bounds for this object
-    XPOS_MIN = -2;
     action = 0;
+    previousAction = 0; // keep track of what the enemy was doing before action got updated
+
     enemyHealth = 20;   // Player deals 10 damage each strike
     enemyHit = false;
+
+    srand(time(0));     // to truly place enemies randomly
+
+
 }
 
 _npc::~_npc()
@@ -108,18 +115,28 @@ void _npc::actions(float playerX)
 
     // This case is for enemy collision by movement ONLY
     case 10:
+        // Enemy looses 15 health per movement collision
         if(this->enemyHealth > 5 && this->enemyHit){
             this->enemyHealth -= 15;
             this->enemyHit = false;
-            this->action = 0;
+
+            // After collision make the enemy behave how it originally was
+            this->action = this->previousAction;
+            this->previousAction = 0;
+
+            // Reposition the enemy after collision by making it bounce away from player
+            switch(this->action){
+                case 0:
+                    this->xPos -= 0.8;
+                    break;
+                case 1:
+                    this->xPos += 0.8;
+                    break;
+            }
             drawEnemy();
 
         }else if(this->enemyHealth <= 5 && this->enemyHit){
-            xMin = 0;
-            xMax = 0;
-            yMin = 0;
-            yMax = 0;
-            drawEnemy();
+            this->action = 9;
         }
         else{};
     }
@@ -141,25 +158,28 @@ void _npc::checkCollision(float playerPosX)
     // Based on the direction the enemy is facing/moving towards
     // Check the edge of the quad/ hitbox
 
-    //Check right edge
+    //Check right edge of enemy hitbox is inside the hitbox of the player
     if(this->action == 0){
-        if( ((this->xPos + 0.01) <= (playerPosX + 0.01)) && ((this->xPos + 0.01) >= (playerPosX - 0.01) )){
-            this->action = 10;
+        if( ((this->xPos + 0.25) <= (playerPosX + 1.25)) && ((this->xPos + 0.25) >= (playerPosX) )){
+            this->previousAction = this->action;        // save the direction the enemy was walking to
+            this->action = 10;                          // give new action to the enemy after movement collision
             this->enemyHit = true;
             cout<<"ENEMY HAS BEEN HIT FROM THE RIGHT EDGE"<<endl;
-            //cout<<"playerPosX: "<<playerPosX<<endl;
-            //cout<<"enemyPosX: "<<this->xPos<<endl;
+            //cout<<"enemyPos: "<<this->xPos<<endl;
+            //cout<<"playerPos: "<<playerPosX<<endl;
         }
     // Check left edge
     }else if(this->action == 1){
         // The higher the number is - the farther the enemy object will be before being "deleted"
         // The lower the number is - the closer the enemy object will be before being "deleted"
-        if( ((this->xPos - 0.55) >= (playerPosX - 0.55)) && ((this->xPos - 0.55) <= (playerPosX + 0.55)) ){
+        if( ((this->xPos) >= (playerPosX)) && ((this->xPos) <= (playerPosX + 1.25)) ){
+            this->previousAction = this->action;
             this->action = 10;
             this->enemyHit = true;
-            //cout<<"playerPosX: "<<playerPosX<<endl;
-            //cout<<"enemyPosX: "<<this->xPos<<endl;
+
             cout<<"ENEMY HAS BEEN HIT FROM THE LEFT EDGE"<<endl;
+            //cout<<"enemyPos: "<<this->xPos<<endl;
+            //cout<<"playerPos: "<<playerPosX<<endl;
         }
     }else{}
 }
@@ -167,12 +187,14 @@ void _npc::checkCollision(float playerPosX)
 
 // The sword distance is goes farther out than the xPos of the player
 // so check player xPos + swordDistance
+// sword distance extends hitbox of the player by 0.15 in either the left or right direction
+// depending on player direction
 void _npc::swordCollisionCheck(float playerPosX, int direction)
 {
 
     switch(direction){
         case -1:
-            if( (this->xPos + 0.01) <= (playerPosX + 0.01) && (this->xPos + 0.01) >= (playerPosX - 0.3)){
+            if( (this->xPos + 0.25) <= (playerPosX + 0.75) && (this->xPos + 0.25) >= (playerPosX - 0.15)){
                 this->action = 9;
                 this->enemyHit = true;
             }
@@ -189,7 +211,16 @@ void _npc::swordCollisionCheck(float playerPosX, int direction)
 }
 
 
+// Places an enemy randomly on the x-axis of the screen.
+void _npc::placeEnemyRandom()
+{
+    int temp = rand() % 2;
+    this->xPos = (float)(rand() % (int)XPOS_MAX) + 1.25;
+    this->yPos = -1.45;
+    this->zPos = -5.0;
 
+    (temp == 0) ? (this->action = 0) : (this->action = 1);
+}
 
 
 

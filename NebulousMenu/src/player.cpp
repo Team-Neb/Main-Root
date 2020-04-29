@@ -30,7 +30,7 @@ player::player()
     xMax=yMax=1.0;
 
 
-    xPos = -0.5;
+    xPos = 0.0;
     yPos = -2;
     zPos = -5.0;
 
