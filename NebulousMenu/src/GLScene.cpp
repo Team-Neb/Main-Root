@@ -284,7 +284,17 @@ int GLScene::winMsg(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             if (stateManager->_gameState == GAME) // The game cannot be controlled while paused
                 {
                 KbMs -> playerAction(ply);
-                KbMs -> manualParallax(plx, 0.005);
+                switch(this->level){
+                    case 1:
+                        KbMs->manualParallax(gameLevel[this->level - 1], 0.005);
+                        break;
+                    case 2:
+                        KbMs->manualParallax(gameLevel[this->level - 1], 0.005);
+                        break;
+                    default:
+                        break;
+                }
+                //KbMs -> manualParallax(plx, 0.005);
                 }
                 break;
             }

@@ -215,7 +215,7 @@ void _npc::swordCollisionCheck(float playerPosX, int direction)
 void _npc::placeEnemyRandom()
 {
     int temp = rand() % 2;
-    this->xPos = (float)(rand() % (int)XPOS_MAX) + 1.25;
+    this->xPos = (float)(rand() % (int)XPOS_MAX) + 1.5;
     this->yPos = -1.45;
     this->zPos = -5.0;
 
