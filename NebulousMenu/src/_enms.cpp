@@ -17,7 +17,8 @@ _enms::_enms()
     xMax = 1.0/(float)frames;
     yMax = 0.5;
     action = 0;
-    xMove = 0.01;
+    xMove = 0.005;
+    enemyFacing = NULL;
 
 }
 

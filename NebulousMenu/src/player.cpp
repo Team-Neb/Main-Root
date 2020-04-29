@@ -29,12 +29,20 @@ player::player()
     yMin=0.5;
     xMax=yMax=1.0;
 
+    xSize = 1.0;
+    ySize = 1.0;
 
-    xPos = -0.5;
+    xPos = 0.0;
     yPos = -2;
     zPos = -5.0;
 
-    lastKeyHit = false; // Check the last key arrow hit to set the current pos for player.
+    health = 5;
+
+    lastKeyHit = false; // Check the last key arrow hit to set the current pos for player. False = Looking at the right
+    actionTrigger = "stand";
+
+    this->playerSwingSword = false;
+    this->playerDir = 1;
 
 }
 
@@ -60,9 +68,6 @@ void player::drawPlayer()
 
     glTexCoord2f(xMin, yMin);
     glVertex3f(vertices[3].x, vertices[3].y, vertices[3].z);
-
-
-
     glEnd();
     glPopMatrix();
 
@@ -143,14 +148,38 @@ void player::playerActions()
 
     if (actionTrigger == "Attack"){
         if(Time -> getTicks()>60){
+
             xMin += 0.1;
             xMax += 0.1;
 
             yMin = 0.0;
             yMax = 0.5;
 
+            this->playerSwingSword = true;
             Time->reset();
         }
     }
 }
+
+bool player::hasPlayerAttacked()
+{
+    return this->playerSwingSword;
+}
+
+void player::setPlayerAttackStatus(bool status)
+{
+    this->playerSwingSword = status;
+}
+
+
+int player::getPlayerDirection()
+{
+    return this->playerDir;
+}
+
+void player::setPlayerDirection(int direction)
+{
+    this->playerDir = direction;
+}
+
 

@@ -1,5 +1,5 @@
-#ifndef _ENMS_H
-#define _ENMS_H
+#ifndef _NPC_H
+#define _NPC_H
 
 #include <GL/gl.h>
 #include <textureLoader.h>
@@ -7,21 +7,20 @@
 #include <windows.h>
 #include <math.h>
 
-#define PI 3.14159
-#define gravity 9.81
-class _enms
+
+class _npc
 {
     public:
-        _enms();
-        virtual ~_enms();
+        _npc();
+        virtual ~_npc();
 
         void drawEnemy();                       // draw enemy object
         void placeEnemy(float, float, float);   // place enemy
         void initEnemy(GLuint);                 // initialize enemy
-        void actions();                         // movement and actions
+        void actions(float);                    // movement and actions
 
-        bool isEnemyLive();                     // status of enemy
-        GLuint EnemyTex;                        // handler Texture;
+        GLuint npcTex;                        // handler Texture;
+
 
         float xPos, yPos, zPos;                 // Placement
         float xSize, ySize;                     // Scaling factor
@@ -29,19 +28,27 @@ class _enms
 
         int frames;                             // Number of frames
 
-        float xMove;                            // moving speed on x axis
         int action;                             // to make action for enemy
-        bool enemyFacing;                        // flag of enemy facing left or right, False = Right, True = Left
 
         Timer *TE = new Timer();
 
-        float theta, v, t;                      // angle, velocity, time;
-
+        bool getHitStatus();
+        int getHealth();
+        void swordCollisionCheck(float, int);
 
     protected:
 
     private:
+
         float xMin, yMin, xMax, yMax;
+
+        int enemyHealth;
+        bool enemyHit;
+
+        float XPOS_MAX;
+        float XPOS_MIN;
+        void checkCollision(float);
+
 };
 
-#endif // _ENMS_H
+#endif // _NPC_H

@@ -108,7 +108,7 @@
 1585791678 source:c:\users\flore\desktop\cscixxx_projects\midterm01\src\timer.cpp
 	"Timer.h"
 
-1587947214 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\main.cpp
+1588130999 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\main.cpp
 	<windows.h>
 	<GLScene.h>
 	<stdlib.h>
@@ -116,13 +116,13 @@
 	<windows.h>
 	<StateManager.h>
 
-1587865779 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\glscene.h
+1588130293 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\glscene.h
 	<string.h>
 	<windows.h>
 	<GL/glut.h>
 	<StateManager.h>
 
-1587844383 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\statemanager.h
+1588108856 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\statemanager.h
 
 1587844383 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\_charac.cpp
 	"_charac.h"
@@ -135,7 +135,7 @@
 1587844383 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\gllight.h
 	<GLScene.h>
 
-1587955888 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\glscene.cpp
+1588130293 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\glscene.cpp
 	<GLLight.h>
 	"GLScene.h"
 	<Inputs.h>
@@ -145,8 +145,11 @@
 	<Objects.h>
 	<_enms.h>
 	<_checkCollision.h>
+	<HealthBar.h>
+	<_npc.h>
+	<Timer.h>
 
-1587844383 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\inputs.h
+1588108856 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\inputs.h
 	<windows.h>
 	<Model.h>
 	<Parallax.h>
@@ -167,7 +170,7 @@
 	<GL/gl.h>
 	<iostream>
 
-1587868544 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\player.h
+1588130293 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\player.h
 	<GL/gl.h>
 	<TextureLoader.h>
 
@@ -180,7 +183,7 @@
 1587844383 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\timer.h
 	<time.h>
 
-1587870247 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\inputs.cpp
+1588130293 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\inputs.cpp
 	"Inputs.h"
 
 1587844383 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\menu.cpp
@@ -198,7 +201,7 @@
 1587844383 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\parallax.cpp
 	"Parallax.h"
 
-1587955787 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\player.cpp
+1588130293 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\player.cpp
 	"player.h"
 	<Timer.h>
 
@@ -219,21 +222,22 @@
 
 1571634702 c:\users\ntt16\desktop\csci course\game dev\nebulous\common\include\soil.h
 
-1587955641 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\_enms.cpp
+1588130293 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\_enms.cpp
 	"_enms.h"
 
-1587947214 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\_enms.h
+1588130293 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\_enms.h
 	<GL/gl.h>
 	<textureLoader.h>
 	<Timer.h>
 	<windows.h>
 	<math.h>
 
-1587948608 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\_checkcollision.cpp
+1588130293 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\_checkcollision.cpp
 	"_checkCollision.h"
 
-1587948596 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\_checkcollision.h
+1587956523 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\_checkcollision.h
 	<math.h>
+
 
 1587960385 source:c:\users\flore\desktop\nebulous-master\nebulousmenu\main.cpp
 	<windows.h>
@@ -611,11 +615,23 @@
 	"_enms.h"
 
 1588064150 c:\users\dolfo\desktop\nebulous\nebulousmenu\include\_enms.h
+
+1588130293 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\healthbar.cpp
+	"HealthBar.h"
+
+1588130293 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\healthbar.h
+	<GL/gl.h>
+	<textureLoader.h>
+	<player.h>
+
+1588108856 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\_npc.h
+
 	<GL/gl.h>
 	<textureLoader.h>
 	<Timer.h>
 	<windows.h>
 	<math.h>
+
 
 1588064150 c:\users\dolfo\desktop\nebulous\nebulousmenu\include\textureloader.h
 	<SOIL.h>
@@ -706,4 +722,8 @@
 1588107281 source:c:\users\dolfo\desktop\nebulous\nebulousmenu\src\inputs.cpp
 	"Inputs.h"
 	<_Sound.h>
+
+1588108856 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\_npc.cpp
+	"_npc.h"
+
 

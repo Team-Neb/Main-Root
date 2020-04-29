@@ -7,6 +7,7 @@
 #include<_Sound.h>
 
 
+
 class GLScene
 {
     public:
@@ -20,6 +21,7 @@ class GLScene
 
         int winMsg(HWND, UINT, WPARAM, LPARAM);
         float screenWidth, screenHeight;
+
 
 
     protected:
