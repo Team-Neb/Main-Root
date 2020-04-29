@@ -479,7 +479,7 @@
 	"ik_IRefCounted.h"
 	"ik_ISoundSource.h"
 
-1588064150 source:c:\users\dolfo\desktop\nebulous\nebulousmenu\main.cpp
+1588135861 source:c:\users\dolfo\desktop\nebulous\nebulousmenu\main.cpp
 	<windows.h>
 	<GLScene.h>
 	<stdlib.h>
@@ -487,7 +487,7 @@
 	<windows.h>
 	<StateManager.h>
 
-1588066900 c:\users\dolfo\desktop\nebulous\nebulousmenu\include\glscene.h
+1588135861 c:\users\dolfo\desktop\nebulous\nebulousmenu\include\glscene.h
 	<string.h>
 	<windows.h>
 	<GL/glut.h>
@@ -500,7 +500,7 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1588067710 c:\users\dolfo\desktop\nebulous\nebulousmenu\include\statemanager.h
+1588139822 c:\users\dolfo\desktop\nebulous\nebulousmenu\include\statemanager.h
 
 1588066900 c:\users\dolfo\desktop\nebulous\nebulousmenu\include\_sound.h
 	<SNDS/irrKlang.h>
@@ -609,16 +609,21 @@
 
 1588064150 c:\users\dolfo\desktop\nebulous\nebulousmenu\include\_charac.h
 
-1588064150 source:c:\users\dolfo\desktop\nebulous\nebulousmenu\src\_checkcollision.cpp
+1588135862 source:c:\users\dolfo\desktop\nebulous\nebulousmenu\src\_checkcollision.cpp
 	"_checkCollision.h"
 
 1588064150 c:\users\dolfo\desktop\nebulous\nebulousmenu\include\_checkcollision.h
 	<math.h>
 
-1588064150 source:c:\users\dolfo\desktop\nebulous\nebulousmenu\src\_enms.cpp
+1588135862 source:c:\users\dolfo\desktop\nebulous\nebulousmenu\src\_enms.cpp
 	"_enms.h"
 
-1588064150 c:\users\dolfo\desktop\nebulous\nebulousmenu\include\_enms.h
+1588135861 c:\users\dolfo\desktop\nebulous\nebulousmenu\include\_enms.h
+	<GL/gl.h>
+	<textureLoader.h>
+	<Timer.h>
+	<windows.h>
+	<math.h>
 
 1588133085 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\healthbar.cpp
 
@@ -676,7 +681,7 @@
 	<Timer.h>
 	<player.h>
 
-1588064150 c:\users\dolfo\desktop\nebulous\nebulousmenu\include\player.h
+1588135861 c:\users\dolfo\desktop\nebulous\nebulousmenu\include\player.h
 	<GL/gl.h>
 	<TextureLoader.h>
 
@@ -688,7 +693,7 @@
 	<windows.h>
 	<textureLoader.h>
 
-1588064150 source:c:\users\dolfo\desktop\nebulous\nebulousmenu\src\player.cpp
+1588135862 source:c:\users\dolfo\desktop\nebulous\nebulousmenu\src\player.cpp
 	"player.h"
 	<Timer.h>
 
@@ -704,7 +709,7 @@
 1588066901 source:c:\users\dolfo\desktop\nebulous\nebulousmenu\src\_sound.cpp
 	"_Sound.h"
 
-1588107992 source:c:\users\dolfo\desktop\nebulous\nebulousmenu\src\glscene.cpp
+1588139822 source:c:\users\dolfo\desktop\nebulous\nebulousmenu\src\glscene.cpp
 	<GLLight.h>
 	"GLScene.h"
 	<Inputs.h>
@@ -715,6 +720,9 @@
 	<_enms.h>
 	<_checkCollision.h>
 	<_Sound.h>
+	<HealthBar.h>
+	<_npc.h>
+	<Timer.h>
 
 1588066900 c:\users\dolfo\desktop\nebulous\nebulousmenu\include\inputs.h
 	<windows.h>
@@ -724,7 +732,7 @@
 	<StateManager.h>
 	<_Sound.h>
 
-1588107281 source:c:\users\dolfo\desktop\nebulous\nebulousmenu\src\inputs.cpp
+1588139821 source:c:\users\dolfo\desktop\nebulous\nebulousmenu\src\inputs.cpp
 	"Inputs.h"
 	<_Sound.h>
 
@@ -834,4 +842,22 @@
 
 1588135118 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\_sound.cpp
 	"_Sound.h"
+
+1588135862 source:c:\users\dolfo\desktop\nebulous\nebulousmenu\src\_npc.cpp
+	"_npc.h"
+
+1588135861 c:\users\dolfo\desktop\nebulous\nebulousmenu\include\_npc.h
+	<GL/gl.h>
+	<textureLoader.h>
+	<Timer.h>
+	<windows.h>
+	<math.h>
+
+1588135861 c:\users\dolfo\desktop\nebulous\nebulousmenu\include\healthbar.h
+	<GL/gl.h>
+	<textureLoader.h>
+	<player.h>
+
+1588135862 source:c:\users\dolfo\desktop\nebulous\nebulousmenu\src\healthbar.cpp
+	"HealthBar.h"
 

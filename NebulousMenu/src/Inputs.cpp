@@ -64,6 +64,10 @@ void Inputs::keyPressed(Model * Mdl, StateManager *stateManager)
             {
                 stateManager->_gameState = QUIT;
             }
+            else if (stateManager->_gameState == CREDITS)
+            {
+                stateManager->_gameState = MENU;
+            }
             break;
 
         case VK_SPACE:
@@ -85,7 +89,7 @@ void Inputs::keyPressed(Model * Mdl, StateManager *stateManager)
             }
             else if (stateManager->_gameState == STORY5)
             {
-                stateManager->_gameState = GAME;
+                stateManager->_gameState = MENU;
             }
             break;
 
@@ -93,7 +97,7 @@ void Inputs::keyPressed(Model * Mdl, StateManager *stateManager)
 
             if (stateManager->_gameState == LANDING)
             {
-                stateManager->_gameState = MENU; // BAD EDITS
+                stateManager->_gameState = STORY1; // BAD EDITS
             }
             else if (stateManager->_gameState == PAUSED)
             {
@@ -105,20 +109,25 @@ void Inputs::keyPressed(Model * Mdl, StateManager *stateManager)
         case 0x46: //F for skipping intro
             if (stateManager->_gameState == STORY1)
             {
-                stateManager->_gameState = GAME;
+                stateManager->_gameState = MENU;
             }
             break;
 
         case 0x4E: //N for new game
             if (stateManager->_gameState == MENU)
             {
-                stateManager->_gameState = STORY1;
+                stateManager->_gameState = GAME;
             }
 
         case 0x48: //H for help page
             if (stateManager->_gameState == MENU)
             {
                 stateManager->_gameState = HELP;
+            }
+        case 0x43: //C for credits
+            if (stateManager->_gameState == MENU)
+            {
+                stateManager->_gameState = CREDITS;
             }
 
 

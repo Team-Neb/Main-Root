@@ -31,6 +31,7 @@ Parallax *storyThree = new Parallax();
 Parallax *storyFour = new Parallax();
 Parallax *storyFive = new Parallax();
 Parallax *continueScreen = new Parallax();
+Parallax *credits = new Parallax();
 
 
 
@@ -83,12 +84,12 @@ GLint GLScene::initGL()
     plx->parallaxInit("images/par.png");
     pause->parallaxInit("images/pause.png");
     tlt->parallaxInit("images/title.png");
-    menu->parallaxInit("images/FrontMenu.jpg");
-    help->parallaxInit("images/help.jpg");
+    menu->parallaxInit("images/FrontMenu.png");
+    help->parallaxInit("images/help.png");
     healthBar->initHealthBar("images/heartBar.png");
     enmsTex->loadTexture("images/mon.png");
     enemy2Tex->loadTexture("images/monster2.png");  // load the image to the second enemy monster
-
+    credits->parallaxInit("images/credits.png");
 
     storyOne->parallaxInit("images/scene01.png");
     storyTwo->parallaxInit("images/scene02.jpg");
@@ -155,6 +156,13 @@ GLint GLScene::drawGLScene()
         glPushMatrix();
         glScaled(.33, 1, 1.0);
         help->drawSquare(screenWidth,screenHeight);
+        glPopMatrix();
+        break;
+
+    case CREDITS:
+        glPushMatrix();
+        glScaled(.33, 1, 1.0);
+        credits->drawSquare(screenWidth,screenHeight);
         glPopMatrix();
         break;
 
