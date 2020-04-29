@@ -11,11 +11,11 @@ _npc::_npc()
 
     rotateX = rotateY = rotateZ = 0;
 
-    frames = 1;
+    frames = 10;
 
     xMin = yMin = 0.0;
     xMax = 1.0/(float)frames;
-    yMax = 1;
+    yMax = 0.5;
 
     // The left and right bounds for this object
     XPOS_MAX = 4.0;
@@ -81,6 +81,10 @@ void _npc::actions(float playerX)
     // MOVE RIGHT
     case 0:
         if(TE->getTicks()>60){
+            xMin += 0.1;
+            xMax += 0.1;
+            yMin = 0.5;
+            yMax = 1.0;
             (this->xPos < XPOS_MAX) ? (this->xPos += 0.02) : (this->action = 1);
             if(!this->enemyHit){
                 this->checkCollision(playerX);
@@ -94,6 +98,10 @@ void _npc::actions(float playerX)
     // MOVE LEFT
     case 1:
         if(TE->getTicks()>60){
+            xMin -= 0.1;
+            xMax -= 0.1;
+            yMin = 0.0;
+            yMax = 0.5;
             (this->xPos > XPOS_MIN) ? (this->xPos -= 0.02) : (this->action = 0);
             if(!this->enemyHit){
                 this->checkCollision(playerX);
@@ -209,7 +217,7 @@ void _npc::placeEnemyRandom()
 
     (temp == 0) ? (this->xPos = -newPosition) : (this->xPos = newPosition); // place randomly on left or right side of player
     (temp == 0) ? (this->action = 0) : (this->action = 1);
-    this->yPos = -1.45;
+    this->yPos = -1.65;
     this->zPos = -5.0;
 }
 

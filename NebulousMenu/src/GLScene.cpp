@@ -74,7 +74,7 @@ GLint GLScene::initGL()
     }
 
     // Apply the texture image to the handler
-    enemy2Tex->loadTexture("images/monster2.png");  // load the image to the second enemy monster
+    enemy2Tex->loadTexture("images/Skull_Spritesheet.png");  // load the image to the second enemy monster
 
     // Create enemy objects for the first level
     this->spawnEnemies(this->level);
@@ -365,7 +365,7 @@ void GLScene::spawnEnemies(int level)
             for(int i = 0; i < 1; i++){
                 enemyType2.push_back(new _npc());
                 enemyType2[i]->initEnemy(enemy2Tex->tex);
-                enemyType2[i]->placeEnemy(-1.37, -1.45, -5.0);
+                enemyType2[i]->placeEnemy(-1.37, -1.65, -5.0);
             }
             break;
         case 2:
