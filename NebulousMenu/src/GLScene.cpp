@@ -10,6 +10,7 @@
 #include <_checkCollision.h>
 #include <_npc.h>
 #include <Timer.h>
+#include <vector>
 
 Inputs *KbMs = new Inputs();
 Model *Mdl = new Model();
@@ -28,15 +29,26 @@ _enms enms[10];
 
 
 
-// init second enemy object
-_npc *enemy2 = new _npc();
+// Create vector of _npc pointers to store level 2 enemy objects
+// as well as the texture handler for these enemies
+vector<_npc *> enemyType2;
 textureLoader *enemy2Tex = new textureLoader();
+
+// Creating array of parrallax pointers to store background images of the game levels
+vector<Parallax *> gameLevel;
+const int NUMBER_OF_LEVELS = 2;
+
+
 
 GLScene::GLScene()
 {
     //ctor
     screenHeight = GetSystemMetrics(SM_CYSCREEN);
     screenWidth = GetSystemMetrics(SM_CXSCREEN);
+
+    // initialize game level to 1 by default
+    this->level = 1;
+    this->is_level_complete = false;
 }
 
 GLScene::~GLScene()
@@ -56,6 +68,26 @@ GLint GLScene::initGL()
     GLLight Light(GL_LIGHT0);
     Light.setLight(GL_LIGHT0); // create light instance
 
+    // Create the number of parallax objects
+    for(int i = 0; i < NUMBER_OF_LEVELS; i++){
+        gameLevel.push_back(new Parallax());
+    }
+
+    // Apply the texture image to the handler
+    enemy2Tex->loadTexture("images/monster2.png");  // load the image to the second enemy monster
+
+    // Create level 2 enemy objects
+    for(int i = 0; i < 1; i++){
+        enemyType2.push_back(new _npc());
+        enemyType2[i]->initEnemy(enemy2Tex->tex);
+        enemyType2[i]->placeEnemy(-1.37, -1.45, -5.0);
+    }
+
+    // INITIALIZE THE BACKGROUND GAME LEVEL SCENES
+    gameLevel[0]->parallaxInit("images/par.png");
+    gameLevel[1]->parallaxInit("images/level-2.png");
+
+
    // images to import for game states
     ply->playerInit("images/walkAndattack.png");
     plx->parallaxInit("images/par.png");
@@ -64,7 +96,6 @@ GLint GLScene::initGL()
     menu->parallaxInit("images/FrontMenu.jpg");
     help->parallaxInit("images/help.jpg");
     enmsTex->loadTexture("images/mon.png");
-    enemy2Tex->loadTexture("images/monster2.png");  // load the image to the second enemy monster
 
 
     for(int i = 0; i < 1; i++){
@@ -73,17 +104,14 @@ GLint GLScene::initGL()
         enms[i].xSize = enms[i].ySize = float(rand()%12)/65.0;
     }
 
-    // placing the enemy and initializing it's values
-    enemy2->initEnemy(enemy2Tex->tex);
-    enemy2->placeEnemy(-1.37, -1.45, -5.0);
-
     return true;
 
 }
 
 //function for main to exit game when escape is pressed on certain game states
 GameStates GLScene::sendState(){
-    return stateManager->_gameState;}
+    return stateManager->_gameState;
+}
 
 
 GLint GLScene::drawGLScene()
@@ -115,8 +143,17 @@ GLint GLScene::drawGLScene()
         break;
 
     case GAME:
+
+        // Add the background parallax image
         glPushMatrix();
-        plx -> drawSquare(screenHeight, screenWidth);
+            // Choose the proper background based on the current game level
+            switch(this->level){
+                case 1:
+                    gameLevel[0]->drawSquare(screenHeight, screenWidth);
+                    break;
+                case 2:
+                    gameLevel[1]->drawSquare(screenHeight, screenWidth);
+            }
         glPopMatrix();
 
         glPushMatrix();
@@ -158,16 +195,26 @@ GLint GLScene::drawGLScene()
         }
 
 
+        //check if player sword collided with an enemy if player attacked
         if(ply->hasPlayerAttacked() ){
-            //check if player sword collided with enemy
-            enemy2->swordCollisionCheck(ply->xPos, ply->getPlayerDirection());
+            enemyType2[0]->swordCollisionCheck(ply->xPos, ply->getPlayerDirection());
             ply->setPlayerAttackStatus(false);
         }
 
-        // This will update the position of the enemy and check for collision
+        // This will update the position of the enemy and check for collision by movement
         // If collision was done by movement - then it will update the action variable
         // of the enemy2. The next time it updates - the enemy will perform the appropiate action
-        enemy2->actions(ply->xPos);
+        enemyType2[0]->actions(ply->xPos);
+
+
+        // Check if enemy has been killed to move onto next level
+        // Current implementation is just a single enemy - eventually check vector length
+        // to see if all enemy objects have been destroyed
+        if(enemyType2[0]->action == 9 && !this->is_level_complete){
+            this->level += 1;
+            this->is_level_complete = true;
+        }
+
         break;
 
     case PAUSED: // pop up pause menu

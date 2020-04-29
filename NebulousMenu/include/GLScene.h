@@ -24,6 +24,8 @@ class GLScene
     protected:
 
     private:
+        int level;
+        bool is_level_complete;
 };
 
 #endif // GLSCENE_H
