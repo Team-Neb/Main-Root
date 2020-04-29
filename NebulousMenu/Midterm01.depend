@@ -108,7 +108,7 @@
 1585791678 source:c:\users\flore\desktop\cscixxx_projects\midterm01\src\timer.cpp
 	"Timer.h"
 
-1588130999 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\main.cpp
+1588135059 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\main.cpp
 	<windows.h>
 	<GLScene.h>
 	<stdlib.h>
@@ -116,13 +116,14 @@
 	<windows.h>
 	<StateManager.h>
 
-1588130293 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\glscene.h
+1588135118 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\glscene.h
 	<string.h>
 	<windows.h>
 	<GL/glut.h>
 	<StateManager.h>
+	<_Sound.h>
 
-1588108856 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\statemanager.h
+1588135118 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\statemanager.h
 
 1587844383 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\_charac.cpp
 	"_charac.h"
@@ -149,12 +150,13 @@
 	<_npc.h>
 	<Timer.h>
 
-1588108856 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\inputs.h
+1588135118 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\inputs.h
 	<windows.h>
 	<Model.h>
 	<Parallax.h>
 	<player.h>
 	<StateManager.h>
+	<_Sound.h>
 
 1587844383 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\model.h
 	<windows.h>
@@ -170,7 +172,7 @@
 	<GL/gl.h>
 	<iostream>
 
-1588130293 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\player.h
+1588133085 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\player.h
 	<GL/gl.h>
 	<TextureLoader.h>
 
@@ -183,8 +185,9 @@
 1587844383 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\timer.h
 	<time.h>
 
-1588130293 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\inputs.cpp
+1588135118 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\inputs.cpp
 	"Inputs.h"
+	<_Sound.h>
 
 1587844383 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\menu.cpp
 	"Menu.h"
@@ -201,7 +204,7 @@
 1587844383 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\parallax.cpp
 	"Parallax.h"
 
-1588130293 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\player.cpp
+1588133085 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\player.cpp
 	"player.h"
 	<Timer.h>
 
@@ -222,22 +225,23 @@
 
 1571634702 c:\users\ntt16\desktop\csci course\game dev\nebulous\common\include\soil.h
 
-1588130293 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\_enms.cpp
+1588133085 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\_enms.cpp
 	"_enms.h"
 
-1588130293 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\_enms.h
+1588133085 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\_enms.h
 	<GL/gl.h>
 	<textureLoader.h>
 	<Timer.h>
 	<windows.h>
 	<math.h>
 
-1588130293 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\_checkcollision.cpp
+1588133085 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\_checkcollision.cpp
 	"_checkCollision.h"
 
 1587956523 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\_checkcollision.h
 	<math.h>
 
+1588133085 ated upstream
 
 1587960385 source:c:\users\flore\desktop\nebulous-master\nebulousmenu\main.cpp
 	<windows.h>
@@ -616,22 +620,23 @@
 
 1588064150 c:\users\dolfo\desktop\nebulous\nebulousmenu\include\_enms.h
 
-1588130293 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\healthbar.cpp
+1588133085 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\healthbar.cpp
+
+1588133085 shed changes
 	"HealthBar.h"
-
-1588130293 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\healthbar.h
-	<GL/gl.h>
-	<textureLoader.h>
-	<player.h>
-
-1588108856 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\_npc.h
-
 	<GL/gl.h>
 	<textureLoader.h>
 	<Timer.h>
 	<windows.h>
 	<math.h>
+	"_npc.h"
 
+1588133085 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\healthbar.h
+	<GL/gl.h>
+	<textureLoader.h>
+	<player.h>
+
+1588133085 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\_npc.h
 
 1588064150 c:\users\dolfo\desktop\nebulous\nebulousmenu\include\textureloader.h
 	<SOIL.h>
@@ -723,7 +728,110 @@
 	"Inputs.h"
 	<_Sound.h>
 
-1588108856 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\_npc.cpp
-	"_npc.h"
+1588133085 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\_npc.cpp
 
+1588135118 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\_sound.h
+	<SNDS/irrKlang.h>
+	<stdlib.h>
+	<iostream>
+
+1587419311 c:\users\ntt16\desktop\csci course\game dev\nebulous\common\include\snds\irrklang.h
+	"ik_irrKlangTypes.h"
+	"ik_vec3d.h"
+	"ik_IRefCounted.h"
+	"ik_IVirtualRefCounted.h"
+	"ik_ESoundOutputDrivers.h"
+	"ik_ESoundEngineOptions.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+	"ik_ISoundEngine.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_IAudioStream.h"
+	"ik_IAudioStreamLoader.h"
+	"ik_ISoundEffectControl.h"
+	"ik_ISoundStopEventReceiver.h"
+	"ik_IFileFactory.h"
+	"ik_IFileReader.h"
+	"ik_ISoundDeviceList.h"
+	"ik_IAudioRecorder.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1587419311 c:\users\ntt16\desktop\csci course\game dev\nebulous\common\include\snds\ik_irrklangtypes.h
+	<wchar.h>
+
+1587419311 c:\users\ntt16\desktop\csci course\game dev\nebulous\common\include\snds\ik_vec3d.h
+	<math.h>
+	"ik_irrKlangTypes.h"
+
+1587419311 c:\users\ntt16\desktop\csci course\game dev\nebulous\common\include\snds\ik_irefcounted.h
+	"ik_irrKlangTypes.h"
+
+1587419311 c:\users\ntt16\desktop\csci course\game dev\nebulous\common\include\snds\ik_ivirtualrefcounted.h
+	"ik_irrKlangTypes.h"
+
+1587419311 c:\users\ntt16\desktop\csci course\game dev\nebulous\common\include\snds\ik_esoundoutputdrivers.h
+
+1587419311 c:\users\ntt16\desktop\csci course\game dev\nebulous\common\include\snds\ik_esoundengineoptions.h
+
+1587419311 c:\users\ntt16\desktop\csci course\game dev\nebulous\common\include\snds\ik_estreammodes.h
+
+1587419311 c:\users\ntt16\desktop\csci course\game dev\nebulous\common\include\snds\ik_saudiostreamformat.h
+	"ik_IRefCounted.h"
+
+1587419311 c:\users\ntt16\desktop\csci course\game dev\nebulous\common\include\snds\ik_isoundengine.h
+	"ik_IRefCounted.h"
+	"ik_vec3d.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_EStreamModes.h"
+	"ik_IFileFactory.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1587419311 c:\users\ntt16\desktop\csci course\game dev\nebulous\common\include\snds\ik_isoundsource.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+
+1587419311 c:\users\ntt16\desktop\csci course\game dev\nebulous\common\include\snds\ik_isound.h
+	"ik_IVirtualRefCounted.h"
+	"ik_ISoundEffectControl.h"
+	"ik_vec3d.h"
+
+1587419311 c:\users\ntt16\desktop\csci course\game dev\nebulous\common\include\snds\ik_isoundeffectcontrol.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+
+1587419311 c:\users\ntt16\desktop\csci course\game dev\nebulous\common\include\snds\ik_ifilefactory.h
+	"ik_IRefCounted.h"
+
+1587419311 c:\users\ntt16\desktop\csci course\game dev\nebulous\common\include\snds\ik_isoundmixedoutputreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1587419311 c:\users\ntt16\desktop\csci course\game dev\nebulous\common\include\snds\ik_iaudiostream.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1587419311 c:\users\ntt16\desktop\csci course\game dev\nebulous\common\include\snds\ik_iaudiostreamloader.h
+	"ik_IRefCounted.h"
+	"ik_IFileReader.h"
+
+1587419311 c:\users\ntt16\desktop\csci course\game dev\nebulous\common\include\snds\ik_ifilereader.h
+	"ik_IRefCounted.h"
+
+1587419311 c:\users\ntt16\desktop\csci course\game dev\nebulous\common\include\snds\ik_isoundstopeventreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1587419311 c:\users\ntt16\desktop\csci course\game dev\nebulous\common\include\snds\ik_isounddevicelist.h
+	"ik_IRefCounted.h"
+
+1587419311 c:\users\ntt16\desktop\csci course\game dev\nebulous\common\include\snds\ik_iaudiorecorder.h
+	"ik_IRefCounted.h"
+	"ik_ISoundSource.h"
+
+1588135118 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\_sound.cpp
+	"_Sound.h"
 
