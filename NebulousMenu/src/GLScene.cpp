@@ -25,6 +25,7 @@ StateManager *stateManager = new StateManager;
 Parallax *tlt = new Parallax();
 Parallax *menu = new Parallax();
 Parallax *help = new Parallax();
+Parallax *options = new Parallax();
 Parallax *storyOne = new Parallax();
 Parallax *storyTwo = new Parallax();
 Parallax *storyThree = new Parallax();
@@ -86,6 +87,7 @@ GLint GLScene::initGL()
     tlt->parallaxInit("images/title.png");
     menu->parallaxInit("images/FrontMenu.png");
     help->parallaxInit("images/help.png");
+    options->parallaxInit("images/options.png");
     healthBar->initHealthBar("images/heartBar.png");
     enmsTex->loadTexture("images/mon.png");
     enemy2Tex->loadTexture("images/monster2.png");  // load the image to the second enemy monster
@@ -272,6 +274,17 @@ GLint GLScene::drawGLScene()
 
 
         break;
+
+    case HELP_INGAME:
+        glPushMatrix();
+        plx -> drawSquare(screenHeight, screenWidth);// drawing the game behind the pop screen
+        glPopMatrix();
+        glPushMatrix();
+        glScaled(.75, .75, 0.9); // reduced scaling to reduce size
+        options -> drawPopUp(screenHeight, screenWidth);
+        glPopMatrix();
+        break;
+
 
     case PAUSED: // pop up pause menu
 

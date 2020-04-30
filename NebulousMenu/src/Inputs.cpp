@@ -47,12 +47,7 @@ void Inputs::keyPressed(Model * Mdl, StateManager *stateManager)
             break;
 */
         case VK_ESCAPE: //pause the game and open popup also quit the program for certain states
-            if (stateManager->_gameState == GAME)
-            {
-                stateManager->_gameState = PAUSED;
-            }
-
-            else if (stateManager->_gameState == PAUSED)
+            if (stateManager->_gameState == PAUSED)
             {
                 stateManager->_gameState = GAME;
             }
@@ -67,6 +62,10 @@ void Inputs::keyPressed(Model * Mdl, StateManager *stateManager)
             else if (stateManager->_gameState == CREDITS)
             {
                 stateManager->_gameState = MENU;
+            }
+            else if (stateManager->_gameState == HELP_INGAME)
+            {
+                stateManager->_gameState = PAUSED;
             }
             break;
 
@@ -118,17 +117,43 @@ void Inputs::keyPressed(Model * Mdl, StateManager *stateManager)
             {
                 stateManager->_gameState = GAME;
             }
+            break;
 
         case 0x48: //H for help page
             if (stateManager->_gameState == MENU)
             {
                 stateManager->_gameState = HELP;
             }
+            else if (stateManager->_gameState == PAUSED)
+            {
+                stateManager->_gameState = HELP_INGAME;
+            }
+            break;
+
+        case 0x50: // H for help
+            if (stateManager->_gameState == GAME)
+            {
+                stateManager->_gameState = PAUSED;
+            }
+            break;
+
+        case 0x57: //W to skip from Landing -> Menu & Menu -> Game
+            if (stateManager->_gameState == LANDING)
+            {
+                stateManager->_gameState = MENU;
+            }
+            else if (stateManager->_gameState == MENU)
+            {
+                stateManager->_gameState = GAME;
+            }
+            break;
+
         case 0x43: //C for credits
             if (stateManager->_gameState == MENU)
             {
                 stateManager->_gameState = CREDITS;
             }
+            break;
 
 
     }
