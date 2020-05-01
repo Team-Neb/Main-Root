@@ -11,6 +11,7 @@
 #include <_npc.h>
 #include <Timer.h>
 #include <vector>
+#include <string>
 
 Inputs *KbMs = new Inputs();
 Model *Mdl = new Model();
@@ -39,7 +40,6 @@ vector<Parallax *> gameLevel;
 const int NUMBER_OF_LEVELS = 2;
 
 
-
 GLScene::GLScene()
 {
     //ctor
@@ -49,6 +49,8 @@ GLScene::GLScene()
     // initialize game level to 1 by default
     this->level = 1;
     this->is_level_complete = false;
+    this->cinematicFrames = 5;
+    this->currentCinematicFrame = 0;
 }
 
 GLScene::~GLScene()
@@ -67,6 +69,9 @@ GLint GLScene::initGL()
     glEnable(GL_COLOR_MATERIAL); // This is for rendering the base color of an object (glColor3f)
     GLLight Light(GL_LIGHT0);
     Light.setLight(GL_LIGHT0); // create light instance
+
+    // Initialize the cinematic vector with all the needed scenes
+    this->initCinematic();
 
     // Create the number of parallax objects
     for(int i = 0; i < NUMBER_OF_LEVELS; i++){
@@ -100,6 +105,7 @@ GLint GLScene::initGL()
         enms[i].xSize = enms[i].ySize = float(rand()%12)/65.0;
     }
 
+    this->cinematicTimer->start();
     return true;
 
 }
@@ -125,12 +131,28 @@ GLint GLScene::drawGLScene()
         break;
 
     case MENU:
-        glPushMatrix();
-        glScaled(.33, 1, 1.0);
-        menu->drawSquare(screenWidth,screenHeight);
-        glPopMatrix();
-        break;
+        // Every 2 seconds update what scene to show
+        if (this->cinematicTimer->getTicks() > 2000 && currentCinematicFrame != 5)
+            {
+                cout<<"in here"<<endl;
+                this->currentCinematicFrame += 1;
+                this->cinematicTimer->reset();
+            }
 
+        // Show the intro cinematic scene if not all scenes have been shown.
+        if(currentCinematicFrame != 5){
+            glPushMatrix();
+            glScaled(.33, 1, 1.0);
+            this->cinematic[currentCinematicFrame]->drawSquare(screenWidth,screenHeight);
+            glPopMatrix();
+        // Otherwise show the menu page
+        }else{
+            glPushMatrix();
+            glScaled(.33, 1, 1.0);
+            menu->drawSquare(screenWidth,screenHeight);
+            glPopMatrix();
+        }
+        break;
     case HELP:
         glPushMatrix();
         glScaled(.33, 1, 1.0);
@@ -380,4 +402,16 @@ void GLScene::spawnEnemies(int level)
     }
 }
 
+void GLScene::initCinematic()
+{
+    // Add Parallax objects into the vector
+    for(int i = 0; i < this->cinematicFrames; i++){
+        cinematic.push_back(new Parallax());
+    };
+    cinematic[0]->parallaxInit("images/scene01.png");
+    cinematic[1]->parallaxInit("images/scene02.jpg");
+    cinematic[2]->parallaxInit("images/scene03.png");
+    cinematic[3]->parallaxInit("images/scene04.png");
+    cinematic[4]->parallaxInit("images/scene05.png");
+}
 

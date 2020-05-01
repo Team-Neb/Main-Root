@@ -137,7 +137,7 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 
 		dwExStyle=WS_EX_APPWINDOW;								// Window Extended Style
 		dwStyle= WS_POPUP;			// must handle Gsync situations: Windows Style
-		ShowCursor(FALSE);									// Hide Mouse Pointer
+		ShowCursor(TRUE);									// Hide Mouse Pointer
 	}
 	else
 	{
