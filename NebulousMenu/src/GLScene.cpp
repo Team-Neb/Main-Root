@@ -132,7 +132,7 @@ GLint GLScene::drawGLScene()
 
     case MENU:
         // Every 2 seconds update what scene to show
-        if (this->cinematicTimer->getTicks() > 2000 && currentCinematicFrame != 5)
+        if (this->cinematicTimer->getTicks() > 2000 && currentCinematicFrame != this->cinematicFrames)
             {
                 cout<<"in here"<<endl;
                 this->currentCinematicFrame += 1;
@@ -140,7 +140,7 @@ GLint GLScene::drawGLScene()
             }
 
         // Show the intro cinematic scene if not all scenes have been shown.
-        if(currentCinematicFrame != 5){
+        if(currentCinematicFrame != this->cinematicFrames){
             glPushMatrix();
             glScaled(.33, 1, 1.0);
             this->cinematic[currentCinematicFrame]->drawSquare(screenWidth,screenHeight);
