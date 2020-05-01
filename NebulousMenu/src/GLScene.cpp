@@ -8,6 +8,9 @@
 #include <Objects.h>
 #include <_enms.h>
 #include <_checkCollision.h>
+
+#include<_Sound.h>
+
 #include <HealthBar.h>
 #include <_npc.h>
 #include <Timer.h>
@@ -22,6 +25,19 @@ StateManager *stateManager = new StateManager;
 Parallax *tlt = new Parallax();
 Parallax *menu = new Parallax();
 Parallax *help = new Parallax();
+Parallax *options = new Parallax();
+Parallax *storyOne = new Parallax();
+Parallax *storyTwo = new Parallax();
+Parallax *storyThree = new Parallax();
+Parallax *storyFour = new Parallax();
+Parallax *storyFive = new Parallax();
+Parallax *continueScreen = new Parallax();
+Parallax *credits = new Parallax();
+
+
+
+
+// implement story slides thru parallax
 
 _checkCollision *hit = new _checkCollision();
 HealthBar *healthBar = new HealthBar();
@@ -29,9 +45,15 @@ HealthBar *healthBar = new HealthBar();
 textureLoader *enmsTex = new textureLoader();
 _enms enms[1];
 
+
+// Sound adding
+
+_Sound *snds = new _Sound();
+
 // init second enemy object
 _npc *enemy2 = new _npc();
 textureLoader *enemy2Tex = new textureLoader();
+
 
 
 GLScene::GLScene()
@@ -61,14 +83,23 @@ GLint GLScene::initGL()
    // images to import for game states
     ply->playerInit("images/walkAndattack.png");
     plx->parallaxInit("images/par.png");
-    pause->parallaxInit("images/pause.jpg");
+    pause->parallaxInit("images/pause.png");
     tlt->parallaxInit("images/title.png");
-    menu->parallaxInit("images/FrontMenu.jpg");
-    help->parallaxInit("images/help.jpg");
+    menu->parallaxInit("images/FrontMenu.png");
+    help->parallaxInit("images/help.png");
+    options->parallaxInit("images/options.png");
     healthBar->initHealthBar("images/heartBar.png");
     enmsTex->loadTexture("images/mon.png");
     enemy2Tex->loadTexture("images/monster2.png");  // load the image to the second enemy monster
+    credits->parallaxInit("images/credits.png");
 
+    storyOne->parallaxInit("images/scene01.png");
+    storyTwo->parallaxInit("images/scene02.jpg");
+    storyThree->parallaxInit("images/scene03.png");
+    storyFour->parallaxInit("images/scene04.png");
+    storyFive->parallaxInit("images/scene05.png");
+
+    // Here is where we'll load story slides for the narrative
 
 
     for(int i = 0; i < 1; i++){
@@ -83,9 +114,15 @@ GLint GLScene::initGL()
         }
     }
 
+
+    snds->initSounds();
+    snds->playMusic("sounds/WiiTheme.mp3"); // Switch back to sounds/NebulousTheme.mp3
+
+
     // placing the enemy and initializing it's values
     enemy2->initEnemy(enemy2Tex->tex);
     enemy2->placeEnemy(-1.37, -1.45, -5.0);
+
 
     return true;
 
@@ -124,7 +161,50 @@ GLint GLScene::drawGLScene()
         glPopMatrix();
         break;
 
+    case CREDITS:
+        glPushMatrix();
+        glScaled(.33, 1, 1.0);
+        credits->drawSquare(screenWidth,screenHeight);
+        glPopMatrix();
+        break;
+
+    case STORY1:
+        glPushMatrix();
+        glScaled(.33, 1, 1.0);
+        storyOne->drawSquare(screenWidth,screenHeight);
+        glPopMatrix();
+        break;
+
+    case STORY2:
+        glPushMatrix();
+        glScaled(.33, 1, 1.0);
+        storyTwo->drawSquare(screenWidth,screenHeight);
+        glPopMatrix();
+        break;
+
+    case STORY3:
+        glPushMatrix();
+        glScaled(.33, 1, 1.0);
+        storyThree->drawSquare(screenWidth,screenHeight);
+        glPopMatrix();
+        break;
+
+    case STORY4:
+        glPushMatrix();
+        glScaled(.33, 1, 1.0);
+        storyFour->drawSquare(screenWidth,screenHeight);
+        glPopMatrix();
+        break;
+
+    case STORY5:
+        glPushMatrix();
+        glScaled(.33, 1, 1.0);
+        storyFive->drawSquare(screenWidth,screenHeight);
+        glPopMatrix();
+        break;
+
     case GAME:
+
         glPushMatrix();
         plx -> drawSquare(screenHeight, screenWidth);
         glPopMatrix();
@@ -195,6 +275,17 @@ GLint GLScene::drawGLScene()
 
         break;
 
+    case HELP_INGAME:
+        glPushMatrix();
+        plx -> drawSquare(screenHeight, screenWidth);// drawing the game behind the pop screen
+        glPopMatrix();
+        glPushMatrix();
+        glScaled(.75, .75, 0.9); // reduced scaling to reduce size
+        options -> drawPopUp(screenHeight, screenWidth);
+        glPopMatrix();
+        break;
+
+
     case PAUSED: // pop up pause menu
 
         glPushMatrix();
@@ -238,7 +329,7 @@ int GLScene::winMsg(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             {
                 KbMs ->wParam = wParam;    //second variable refernces one here other is in a differnt file
                 KbMs -> keyPressed(Mdl, stateManager);
-
+                KbMs -> keyPressed(snds);
 
             if (stateManager->_gameState == GAME) // The game cannot be controlled while paused
                 {
@@ -303,3 +394,43 @@ case WM_LBUTTONDOWN:
 
 }
 
+
+/*
+
+GLvoid GLScene::drawGLScene(_Sound* snd)
+{
+    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+    glLoadIdentity();
+    stateManager->_gameState;
+    _Sound -> _gameState;
+    //  State manager used to manipulate game states
+    switch(stateManager->_gameState){
+    case LANDING:
+
+
+        break;
+
+    case MENU:
+
+
+        break;
+
+    case HELP:
+
+        break;
+
+    case GAME:
+
+
+        break;
+
+    case PAUSED: // pop up pause menu
+
+        break;
+        default:
+        break;
+
+
+    }
+}
+*/

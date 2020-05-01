@@ -47,6 +47,8 @@
 			<Add library="glu32" />
 			<Add library="winmm" />
 			<Add library="gdi32" />
+			<Add library="../Common/lib/libirrKlang.a" />
+			<Add library="../Common/lib/irrKlang.lib" />
 			<Add directory="../Common" />
 		</Linker>
 		<Unit filename="include/GLLight.h" />
@@ -58,6 +60,8 @@
 		<Unit filename="include/Parallax.h" />
 		<Unit filename="include/StateManager.h" />
 		<Unit filename="include/Timer.h" />
+		<Unit filename="include/_Sound.h" />
+		<Unit filename="include/_charac.h" />
 		<Unit filename="include/_checkCollision.h" />
 		<Unit filename="include/_enms.h" />
 		<Unit filename="include/_npc.h" />
@@ -73,6 +77,8 @@
 		<Unit filename="src/Parallax.cpp" />
 		<Unit filename="src/StateManager.cpp" />
 		<Unit filename="src/Timer.cpp" />
+		<Unit filename="src/_Sound.cpp" />
+		<Unit filename="src/_charac.cpp" />
 		<Unit filename="src/_checkCollision.cpp" />
 		<Unit filename="src/_enms.cpp" />
 		<Unit filename="src/_npc.cpp" />

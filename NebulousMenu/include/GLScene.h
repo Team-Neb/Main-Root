@@ -4,7 +4,7 @@
 #include <windows.h>
 #include <GL/glut.h>
 #include <StateManager.h>
-
+#include<_Sound.h>
 
 
 
@@ -17,6 +17,7 @@ class GLScene
         GLint drawGLScene();
         GLvoid resizeGLScene(GLsizei,GLsizei);
         GameStates sendState();
+
 
         int winMsg(HWND, UINT, WPARAM, LPARAM);
         float screenWidth, screenHeight;
