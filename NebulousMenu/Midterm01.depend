@@ -116,14 +116,43 @@
 	<windows.h>
 	<StateManager.h>
 
-1588135118 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\glscene.h
+1587419311 ated upstream
+
+1588297129 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\glscene.h
 	<string.h>
 	<windows.h>
 	<GL/glut.h>
 	<StateManager.h>
 	<_Sound.h>
 
-1588135118 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\statemanager.h
+1588133085 shed changes
+	<string.h>
+	<windows.h>
+	<GL/glut.h>
+	<StateManager.h>
+	<_Sound.h>
+	<windows.h>
+	<Model.h>
+	<Parallax.h>
+	<player.h>
+	<StateManager.h>
+	<_Sound.h>
+	"Inputs.h"
+	<_Sound.h>
+	"HealthBar.h"
+	<GL/gl.h>
+	<textureLoader.h>
+	<Timer.h>
+	<windows.h>
+	<math.h>
+	"_npc.h"
+	<GL/gl.h>
+	<textureLoader.h>
+	<Timer.h>
+	<player.h>
+	"_npc.h"
+
+1588297129 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\statemanager.h
 
 1587844383 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\_charac.cpp
 	"_charac.h"
@@ -136,7 +165,7 @@
 1587844383 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\gllight.h
 	<GLScene.h>
 
-1588130293 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\glscene.cpp
+1588297129 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\glscene.cpp
 	<GLLight.h>
 	"GLScene.h"
 	<Inputs.h>
@@ -146,11 +175,12 @@
 	<Objects.h>
 	<_enms.h>
 	<_checkCollision.h>
+	<_Sound.h>
 	<HealthBar.h>
 	<_npc.h>
 	<Timer.h>
 
-1588135118 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\inputs.h
+1588297129 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\inputs.h
 	<windows.h>
 	<Model.h>
 	<Parallax.h>
@@ -185,7 +215,7 @@
 1587844383 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\timer.h
 	<time.h>
 
-1588135118 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\inputs.cpp
+1588297129 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\inputs.cpp
 	"Inputs.h"
 	<_Sound.h>
 
@@ -240,8 +270,6 @@
 
 1587956523 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\_checkcollision.h
 	<math.h>
-
-1588133085 ated upstream
 
 1587960385 source:c:\users\flore\desktop\nebulous-master\nebulousmenu\main.cpp
 	<windows.h>
@@ -627,15 +655,6 @@
 
 1588133085 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\healthbar.cpp
 
-1588133085 shed changes
-	"HealthBar.h"
-	<GL/gl.h>
-	<textureLoader.h>
-	<Timer.h>
-	<windows.h>
-	<math.h>
-	"_npc.h"
-
 1588133085 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\healthbar.h
 	<GL/gl.h>
 	<textureLoader.h>
@@ -676,10 +695,6 @@
 	"Objects.h"
 
 1588064150 c:\users\dolfo\desktop\nebulous\nebulousmenu\include\objects.h
-	<GL/gl.h>
-	<textureLoader.h>
-	<Timer.h>
-	<player.h>
 
 1588135861 c:\users\dolfo\desktop\nebulous\nebulousmenu\include\player.h
 	<GL/gl.h>
@@ -738,7 +753,7 @@
 
 1588133085 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\_npc.cpp
 
-1588135118 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\_sound.h
+1588297129 c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\include\_sound.h
 	<SNDS/irrKlang.h>
 	<stdlib.h>
 	<iostream>
@@ -840,11 +855,10 @@
 	"ik_IRefCounted.h"
 	"ik_ISoundSource.h"
 
-1588135118 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\_sound.cpp
+1588297129 source:c:\users\ntt16\desktop\csci course\game dev\nebulous\nebulousmenu\src\_sound.cpp
 	"_Sound.h"
 
 1588135862 source:c:\users\dolfo\desktop\nebulous\nebulousmenu\src\_npc.cpp
-	"_npc.h"
 
 1588135861 c:\users\dolfo\desktop\nebulous\nebulousmenu\include\_npc.h
 	<GL/gl.h>
