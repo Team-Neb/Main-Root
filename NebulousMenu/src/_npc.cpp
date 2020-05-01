@@ -36,6 +36,7 @@ _npc::~_npc()
 {
     //dtor
 }
+
 void _npc::drawEnemy()
 {
     glBindTexture(GL_TEXTURE_2D, this->npcTex);
@@ -74,6 +75,8 @@ void _npc::initEnemy(GLuint tex)
     TE->start();
 }
 
+// Controls what the enemy object will do.
+// Move left or right - collide with player by movement - or die
 void _npc::actions(float playerX)
 {
     switch(action){
@@ -141,8 +144,9 @@ void _npc::actions(float playerX)
                     this->xPos += 0.8;
                     break;
             }
-            drawEnemy();
 
+            drawEnemy();
+        // If enemy has 5 health or less then the collision will cause enemy to die next frame update
         }else if(this->enemyHealth <= 5 && this->enemyHit){
             this->action = 9;
         }
@@ -155,10 +159,6 @@ bool _npc::getHitStatus()
     return enemyHit;
 }
 
-int _npc::getHealth()
-{
-    return enemyHealth;
-}
 
 // Based on the direction the enemy is facing/moving towards
 // Check the edge of the quad/ hitbox

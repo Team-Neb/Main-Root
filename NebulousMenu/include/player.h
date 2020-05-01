@@ -29,16 +29,19 @@ class player
         int frames;
         bool lastKeyHit;
 
-
+        /***************** RICHARD'S CODE *****************/
         bool hasPlayerAttacked();
         void setPlayerAttackStatus(bool);
         int getPlayerDirection();
         void setPlayerDirection(int);
+        /************ END OF RICHARD'S CODE ***************/
     protected:
 
     private:
+        /************* RICHARD'S CODE *********************/
         bool playerSwingSword;
         int playerDir;      // -1 or 1; determines whether facing left or right
+        /********** END OF RICHARD'S CODE ******************/
 };
 
 #endif // PLAYER_H

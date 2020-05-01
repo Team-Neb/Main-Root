@@ -12,16 +12,16 @@ class Inputs
         Inputs();
         virtual ~Inputs();
 
-        void keyPressed(Model *, StateManager*);
+        void keyPressed( StateManager*);
         void keyUp();
 
         void manualParallax(Parallax *, float); //move parallax by keys
 
 
-        void mouseEventDown(Model *, double, double);
+        void mouseEventDown(double, double);
         void mouseEventUp();
-        void mouseEventWheel(Model *, double);
-        void mouseEventMove(Model *, double, double);
+        void mouseEventWheel(double);
+        void mouseEventMove(double, double);
         void playerAction(player *);
 
         double prev_mouse_X;

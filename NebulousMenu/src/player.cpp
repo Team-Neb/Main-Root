@@ -36,9 +36,10 @@ player::player()
 
     lastKeyHit = false; // Check the last key arrow hit to set the current pos for player.
 
+    /****************************** RICHARD'S CODE *****************************/
     this->playerSwingSword = false;
-    this->playerDir = 1;
-
+    this->playerDir = 1;    // player considered facing right at start of game
+    /******************************* END OF RICHARD'S CODE *********************/
 }
 
 player::~player()
@@ -79,12 +80,6 @@ void player::playerInit(char *fileName)
 
     T->loadTexture(fileName);
     Time->start();
-
-    /*xMin=0.0;
-    xMax = 0.1;
-
-    yMin = -1.0;
-    yMax = 1.0;*/
 
 }
 
@@ -152,13 +147,17 @@ void player::playerActions()
             yMin = 0.0;
             yMax = 0.5;
 
+            /*************** RICHARD'S CODE ****************/
             this->playerSwingSword = true;
+            /************** END OF RICHARD'S CODE ***************/
 
             Time->reset();
         }
     }
 }
 
+
+/****************************** RICHARD'S CODE *********************************/
 bool player::hasPlayerAttacked()
 {
     return this->playerSwingSword;
@@ -179,3 +178,4 @@ void player::setPlayerDirection(int direction)
 {
     this->playerDir = direction;
 }
+/******************** END OF RICHARD'S CODE *************************************/

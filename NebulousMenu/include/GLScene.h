@@ -27,15 +27,20 @@ class GLScene
     protected:
 
     private:
-        void spawnEnemies(int);     // Spawn enemies at start of game or every new level
-        int level;                  // For level switching
-        bool is_level_complete;     // To determine whether to move onto next level
 
-        Timer *cinematicTimer = new Timer();        // for intro cinematic
+        /****************** RICHARD'S CODE *************************************/
+        void spawnEnemies(int);                     // Spawn enemies at start of game or every new level
+        int level;                                  // For level switching
+        bool is_level_complete;                     // To determine whether to move onto next level
+
+        Timer *cinematicTimer = new Timer();        // To control how often the intro cinematic scene changes
         vector<Parallax *> cinematic;               // to hold all the cinematic scenes
-        void initCinematic();
+        void initCinematic();                       // Add Parallax objects into vector and apply image texture
         int cinematicFrames;                        // How many unique frames are in the cinematic
-        int currentCinematicFrame;                  // Which scene to display
+        int currentCinematicFrame;                  // Which scene to display for the cinamtic intro
+
+        void spawnGameDrop(float, float, float);    // Create and draw GameDrops onto the screen
+        /**************** END OF RICHARD'S CODE *******************************/
 
 };
 
