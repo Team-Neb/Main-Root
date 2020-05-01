@@ -39,6 +39,7 @@ player::player()
     /****************************** RICHARD'S CODE *****************************/
     this->playerSwingSword = false;
     this->playerDir = 1;    // player considered facing right at start of game
+    this->keyObtained = false;
     /******************************* END OF RICHARD'S CODE *********************/
 }
 
@@ -178,4 +179,15 @@ void player::setPlayerDirection(int direction)
 {
     this->playerDir = direction;
 }
+
+bool player::getKeyStatus()
+{
+    return this->keyObtained;
+}
+
+void player::setKeyStatus(bool status)
+{
+    this->keyObtained = status;
+}
+
 /******************** END OF RICHARD'S CODE *************************************/

@@ -1,7 +1,6 @@
 #ifndef INPUTS_H
 #define INPUTS_H
 #include<windows.h>
-#include<Model.h>
 #include <Parallax.h>
 #include<player.h>
 #include <StateManager.h>

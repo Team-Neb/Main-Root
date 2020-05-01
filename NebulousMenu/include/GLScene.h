@@ -39,7 +39,7 @@ class GLScene
         int cinematicFrames;                        // How many unique frames are in the cinematic
         int currentCinematicFrame;                  // Which scene to display for the cinamtic intro
 
-        void spawnGameDrop(float, float, float);    // Create and draw GameDrops onto the screen
+        void spawnGameDrop(float, float, float, int);    // Create and draw GameDrops onto the screen
         /**************** END OF RICHARD'S CODE *******************************/
 
 };

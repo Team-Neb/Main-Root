@@ -152,6 +152,7 @@ void Inputs::playerAction(player* ply)
         ply->actionTrigger = "Left";
         /************** RICHARD'S CODE ***************************/
         ply->setPlayerDirection(-1);
+        ply->xPos -= 0.02;
         /*********** END OF RICHARD'S CODE **********************/
         break;
 
@@ -160,6 +161,7 @@ void Inputs::playerAction(player* ply)
 
         /************** RICHARD'S CODE **************************/
         ply->setPlayerDirection(1);
+        ply->xPos += 0.02;
         /************* END OF RICHARD'S CODE ******************/
         break;
 

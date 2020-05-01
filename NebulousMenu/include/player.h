@@ -34,6 +34,8 @@ class player
         void setPlayerAttackStatus(bool);
         int getPlayerDirection();
         void setPlayerDirection(int);
+        bool getKeyStatus();
+        void setKeyStatus(bool);
         /************ END OF RICHARD'S CODE ***************/
     protected:
 
@@ -41,6 +43,7 @@ class player
         /************* RICHARD'S CODE *********************/
         bool playerSwingSword;
         int playerDir;      // -1 or 1; determines whether facing left or right
+        bool keyObtained;
         /********** END OF RICHARD'S CODE ******************/
 };
 

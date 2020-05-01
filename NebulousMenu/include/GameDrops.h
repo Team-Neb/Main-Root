@@ -15,7 +15,7 @@ class GameDrops
         void drawDrop();                        // draw GameDrop object
         void placeDrop(float, float, float);    // place GameDrop object
         void initDrop(GLuint);                  // initialize Drop
-        void actions(int);                      // NOT USED
+        void actions();                      // NOT USED
 
         GLuint dropTex;                         // handler Texture;
 
@@ -33,6 +33,7 @@ class GameDrops
     private:
         float xPos, yPos, zPos;                 // Placement of object
         float xSize, ySize;                     // Scaling factor
+        float rotateX, rotateY, rotateZ;        // Rotations for animation
 
         int frames;                             // Number of frames
         int action;                             // To determine if the object should be drawn on the screen

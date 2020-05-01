@@ -2,10 +2,8 @@
 #include <GLLight.h>
 #include "GLScene.h"
 #include<Inputs.h>
-#include<Model.h>
 #include<Parallax.h>
 #include<player.h>
-#include <Objects.h>
 #include <_enms.h>
 #include <_checkCollision.h>
 #include <_npc.h>       // Richard's enemy class
@@ -13,7 +11,6 @@
 #include <GameDrops.h>  // Richard's game drop class
 
 Inputs *KbMs = new Inputs();
-//Model *Mdl = new Model();
 Parallax *plx = new Parallax();
 Parallax *pause = new Parallax();
 player *ply = new player();
@@ -29,14 +26,17 @@ _enms enms[10];
 
 
 /**************** RICHARD'S CODE *************************/
-// Create GameDrops objects vector and texture pointer
+// Create GameDrops objects vector and texture pointers
 vector<GameDrops *> drops;
-textureLoader *dropTex = new textureLoader();
+textureLoader *heart_dropTex = new textureLoader();
+textureLoader *godmode_dropTex = new textureLoader();
+textureLoader *key_dropTex = new textureLoader();
 
 // Create vector of _npc pointers to store level 2 enemy objects
 // as well as the texture handler for these enemies
 vector<_npc *> enemyType2;
 textureLoader *enemy2Tex = new textureLoader();
+const int MAX_ENEMIES = 4;
 
 // Creating array of parrallax pointers to store background images of the game levels
 vector<Parallax *> gameLevel;
@@ -96,7 +96,9 @@ GLint GLScene::initGL()
     this->spawnEnemies(this->level);
 
     //Load texture to handler for gamedrop
-    dropTex->loadTexture("images/heart.png");
+    heart_dropTex->loadTexture("images/heart_drop.png");
+    godmode_dropTex->loadTexture("images/godmode_drop.png");
+    key_dropTex->loadTexture("images/key_drop.png");
     /************************** END OF RICHARD'S CODE **************************************/
 
    // images to import for game states
@@ -235,26 +237,36 @@ GLint GLScene::drawGLScene()
 
 
         /************************************** RICHARD'S CODE ***********************************/
-        //check if player sword collided with an enemy if player attacked
+        // check if player sword collided with an enemy if player attacked
+        // if player has not attacked, then player must have moved. Check for collision with gamedrop object
         if(ply->hasPlayerAttacked() ){
             enemyType2[0]->swordCollisionCheck(ply->xPos, ply->getPlayerDirection());
             ply->setPlayerAttackStatus(false);
+        }else{
+
         }
 
-        // The enemy performs an action based on it's action value
+        // The enemy performs an action based on it's action value and gets drawn
         enemyType2[0]->actions(ply->xPos);
 
-        // Check if enemy has been killed to move onto next level
-        // Current implementation is just a single enemy - eventually check vector length
-        // to see if all enemy objects have been destroyed
-        if(enemyType2[0]->action == 9 && !this->is_level_complete){
 
+        // Check if all enemy has been killed to move onto next level
+        // Current implementation is just a single enemy
+        // to see if all enemy objects have been destroyed
+
+        // Destroy enemy objects if they are supposed to die
+        if(enemyType2[0]->action == 9 && !this->is_level_complete){
             // Random chance to spawn a GameDrop
             int temp = 0;
             temp = rand() % 10 + 1;
-            if(temp >= 1){
-                this->spawnGameDrop(enemyType2[0]->xPos, enemyType2[0]->yPos, -5.0);
+            if(temp >= 10){
+                this->spawnGameDrop(enemyType2[0]->xPos, enemyType2[0]->yPos, -5.0, 3);
+            }else if( temp >=7){
+                this->spawnGameDrop(enemyType2[0]->xPos, enemyType2[0]->yPos, -5.0, 2);
+            }else{
+                this->spawnGameDrop(enemyType2[0]->xPos, enemyType2[0]->yPos, -5.0, 1);
             }
+
 
             // Try to avoid memory leaks
             delete enemyType2[0];       // delete enemy object
@@ -274,6 +286,7 @@ GLint GLScene::drawGLScene()
         // Draw any GameDrops on the screen
         for(int i = 0; i < drops.size(); i++){
             if(drops[i]->getAction() == 1){
+                drops[i]->actions();
                 drops[i]->drawDrop();
             }
         }
@@ -352,21 +365,21 @@ int GLScene::winMsg(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 case WM_LBUTTONDOWN:
         {
             KbMs->wParam = wParam;
-            //KbMs->mouseEventDown(Mdl,LOWORD(lParam),HIWORD(lParam));
+
         break;
         }
 
    		case WM_RBUTTONDOWN:
         {
             KbMs->wParam = wParam;
-            //KbMs->mouseEventDown(Mdl,LOWORD(lParam),HIWORD(lParam));
+
         break;
         }
 
           case WM_MBUTTONDOWN:
         {
             KbMs->wParam = wParam;
-            //KbMs->mouseEventDown(Mdl,LOWORD(lParam),HIWORD(lParam));
+
         break;
         }
 
@@ -380,13 +393,12 @@ case WM_LBUTTONDOWN:
 
         case WM_MOUSEMOVE:
         {
-             //KbMs->mouseEventMove(Mdl,LOWORD(lParam),HIWORD(lParam));
+
         break;
         }
 
         case WM_MOUSEWHEEL:
         {
-            //KbMs->mouseEventWheel(Mdl,(double)GET_WHEEL_DELTA_WPARAM(wParam));
         break;
         }
 
@@ -452,8 +464,24 @@ void GLScene::initCinematic()
 // Apply texture image to the last object in the vector
 // Update the objects position based on the enemy's position that spawned this drop
 // Takes in the enemy's x, y, and z Position values
-void GLScene::spawnGameDrop(float x, float y ,float z){
+void GLScene::spawnGameDrop(float x, float y ,float z, int type){
     drops.push_back(new GameDrops());
-    drops[drops.size() - 1]->initDrop(dropTex->tex);
-    drops[drops.size() - 1]->placeDrop(x, y, z);
+    switch(type){
+        case 1:
+            drops[drops.size() - 1]->initDrop(heart_dropTex->tex);
+            drops[drops.size() - 1]->placeDrop(x, y - 0.2, z);
+            break;
+        case 2:
+            drops[drops.size() - 1]->initDrop(godmode_dropTex->tex);
+            drops[drops.size() - 1]->placeDrop(x, y - 0.2, z);
+            break;
+        case 3:
+            drops[drops.size() - 1]->initDrop(key_dropTex->tex);
+            drops[drops.size() - 1]->placeDrop(x, y - 0.2, z);
+            break;
+        default:
+            drops[drops.size() - 1]->initDrop(heart_dropTex->tex);
+            drops[drops.size() - 1]->placeDrop(x, y - 0.2, z);
+            break;
+    }
 }

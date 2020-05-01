@@ -6,13 +6,16 @@ GameDrops::GameDrops()
     this->xPos = this->yPos = 0;
     this->zPos = -5;
 
-    this->xSize = this->ySize = 0.3;
+    // 0.3
+    this->xSize = this->ySize = 0.15 ;
     this->frames = 1;
     this->xMin = 0;
     this->yMin = 0;
     this->xMax = 1;
     this->yMax = 1;
     this->action = 1;
+
+    this->rotateY = 0;
 }
 
 GameDrops::~GameDrops()
@@ -23,9 +26,9 @@ GameDrops::~GameDrops()
 void GameDrops::drawDrop()
 {
     glBindTexture(GL_TEXTURE_2D, this->dropTex);
-
     glPushMatrix();
         glTranslatef(xPos,yPos,zPos);
+        //glRotatef(rotateY,0.0,1.0,0.0);
         glScalef(xSize,ySize,1);
 
         glBegin(GL_POLYGON);
@@ -51,6 +54,7 @@ void GameDrops::placeDrop(float x, float y, float z)
 void GameDrops::initDrop(GLuint tex)
 {
     this->dropTex = tex;
+    TE->start();
 }
 
 
@@ -64,11 +68,14 @@ void GameDrops::setAction(int value)
     this->action = value;
 }
 
-void GameDrops::actions(int action)
+void GameDrops::actions()
 {
     switch(action){
         case 1:
-            this->action = 1;
+            if(TE->getTicks() > 60){
+                rotateY += 5;
+                TE->reset();
+            }
             break;
         default:
             break;
