@@ -7,6 +7,9 @@
 #include <Timer.h>
 #include <vector>
 #include <Parallax.h>
+#include <GameDrops.h>
+#include <textureLoader.h>
+#include <_npc.h>
 
 
 
@@ -40,6 +43,25 @@ class GLScene
         int currentCinematicFrame;                  // Which scene to display for the cinamtic intro
 
         void spawnGameDrop(float, float, float, int);    // Create and draw GameDrops onto the screen
+
+
+
+        vector<GameDrops *>drops;
+        vector<textureLoader *> dropTextures;
+        vector<_npc *> enemyType2;
+        vector<textureLoader *> enemyTextures;
+        vector<Parallax *> levels;
+
+        void initDropTextures();
+        void initEnemyTextures();
+        void initLevelScenes();
+
+        void resetLevel(int);
+
+        void drawDrops();
+
+
+
         /**************** END OF RICHARD'S CODE *******************************/
 
 };

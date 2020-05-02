@@ -26,21 +26,10 @@ _enms enms[10];
 
 
 /**************** RICHARD'S CODE *************************/
-// Create GameDrops objects vector and texture pointers
-vector<GameDrops *> drops;
-textureLoader *heart_dropTex = new textureLoader();
-textureLoader *godmode_dropTex = new textureLoader();
-textureLoader *key_dropTex = new textureLoader();
 
-// Create vector of _npc pointers to store level 2 enemy objects
-// as well as the texture handler for these enemies
-vector<_npc *> enemyType2;
-textureLoader *enemy2Tex = new textureLoader();
-const int MAX_ENEMIES = 4;
+const int NUMBER_OF_LEVELS = 2;         // Controls how large the levels vector will be
+const int MAX_ENEMIES = 4;              // Controls how large the enemy vector will be and when to end the level
 
-// Creating array of parrallax pointers to store background images of the game levels
-vector<Parallax *> gameLevel;
-const int NUMBER_OF_LEVELS = 2;
 /*************** END OF RICHARD'S CODE **********************/
 
 
@@ -77,28 +66,21 @@ GLint GLScene::initGL()
 
 
     /************************** RICHARD'S CODE ********************************************/
+
+    // Initialize all the needed textures
+    this->initDropTextures();
+    this->initEnemyTextures();
+    this->initLevelScenes();
+
+
     // Initialize the cinematic vector with all the needed scenes
     this->initCinematic();
     this->cinematicTimer->start();
 
-    // Create the number of parallax objects for the background scene of each level
-    for(int i = 0; i < NUMBER_OF_LEVELS; i++){
-        gameLevel.push_back(new Parallax());
-    }
-    // INITIALIZE THE BACKGROUND GAME LEVEL SCENES
-    gameLevel[0]->parallaxInit("images/par.png");
-    gameLevel[1]->parallaxInit("images/level-2.png");
-
-    // Apply the texture image to the handler
-    enemy2Tex->loadTexture("images/Skull_Spritesheet.png");  // load the image to the second enemy monster
-
     // Create enemy objects for the first level
     this->spawnEnemies(this->level);
 
-    //Load texture to handler for gamedrop
-    heart_dropTex->loadTexture("images/heart_drop.png");
-    godmode_dropTex->loadTexture("images/godmode_drop.png");
-    key_dropTex->loadTexture("images/key_drop.png");
+
     /************************** END OF RICHARD'S CODE **************************************/
 
    // images to import for game states
@@ -179,10 +161,10 @@ GLint GLScene::drawGLScene()
             // Choose the proper background based on the current game level
             switch(this->level){
                 case 1:
-                    gameLevel[0]->drawSquare(screenHeight, screenWidth);
+                    this->levels[0]->drawSquare(screenHeight, screenWidth);
                     break;
                 case 2:
-                    gameLevel[1]->drawSquare(screenHeight, screenWidth);
+                    this->levels[1]->drawSquare(screenHeight, screenWidth);
                     break;
                 default:
                     break;
@@ -296,12 +278,7 @@ GLint GLScene::drawGLScene()
         }
 
         // Draw any GameDrops on the screen
-        for(int i = 0; i < drops.size(); i++){
-            if(drops[i]->getAction() == 1){
-                drops[i]->actions();
-                drops[i]->drawDrop();
-            }
-        }
+        this->drawDrops();
         /************************************************ END OF RICHARD'S CODE ****************************/
         break;
 
@@ -354,10 +331,10 @@ int GLScene::winMsg(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 /************************************************** RICHARD'S CODE ***************************************/
                 switch(this->level){
                     case 1:
-                        KbMs->manualParallax(gameLevel[this->level - 1], 0.005);
+                        KbMs->manualParallax(levels[this->level - 1], 0.005);
                         break;
                     case 2:
-                        KbMs->manualParallax(gameLevel[this->level - 1], 0.005);
+                        KbMs->manualParallax(levels[this->level - 1], 0.005);
                         break;
                     default:
                         break;
@@ -436,14 +413,14 @@ void GLScene::spawnEnemies(int level)
         case 1:
             for(int i = 0; i < 1; i++){
                 enemyType2.push_back(new _npc());
-                enemyType2[i]->initEnemy(enemy2Tex->tex);
+                enemyType2[i]->initEnemy(enemyTextures[0]->tex);
                 enemyType2[i]->placeEnemy(-1.37, -1.65, -5.0);
             }
             break;
         case 2:
             for(int i = 0; i < 1; i++){
                 enemyType2.push_back(new _npc());
-                enemyType2[i]->initEnemy(enemy2Tex->tex);
+                enemyType2[i]->initEnemy(enemyTextures[0]->tex);
                 enemyType2[i]->placeEnemyRandom();
             }
             break;
@@ -474,30 +451,86 @@ void GLScene::initCinematic()
 // RICHARDS CODE
 // Create new GameDrop object and place into vector drops at the end
 // Apply texture image to the last object in the vector
-// Update the objects position based on the enemy's position that spawned this drop
+// Place the object based on the enemy's position that spawned this drop
 // Takes in the enemy's x, y, and z Position values
 void GLScene::spawnGameDrop(float x, float y ,float z, int type){
     drops.push_back(new GameDrops());
     switch(type){
         case 1:
-            drops[drops.size() - 1]->initDrop(heart_dropTex->tex);
+            drops[drops.size() - 1]->initDrop(this->dropTextures[0]->tex);
             drops[drops.size() - 1]->placeDrop(x, y - 0.2, z);
             drops[drops.size() - 1]->setDropType(1);
             break;
         case 2:
-            drops[drops.size() - 1]->initDrop(godmode_dropTex->tex);
+            drops[drops.size() - 1]->initDrop(this->dropTextures[1]->tex);
             drops[drops.size() - 1]->placeDrop(x, y - 0.2, z);
             drops[drops.size() - 1]->setDropType(2);
             break;
         case 3:
-            drops[drops.size() - 1]->initDrop(key_dropTex->tex);
+            drops[drops.size() - 1]->initDrop(this->dropTextures[2]->tex);
             drops[drops.size() - 1]->placeDrop(x, y - 0.2, z);
             drops[drops.size() - 1]->setDropType(3);
             break;
         default:
-            drops[drops.size() - 1]->initDrop(heart_dropTex->tex);
+            drops[drops.size() - 1]->initDrop(this->dropTextures[0]->tex);
             drops[drops.size() - 1]->placeDrop(x, y - 0.2, z);
             drops[drops.size() - 1]->setDropType(1);
             break;
+    }
+}
+
+
+
+
+
+
+void GLScene::initDropTextures()
+{
+    // Fill the vector with textureLoader objects
+    for(int i = 0; i < 3; i++){
+        this->dropTextures.push_back(new textureLoader());
+    }
+
+    // Apply the texture
+    this->dropTextures[0]->loadTexture("images/heart_drop.png");
+    this->dropTextures[1]->loadTexture("images/godmode_drop.png");
+    this->dropTextures[2]->loadTexture("images/key_drop.png");
+}
+
+void GLScene::initEnemyTextures()
+{
+    for(int i = 0; i < 1; i++){
+        this->enemyTextures.push_back(new textureLoader());
+    }
+
+    this->enemyTextures[0]->loadTexture("images/Skull_Spritesheet.png");
+}
+
+void GLScene::initLevelScenes()
+{
+    // Create the number of parallax objects for the background scene of each level
+    for(int i = 0; i < NUMBER_OF_LEVELS; i++){
+        this->levels.push_back(new Parallax());
+    }
+    // INITIALIZE THE BACKGROUND GAME LEVEL SCENES
+    this->levels[0]->parallaxInit("images/par.png");
+    this->levels[1]->parallaxInit("images/level-2.png");
+}
+
+
+
+void GLScene::resetLevel(int)
+{
+
+
+}
+
+
+void GLScene::drawDrops()
+{
+    // Draw any GameDrops on the screen
+    for(int i = 0; i < this->drops.size(); i++){
+        drops[i]->actions();        // want rotating IDLE animation
+        drops[i]->drawDrop();
     }
 }
