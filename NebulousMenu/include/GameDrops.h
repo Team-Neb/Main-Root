@@ -15,18 +15,20 @@ class GameDrops
         void drawDrop();                        // draw GameDrop object
         void placeDrop(float, float, float);    // place GameDrop object
         void initDrop(GLuint);                  // initialize Drop
-        void actions();                      // NOT USED
+        void actions();                         // NOT USED
 
         GLuint dropTex;                         // handler Texture;
 
         bool getHitStatus();                    // NOT USED
         int getHealth();                        // NOT USED
-        void swordCollisionCheck(float, int);   // NOT USED
+        void checkPlayerPickup(float, int);   // NOT USED
         void placeEnemyRandom();                // NOT USED
 
 
         int getAction();
         void setAction(int);
+        int getDropType();
+        void setDropType(int);
 
     protected:
 
@@ -42,6 +44,8 @@ class GameDrops
 
         Timer *TE = new Timer();                // NOT USED
         void checkCollision(float);             // NOT USED
+
+        int dropType;
 };
 
 #endif // GAMEDROPS_H

@@ -243,7 +243,19 @@ GLint GLScene::drawGLScene()
             enemyType2[0]->swordCollisionCheck(ply->xPos, ply->getPlayerDirection());
             ply->setPlayerAttackStatus(false);
         }else{
-
+            for(int i = 0; i < drops.size(); i++){
+                drops[i]->checkPlayerPickup(ply->xPos, ply->getPlayerDirection());      // update the status of game drop object if collision
+                if(drops[i]->getAction() == 9){
+                    if(drops[i]->getDropType() == 3){
+                        ply->setKeyStatus(true);
+                        cout<<"Picked up key!"<<endl;
+                    }
+                    cout<<"PICKED UP GAMEDROP OBJECT"<<endl;
+                    delete drops[i];
+                    drops[i] = NULL;
+                    drops.erase(drops.begin() + i);
+                }
+            }
         }
 
         // The enemy performs an action based on it's action value and gets drawn
@@ -470,18 +482,22 @@ void GLScene::spawnGameDrop(float x, float y ,float z, int type){
         case 1:
             drops[drops.size() - 1]->initDrop(heart_dropTex->tex);
             drops[drops.size() - 1]->placeDrop(x, y - 0.2, z);
+            drops[drops.size() - 1]->setDropType(1);
             break;
         case 2:
             drops[drops.size() - 1]->initDrop(godmode_dropTex->tex);
             drops[drops.size() - 1]->placeDrop(x, y - 0.2, z);
+            drops[drops.size() - 1]->setDropType(2);
             break;
         case 3:
             drops[drops.size() - 1]->initDrop(key_dropTex->tex);
             drops[drops.size() - 1]->placeDrop(x, y - 0.2, z);
+            drops[drops.size() - 1]->setDropType(3);
             break;
         default:
             drops[drops.size() - 1]->initDrop(heart_dropTex->tex);
             drops[drops.size() - 1]->placeDrop(x, y - 0.2, z);
+            drops[drops.size() - 1]->setDropType(1);
             break;
     }
 }

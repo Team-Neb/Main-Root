@@ -16,6 +16,7 @@ GameDrops::GameDrops()
     this->action = 1;
 
     this->rotateY = 0;
+    this->dropType = 0;
 }
 
 GameDrops::~GameDrops()
@@ -92,9 +93,22 @@ int GameDrops::getHealth()
 
 }
 
-void GameDrops::swordCollisionCheck(float, int)
+void GameDrops::checkPlayerPickup(float playerX, int direction)
 {
-
+    switch(direction){
+        case -1:
+            if( (this->xPos) <= (playerX + 0.75) && (this->xPos) >= (playerX)){
+                this->action = 9;
+            }
+            break;
+        case 1:
+            if( (this->xPos) >= (playerX + 0.75) && (this->xPos) <= (playerX + 1.25) ) {
+                this->action = 9;
+            }
+            break;
+        default:
+            break;
+    }
 }
 
 void GameDrops::placeEnemyRandom()
@@ -105,4 +119,15 @@ void GameDrops::placeEnemyRandom()
 void GameDrops::checkCollision(float)
 {
 
+}
+
+
+int GameDrops::getDropType()
+{
+    return this->dropType;
+}
+
+void GameDrops::setDropType(int value)
+{
+    this->dropType = value;
 }
