@@ -83,15 +83,6 @@ void GameDrops::actions()
     }
 }
 
-bool GameDrops::getHitStatus()
-{
-
-}
-
-int GameDrops::getHealth()
-{
-
-}
 
 void GameDrops::checkPlayerPickup(float playerX, int direction)
 {
@@ -111,15 +102,8 @@ void GameDrops::checkPlayerPickup(float playerX, int direction)
     }
 }
 
-void GameDrops::placeEnemyRandom()
-{
 
-}
 
-void GameDrops::checkCollision(float)
-{
-
-}
 
 
 int GameDrops::getDropType()

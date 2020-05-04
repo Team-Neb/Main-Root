@@ -15,14 +15,11 @@ class GameDrops
         void drawDrop();                        // draw GameDrop object
         void placeDrop(float, float, float);    // place GameDrop object
         void initDrop(GLuint);                  // initialize Drop
-        void actions();                         // NOT USED
+        void actions();
 
         GLuint dropTex;                         // handler Texture;
 
-        bool getHitStatus();                    // NOT USED
-        int getHealth();                        // NOT USED
-        void checkPlayerPickup(float, int);   // NOT USED
-        void placeEnemyRandom();                // NOT USED
+        void checkPlayerPickup(float, int);
 
 
         int getAction();
@@ -42,10 +39,9 @@ class GameDrops
 
         float xMin, yMin, xMax, yMax;           // boundaries of the texture
 
-        Timer *TE = new Timer();                // NOT USED
-        void checkCollision(float);             // NOT USED
+        Timer *TE = new Timer();
 
-        int dropType;
+        int dropType;                           // Type of drop - defined as 1, 2, or 3
 };
 
 #endif // GAMEDROPS_H

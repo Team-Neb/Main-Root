@@ -31,7 +31,7 @@ _enms enms[10];
 const int NUMBER_OF_LEVELS = 2;         // Controls how large the levels vector will be
 const int MAX_ENEMIES = 4;              // Controls how large the enemy vector will be and when to end the level
 const int NUMBER_OF_ENEMIES = 1;        // Controls how many textures are created for the enemy object
-int positionEnemy = 1.5;
+const int TME_BTWN_SCNS = 2000;         // How fast the intro cinematic plays. Value represents MILLISECONDS
 
 /*************** END OF RICHARD'S CODE **********************/
 
@@ -43,10 +43,12 @@ GLScene::GLScene()
     screenWidth = GetSystemMetrics(SM_CXSCREEN);
 
     /*************** RICHARD'S CODE ***************/
+
     this->level = 1;                    // Game level 1 by default
     this->is_level_complete = false;    // The selected/first level of the game is never complete by default
     this->cinematicFrames = 5;          // CHANGE THIS DEPENDING ON HOW MANY SCENES IN THE INTRO CINEMATIC
     this->currentCinematicFrame = 0;    // cinematic vector starts at index 0
+
     /************ END OF RICHARD'S CODE **********/
 }
 
@@ -82,11 +84,6 @@ GLint GLScene::initGL()
     // Initialize the cinematic vector with all the needed scenes
     this->initCinematic();
     this->cinematicTimer->start();
-
-    // Create enemy objects for the first level
-    this->spawnEnemies(this->level);
-
-
     /************************** END OF RICHARD'S CODE **************************************/
 
    // images to import for game states
@@ -132,7 +129,7 @@ GLint GLScene::drawGLScene()
 
         /***************************** RICHARD'S CODE ***********************************************/
         // Every 2 seconds update the cinematic vector position and as long as all scenes have not been displayed
-        if (this->cinematicTimer->getTicks() > 2000 && currentCinematicFrame != this->cinematicFrames){
+        if (this->cinematicTimer->getTicks() > TME_BTWN_SCNS && currentCinematicFrame != this->cinematicFrames){
             this->currentCinematicFrame += 1;
             this->cinematicTimer->reset();
         }
@@ -177,11 +174,20 @@ GLint GLScene::drawGLScene()
             }
         glPopMatrix();
 
-        // If the level has changed - spawn the next type of enemies
-        if(this->is_level_complete){
+
+        // If player does not have key - spawn more enemies up to MAX_ENEMIES
+        if(!ply->getKeyStatus() ){
+            this->spawnEnemies(this->level);
+        }
+        // otherwise if level is complete - reset level and spawn more enemies
+        else if(this->is_level_complete){
+            // RESET LEVEL/GAME HERE
             this->spawnEnemies(this->level);
             this->is_level_complete = false;
+            ply->setKeyStatus(false);
         }
+
+
         /**************** END OF RICHARD'S CODE ******************************************************/
 
         glPushMatrix();
@@ -225,18 +231,15 @@ GLint GLScene::drawGLScene()
 
 
         /************************************** RICHARD'S CODE ***********************************/
-        // check if player sword collided with an enemy if player attacked
-        // if player has not attacked, then player must have moved.
-        // The enemy performs an action based on it's action value and gets drawn
+        // Check for collision with player sword
+        // Then update enemy based on their current action
         this->updateEnemiesAction();
 
+        // Clean up any drops picked up by player
         this->updateDrops();
 
-
-        // Check if all enemy has been killed to move onto next level
-        // Current implementation is just a single enemy
-        // to see if all enemy objects have been destroyed
-        // Destroy enemy objects if they are supposed to die
+        // Cleanup any enemies from screen/level if they are supposed to die
+        // Generating drops doing so
         this->destroyEnemies();
 
         // Draw any GameDrops on the screen
@@ -257,8 +260,6 @@ GLint GLScene::drawGLScene()
         break;
         default:
         break;
-
-
     }
 }
 
@@ -360,42 +361,55 @@ case WM_LBUTTONDOWN:
 
 }
 
-
-
-// RICHARDS CODE
-// Create a new enemy object, place into vector of enemy objects
-// Apply texture image to the object and finally place it randomly on the screen
-// Takes in the scenes current level
-void GLScene::spawnEnemies(int level)
+// RICHARD'S CODE
+// Holds the drop textures
+// Add textureLoader objects into vector dropTextures
+// then manually apply the images to each object
+void GLScene::initDropTextures()
 {
-    switch(level){
-
-        // Stevens enemy objects go in here.
-        // My enemy objects are placed in level 1 as place holder for now
-        case 1:
-            for(int i = 0; i < 1; i++){
-                enemyType2.push_back(new _npc());
-                enemyType2[i]->initEnemy(enemyTextures[0]->tex);
-                enemyType2[i]->placeEnemy(-1.37, -1.65, -5.0);
-            }
-            break;
-        case 2:
-            for(int i = this->enemyType2.size(); i < MAX_ENEMIES; i++){
-                this->enemyType2.push_back(new _npc());
-                this->enemyType2.back()->initEnemy(this->enemyTextures[0]->tex);
-                this->enemyType2.back()->placeEnemyRandom();
-
-            }
-            /*
-                this->enemyType2.push_back(new _npc());
-                this->enemyType2[ this->enemyType2.size() - 1]->initEnemy(this->enemyTextures[0]->tex);
-                this->enemyType2[ this->enemyType2.size() - 1]->placeEnemyRandom();
-                */
-            break;
-        default:
-            break;
+    // Fill the vector with textureLoader objects
+    for(int i = 0; i < 3; i++){
+        this->dropTextures.push_back(new textureLoader());
     }
+
+    // Apply the texture
+    this->dropTextures[0]->loadTexture("images/heart_drop.png");
+    this->dropTextures[1]->loadTexture("images/godmode_drop.png");
+    this->dropTextures[2]->loadTexture("images/key_drop.png");
 }
+
+
+
+// RICHARD'S CODE
+// Holds the enemy textures
+// Add textureLoader objects into vector enemyTextures
+// then manually apply the images to each object
+void GLScene::initEnemyTextures()
+{
+    for(int i = 0; i < NUMBER_OF_ENEMIES; i++){
+        this->enemyTextures.push_back(new textureLoader());
+    }
+
+    this->enemyTextures[0]->loadTexture("images/Skull_Spritesheet.png");
+}
+
+
+
+// RICHARD'S CODE
+// Holds the background scenes for each level
+// Add Parallax Objects into the vector levels up to the defined number of levels
+// Then manually apply the images to each object
+void GLScene::initLevelScenes()
+{
+    // Create the number of parallax objects for the background scene of each level
+    for(int i = 0; i < NUMBER_OF_LEVELS; i++){
+        this->levels.push_back(new Parallax());
+    }
+    // INITIALIZE THE BACKGROUND GAME LEVEL SCENES
+    this->levels[0]->parallaxInit("images/par.png");
+    this->levels[1]->parallaxInit("images/level-2.png");
+}
+
 
 // RICHARDS CODE
 // Create new Parallax objects, up to however many cinematicFrames is defined as
@@ -414,6 +428,40 @@ void GLScene::initCinematic()
     cinematic[3]->parallaxInit("images/scene04.png");
     cinematic[4]->parallaxInit("images/scene05.png");
 }
+
+
+
+// RICHARDS CODE
+// Create a new enemy object, place into vector of enemy objects
+// Apply texture image to the object and finally place it randomly on the screen
+// Takes in the scenes current level
+void GLScene::spawnEnemies(int level)
+{
+    switch(level){
+
+        // Stevens enemy objects go in here.
+        // My enemy objects are placed in level 1 as place holder for now
+        case 1:
+            for(int i = this->enemyType2.size(); i < MAX_ENEMIES; i++){
+                this->enemyType2.push_back(new _npc());
+                this->enemyType2.back()->initEnemy(this->enemyTextures[0]->tex);
+                this->enemyType2.back()->placeEnemyRandom();
+
+            }
+            break;
+        case 2:
+            for(int i = this->enemyType2.size(); i < MAX_ENEMIES; i++){
+                this->enemyType2.push_back(new _npc());
+                this->enemyType2.back()->initEnemy(this->enemyTextures[0]->tex);
+                this->enemyType2.back()->placeEnemyRandom();
+
+            }
+            break;
+        default:
+            break;
+    }
+}
+
 
 
 // RICHARDS CODE
@@ -450,58 +498,14 @@ void GLScene::spawnGameDrop(float x, float y ,float z, int type){
 
 
 
-
-// RICHARD'S CODE
-// Holds the drop textures
-// Add textureLoader objects into vector dropTextures
-// then manually apply the images to each object
-void GLScene::initDropTextures()
-{
-    // Fill the vector with textureLoader objects
-    for(int i = 0; i < 3; i++){
-        this->dropTextures.push_back(new textureLoader());
-    }
-
-    // Apply the texture
-    this->dropTextures[0]->loadTexture("images/heart_drop.png");
-    this->dropTextures[1]->loadTexture("images/godmode_drop.png");
-    this->dropTextures[2]->loadTexture("images/key_drop.png");
-}
-
-// RICHARD'S CODE
-// Holds the enemy textures
-// Add textureLoader objects into vector enemyTextures
-// then manually apply the images to each object
-void GLScene::initEnemyTextures()
-{
-    for(int i = 0; i < NUMBER_OF_ENEMIES; i++){
-        this->enemyTextures.push_back(new textureLoader());
-    }
-
-    this->enemyTextures[0]->loadTexture("images/Skull_Spritesheet.png");
-}
-
-// RICHARD'S CODE
-// Holds the background scenes for each level
-// Add Parallax Objects into the vector levels up to the defined number of levels
-// Then manually apply the images to each object
-void GLScene::initLevelScenes()
-{
-    // Create the number of parallax objects for the background scene of each level
-    for(int i = 0; i < NUMBER_OF_LEVELS; i++){
-        this->levels.push_back(new Parallax());
-    }
-    // INITIALIZE THE BACKGROUND GAME LEVEL SCENES
-    this->levels[0]->parallaxInit("images/par.png");
-    this->levels[1]->parallaxInit("images/level-2.png");
-}
-
-
 // RICHARD'S CODE
 void GLScene::resetLevel(int)
 {
 
 }
+
+
+
 
 // RICHARD'S CODE
 // Reset the entire game
@@ -542,6 +546,7 @@ void GLScene::resetGame()
 }
 
 
+
 // RICHARD'S CODE
 // Draw's any GameDrop object onto the screen.
 // Actions() of drops[i] was/is meant to be IDLE animation.
@@ -553,6 +558,7 @@ void GLScene::drawDrops()
         drops[i]->drawDrop();
     }
 }
+
 
 
 // RICHARD'S CODE
@@ -577,6 +583,7 @@ void GLScene::updateDrops()
 }
 
 
+
 // RICHARD'S CODE
 // Goes through the vector enemyType2 updating all of their next action (move left/right)
 // If player has attacked, check if enemy collided with player sword before updating action
@@ -595,6 +602,8 @@ void GLScene::updateEnemiesAction()
     ply->setPlayerAttackStatus(false);
 
 }
+
+
 
 // RICHARD'S CODE
 // Goes through vector enemyType2 deleting any enemy objects whose action value is 9
