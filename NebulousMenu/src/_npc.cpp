@@ -27,9 +27,6 @@ _npc::_npc()
     enemyHealth = 20;   // Player deals 10 damage each strike
     enemyHit = false;
 
-    srand(time(0));     // to truly place enemies randomly
-
-
 }
 
 _npc::~_npc()

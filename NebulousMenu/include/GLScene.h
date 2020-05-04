@@ -32,8 +32,8 @@ class GLScene
     private:
 
         /****************** RICHARD'S CODE *************************************/
-        void spawnEnemies(int);                     // Spawn enemies at start of game or every new level
-        int level;                                  // For level switching
+        void spawnEnemies(int);                     // Spawn enemies, type of enemies depend on the current level
+        int level;                                  // For keeping track of level - level switching/type of enemy to spawn
         bool is_level_complete;                     // To determine whether to move onto next level
 
         Timer *cinematicTimer = new Timer();        // To control how often the intro cinematic scene changes
@@ -57,10 +57,13 @@ class GLScene
         void initLevelScenes();
 
         void resetLevel(int);
+        void resetGame();
 
         void drawDrops();
 
-
+        void updateDrops();
+        void updateEnemiesAction();
+        void destroyEnemies();
 
         /**************** END OF RICHARD'S CODE *******************************/
 
