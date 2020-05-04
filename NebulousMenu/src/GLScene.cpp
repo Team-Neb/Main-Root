@@ -182,9 +182,10 @@ GLint GLScene::drawGLScene()
         // otherwise if level is complete - reset level and spawn more enemies
         else if(this->is_level_complete){
             // RESET LEVEL/GAME HERE
+
+            this->resetLevel(this->level);
             this->spawnEnemies(this->level);
-            this->is_level_complete = false;
-            ply->setKeyStatus(false);
+            //this->drawDrops();
         }
 
 
@@ -499,8 +500,38 @@ void GLScene::spawnGameDrop(float x, float y ,float z, int type){
 
 
 // RICHARD'S CODE
-void GLScene::resetLevel(int)
+void GLScene::resetLevel(int level)
 {
+
+    cout<<"RESETTING LEVEL"<<endl;
+    this->level = level;
+    this->is_level_complete = false;
+
+    // Destroy all enemy objects
+    while( !this->enemyType2.empty() ){
+        delete this->enemyType2.back();
+        this->enemyType2.back() = NULL;
+        enemyType2.pop_back();
+    }
+
+
+    // Destroy all gamedrop objects
+    while( !this->drops.empty() ){
+        delete this->drops.back();
+        this->drops.back() = NULL;
+        drops.pop_back();
+    }
+
+
+
+    // Reset player action and variables
+    ply->xPos = 0.0;                    // Reset player position
+    // Reset health here STEVEN
+    // Reset godmode status here
+    ply->setPlayerAttackStatus(false);      // Reset flag determining if attacked
+    ply->setKeyStatus(false);           // Reset flag determining if key obtained
+    ply->setPlayerDirection(1);         // Player starts off facing right
+    ply->actionTrigger = "stand";       // Player starts off with stand animation
 
 }
 
@@ -515,18 +546,17 @@ void GLScene::resetGame()
     this->is_level_complete = false;
 
     // Destroy all enemy objects
-    for(int i = 0; i < enemyType2.size(); i++){
-        // Try to avoid memory leaks
-        delete this->enemyType2[i];       // delete enemy object
-        this->enemyType2[i] = NULL;       // no dangling pointers
-        this->enemyType2.erase(this->enemyType2.begin() + i);
+    while( !this->enemyType2.empty() ){
+        delete this->enemyType2.back();
+        this->enemyType2.back() = NULL;
+        enemyType2.pop_back();
     }
 
     // Destroy all gamedrop objects
-    for(int i = 0; i < drops.size(); i++){
-        delete this->drops[i];
-        this->drops[i] = NULL;
-        this->drops.erase(this->drops.begin() + i);
+    while( !this->drops.empty() ){
+        delete this->drops.back();
+        this->drops.back() = NULL;
+        drops.pop_back();
     }
 
     // Reset player action and variables
@@ -633,8 +663,8 @@ void GLScene::destroyEnemies()
             this->enemyType2.erase(enemyType2.begin() + i);
 
 
-            // If vector is empty, move onto the next level
-            if(this->enemyType2.empty()){
+            // If vector is empty and player has obtained key, move onto next level
+            if(this->enemyType2.empty() && ply->getKeyStatus() ){
                 // Put this if statement to prevent game from crashing after 2nd level
                 if(this->level != 2){
                     this->level += 1;
