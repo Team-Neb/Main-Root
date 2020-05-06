@@ -11,7 +11,7 @@ _enms::_enms()
 
     rotateX = rotateY = rotateZ = 0;
 
-    frames = 7;
+    frames = 10;
 
     xMin = yMin = 0.0;
     xMax = 1.0/(float)frames;

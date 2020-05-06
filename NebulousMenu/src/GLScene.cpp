@@ -89,7 +89,7 @@ GLint GLScene::initGL()
     help->parallaxInit("images/help.png");
     options->parallaxInit("images/options.png");
     healthBar->initHealthBar("images/heartBar.png");
-    enmsTex->loadTexture("images/mon.png");
+    enmsTex->loadTexture("images/Skull_Spritesheet.png");
     enemy2Tex->loadTexture("images/monster2.png");  // load the image to the second enemy monster
     credits->parallaxInit("images/credits.png");
 
