@@ -108,8 +108,8 @@ GLint GLScene::initGL()
 
 
     // Initialize the cinematic vector with all the needed scenes
-    this->initCinematic();
-    this->cinematicTimer->start();
+    //this->initCinematic();
+   // this->cinematicTimer->start();
     /************************** END OF RICHARD'S CODE **************************************/
 
    // images to import for game states
@@ -147,8 +147,8 @@ GLint GLScene::initGL()
     }
 
 
-    snds->initSounds();
-    snds->playMusic("sounds/WiiTheme.mp3"); // Switch back to sounds/NebulousTheme.mp3
+   // snds->initSounds();
+    //snds->playMusic("sounds/WiiTheme.mp3"); // Switch back to sounds/NebulousTheme.mp3
 
 
     // placing the enemy and initializing it's values
