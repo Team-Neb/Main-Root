@@ -41,9 +41,11 @@ player::player()
     lastKeyHit = false; // Check the last key arrow hit to set the current pos for player. False = Looking at the right
     actionTrigger = "stand";
 
+    /****************************** RICHARD'S CODE *****************************/
     this->playerSwingSword = false;
-    this->playerDir = 1;
-
+    this->playerDir = 1;    // player considered facing right at start of game
+    this->keyObtained = false;
+    /******************************* END OF RICHARD'S CODE *********************/
 }
 
 player::~player()
@@ -182,4 +184,12 @@ void player::setPlayerDirection(int direction)
     this->playerDir = direction;
 }
 
+bool player::getKeyStatus()
+{
+    return this->keyObtained;
+}
 
+void player::setKeyStatus(bool status)
+{
+    this->keyObtained = status;
+}

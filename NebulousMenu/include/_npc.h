@@ -19,7 +19,7 @@ class _npc
         void initEnemy(GLuint);                 // initialize enemy
         void actions(float);                    // movement and actions
 
-        GLuint npcTex;                        // handler Texture;
+        GLuint npcTex;                          // handler Texture;
 
 
         float xPos, yPos, zPos;                 // Placement
@@ -27,27 +27,27 @@ class _npc
         float rotateX, rotateY, rotateZ;        // Rotations
 
         int frames;                             // Number of frames
-
         int action;                             // to make action for enemy
 
-        Timer *TE = new Timer();
+        Timer *TE = new Timer();                // Control enemy animation and update position
 
-        bool getHitStatus();
-        int getHealth();
-        void swordCollisionCheck(float, int);
+        bool getHitStatus();                    // Determine if enemy has collided
+        void swordCollisionCheck(float, int);   // Check if enemy has collided with player sword
+        void placeEnemyRandom();                // Randomly place enemy on screen
 
     protected:
 
     private:
 
-        float xMin, yMin, xMax, yMax;
+        float xMin, yMin, xMax, yMax;           // texture variables
 
-        int enemyHealth;
-        bool enemyHit;
+        int enemyHealth;                        // How much health enemy has
+        bool enemyHit;                          // Flag
+        int previousAction;                     // Record what the enemy object was doing before collision
 
-        float XPOS_MAX;
-        float XPOS_MIN;
-        void checkCollision(float);
+        float XPOS_MAX;                         // Screen boundaries - how far the enemy will go
+        float XPOS_MIN;                         // Screen boundaries - how far the enemy will go
+        void checkCollision(float);             // Check if there has been a collision with player based on movement
 
 };
 
