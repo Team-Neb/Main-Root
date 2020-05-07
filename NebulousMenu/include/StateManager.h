@@ -1,7 +1,9 @@
 #ifndef STATEMANAGER_H
 #define STATEMANAGER_H
 
-enum GameStates{LANDING,MENU,GAME,PAUSED,HELP_INGAME,HELP,QUIT,STORY1,STORY2,STORY3,STORY4,STORY5,CREDITS}; // Array of different game states to be in.
+
+enum GameStates{LANDING,MENU,GAME,PAUSED,HELP,QUIT}; // Array of different game states to be in.
+
 
 class StateManager
 {

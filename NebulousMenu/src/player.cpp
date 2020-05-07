@@ -38,8 +38,10 @@ player::player()
 
     health = 5;
 
+
     lastKeyHit = false; // Check the last key arrow hit to set the current pos for player. False = Looking at the right
     actionTrigger = "stand";
+
 
     /****************************** RICHARD'S CODE *****************************/
     this->playerSwingSword = false;
@@ -83,12 +85,6 @@ void player::playerInit(char *fileName)
 
     T->loadTexture(fileName);
     Time->start();
-
-    /*xMin=0.0;
-    xMax = 0.1;
-
-    yMin = -1.0;
-    yMax = 1.0;*/
 
 }
 
@@ -157,11 +153,22 @@ void player::playerActions()
             yMin = 0.0;
             yMax = 0.5;
 
+
             this->playerSwingSword = true;
+
+            /*************** RICHARD'S CODE ****************/
+            this->playerSwingSword = true;
+            /************** END OF RICHARD'S CODE ***************/
+
+
             Time->reset();
         }
     }
 }
+
+
+
+/****************************** RICHARD'S CODE *********************************/
 
 bool player::hasPlayerAttacked()
 {
@@ -193,3 +200,7 @@ void player::setKeyStatus(bool status)
 {
     this->keyObtained = status;
 }
+
+
+/******************** END OF RICHARD'S CODE *************************************/
+

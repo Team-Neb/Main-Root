@@ -27,8 +27,9 @@ class player
 
         float xPos, yPos, zPos;
         int frames;
-        bool lastKeyHit; // False = facing right, True = facing left
-        int health;      // player health
+
+        bool lastKeyHit;
+
 
         /***************** RICHARD'S CODE *****************/
         bool hasPlayerAttacked();

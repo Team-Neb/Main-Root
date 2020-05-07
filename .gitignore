@@ -10,5 +10,16 @@ NebulousMenu/Midterm01.layout
 *.depend
 *.depend
 *.layout
+
 *.depend
 *.layout
+
+
+
+
+## exclude anything that is tied to codeblocks ##
+*.cbp
+*.depend
+NebulousMenu/obj
+NebulousMenu/bin
+

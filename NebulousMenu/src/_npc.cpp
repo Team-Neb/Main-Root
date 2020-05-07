@@ -217,3 +217,4 @@ void _npc::placeEnemyRandom()
     this->yPos = -1.65;
     this->zPos = -5.0;
 }
+

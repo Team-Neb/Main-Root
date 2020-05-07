@@ -4,13 +4,16 @@
 #include <windows.h>
 #include <GL/glut.h>
 #include <StateManager.h>
+
 #include<_Sound.h>
+
 #include <Timer.h>
 #include <vector>
 #include <Parallax.h>
 #include <GameDrops.h>
 #include <textureLoader.h>
 #include <_npc.h>
+
 
 
 class GLScene
@@ -23,7 +26,6 @@ class GLScene
         GLvoid resizeGLScene(GLsizei,GLsizei);
         GameStates sendState();
 
-
         int winMsg(HWND, UINT, WPARAM, LPARAM);
         float screenWidth, screenHeight;
 
@@ -32,6 +34,7 @@ class GLScene
     protected:
 
     private:
+
         /****************** RICHARD'S CODE *************************************/
         void spawnEnemies(int);                     // Spawn enemies, type of enemies depend on the current level
         int level;                                  // For keeping track of level - level switching/type of enemy to spawn
@@ -67,6 +70,7 @@ class GLScene
         void destroyEnemies();
 
         /**************** END OF RICHARD'S CODE *******************************/
+
 };
 
 #endif // GLSCENE_H

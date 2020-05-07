@@ -1,17 +1,16 @@
 #ifndef INPUTS_H
 #define INPUTS_H
 #include<windows.h>
-#include<Model.h>
 #include <Parallax.h>
 #include<player.h>
 #include <StateManager.h>
-#include<_Sound.h>
 
 class Inputs
 {
     public:
         Inputs();
         virtual ~Inputs();
+
 
         void keyPressed( StateManager*, _Sound*);
         void keyPressed( StateManager*);
@@ -21,13 +20,17 @@ class Inputs
         void keyUp(); // key up function to pause soon
 
 
+        void keyPressed( StateManager*);
+        void keyUp();
+
+
         void manualParallax(Parallax *, float); //move parallax by keys
 
 
-        void mouseEventDown(Model *, double, double);
+        void mouseEventDown(double, double);
         void mouseEventUp();
-        void mouseEventWheel(Model *, double);
-        void mouseEventMove(Model *, double, double);
+        void mouseEventWheel(double);
+        void mouseEventMove(double, double);
         void playerAction(player *);
 
         double prev_mouse_X;

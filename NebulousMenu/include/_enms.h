@@ -38,10 +38,16 @@ class _enms
         float theta, v, t;                      // angle, velocity, time;
 
 
+        bool getHitStatus();
+        int getHealth();
+        void updateEnemy();
     protected:
 
     private:
         float xMin, yMin, xMax, yMax;
+
+        int enemyHealth;
+        bool enemyHit;
 };
 
 #endif // _ENMS_H
