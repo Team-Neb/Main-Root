@@ -29,6 +29,7 @@ class player
         int frames;
 
         bool lastKeyHit;
+        int health;
 
 
         /***************** RICHARD'S CODE *****************/

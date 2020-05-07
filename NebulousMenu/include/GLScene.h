@@ -67,6 +67,7 @@ class GLScene
 
         void updateDrops();
         void updateEnemiesAction();
+        void updateEnemiesHitPlayer();
         void destroyEnemies();
 
         /**************** END OF RICHARD'S CODE *******************************/

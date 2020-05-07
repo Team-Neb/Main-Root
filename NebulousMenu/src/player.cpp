@@ -36,7 +36,7 @@ player::player()
     yPos = -2;
     zPos = -5.0;
 
-//    health = 5;
+    health = 5;
 
 
     lastKeyHit = false; // Check the last key arrow hit to set the current pos for player. False = Looking at the right
@@ -157,8 +157,7 @@ void player::playerActions()
             this->playerSwingSword = true;
 
             /*************** RICHARD'S CODE ****************/
-            this->playerSwingSword = true;
-            /************** END OF RICHARD'S CODE ***************/
+
 
 
             Time->reset();

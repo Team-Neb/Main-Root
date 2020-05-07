@@ -56,8 +56,8 @@ void HealthBar::healthBarActions(int health){
     switch(health){
 
     case 5:
-        default:
-        //drawHealthBar();
+        xMax = 1;
+        xSize = 0.1;
         break;
 
     case 4:

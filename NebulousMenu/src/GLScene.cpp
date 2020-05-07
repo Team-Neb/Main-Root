@@ -9,6 +9,8 @@
 #include <vector>       // Needed for vector of pointers of various classes
 #include <GameDrops.h>  // Richard's game drop class
 #include <time.h>
+#include<HealthBar.h>
+
 
 Inputs *KbMs = new Inputs();
 Parallax *plx = new Parallax();
@@ -18,7 +20,7 @@ StateManager *stateManager = new StateManager;
 Parallax *tlt = new Parallax();
 Parallax *menu = new Parallax();
 Parallax *help = new Parallax();
-
+HealthBar *healthBar = new HealthBar();
 _checkCollision *hit = new _checkCollision();
 
 textureLoader *enmsTex = new textureLoader();
@@ -48,6 +50,7 @@ GLScene::GLScene()
     this->cinematicFrames = 5;          // CHANGE THIS DEPENDING ON HOW MANY SCENES IN THE INTRO CINEMATIC
     this->currentCinematicFrame = 0;    // cinematic vector starts at index 0
 
+
     /************ END OF RICHARD'S CODE **********/
 }
 
@@ -67,11 +70,6 @@ GLint GLScene::initGL()
     glEnable(GL_COLOR_MATERIAL); // This is for rendering the base color of an object (glColor3f)
     GLLight Light(GL_LIGHT0);
     Light.setLight(GL_LIGHT0); // create light instance
-
-
-    //srand(time(0));
-
-    srand(time(0));
 
 
     /************************** RICHARD'S CODE ********************************************/
@@ -97,7 +95,7 @@ GLint GLScene::initGL()
     menu->parallaxInit("images/FrontMenu.png");
     help->parallaxInit("images/help.jpg");
     enmsTex->loadTexture("images/mon.png");
-
+    healthBar->initHealthBar("images/heartBar.png");
 
     /*for(int i = 0; i < 1; i++){
         enms[i].initEnemy(enmsTex->tex);
@@ -239,6 +237,8 @@ GLint GLScene::drawGLScene()
         // Then update enemy based on their current action
         this->updateEnemiesAction();
 
+        this->updateEnemiesHitPlayer();     // Check if enemies collide with player to decrease player health
+
         // Clean up any drops picked up by player
         this->updateDrops();
 
@@ -249,6 +249,8 @@ GLint GLScene::drawGLScene()
         // Draw any GameDrops on the screen
         this->drawDrops();
         /************************************************ END OF RICHARD'S CODE ****************************/
+        healthBar->healthBarActions(ply->health);   // health bar action based on player health
+        healthBar->drawHealthBar();                 // redraw health bar
         break;
 
     case PAUSED: // pop up pause menu
@@ -357,12 +359,7 @@ case WM_LBUTTONDOWN:
         {
         break;
         }
-
-
-
-
     }
-
 }
 
 // RICHARD'S CODE
@@ -470,14 +467,6 @@ void GLScene::spawnEnemies(int level)
 }
 
 
-
-
-
-
-
-
-
-
 // RICHARDS CODE
 // Create new GameDrop object and place into vector drops at the end
 // Apply texture image to the last object in the vector
@@ -535,6 +524,9 @@ void GLScene::resetLevel(int level)
     // Reset player action and variables
     ply->xPos = 0.0;                    // Reset player position
     // Reset health here STEVEN
+    ply->health = 5;
+    healthBar->healthBarActions(ply->health);
+    healthBar->drawHealthBar();
     // Reset godmode status here
     ply->setPlayerAttackStatus(false);      // Reset flag determining if attacked
     ply->setKeyStatus(false);           // Reset flag determining if key obtained
@@ -542,8 +534,6 @@ void GLScene::resetLevel(int level)
     ply->actionTrigger = "stand";       // Player starts off with stand animation
 
 }
-
-
 
 
 // RICHARD'S CODE
@@ -570,6 +560,9 @@ void GLScene::resetGame()
     // Reset player action and variables
     ply->xPos = 0.0;                    // Reset player position
     // Reset health here STEVEN
+    ply->health = 5;
+    healthBar->healthBarActions(ply->health);
+    healthBar->drawHealthBar();
     // Reset godmode status here
     ply->setPlayerAttackStatus(false);      // Reset flag determining if attacked
     ply->setKeyStatus(false);           // Reset flag determining if key obtained
@@ -597,8 +590,6 @@ void GLScene::drawDrops()
 
     }
 }
-
-
 
 // RICHARD'S CODE
 // Goes through the vector drops checking to see if player has collided with object
@@ -642,7 +633,14 @@ void GLScene::updateEnemiesAction()
 
 }
 
-
+// Goes through the vector enemyType2 updating all of their collision with player status
+void GLScene::updateEnemiesHitPlayer(){
+    for(int i = 0; i < this->enemyType2.size(); i++){
+        if(this->enemyType2[i]->getHitStatus()){
+            ply->health -= 1;
+        }
+    }
+}
 
 // RICHARD'S CODE
 // Goes through vector enemyType2 deleting any enemy objects whose action value is 9

@@ -1,4 +1,7 @@
 #include "_npc.h"
+#include<player.h>
+
+player * playerr = new player();
 
 _npc::_npc()
 {
@@ -118,6 +121,7 @@ void _npc::actions(float playerX)
         xMax = 0;
         yMin = 0;
         yMax = 0;
+        this->enemyHit = false;
         drawEnemy();
         break;
 
@@ -127,6 +131,8 @@ void _npc::actions(float playerX)
         if(this->enemyHealth > 5 && this->enemyHit){
             this->enemyHealth -= 15;
             this->enemyHit = false;
+            playerr->health -=1;
+            cout << playerr->health << " player health from npc class" << endl;
 
             // After collision make the enemy behave how it originally was
             this->action = this->previousAction;
@@ -146,6 +152,7 @@ void _npc::actions(float playerX)
         // If enemy has 5 health or less then the collision will cause enemy to die next frame update
         }else if(this->enemyHealth <= 5 && this->enemyHit){
             this->action = 9;
+            playerr->health -=1;
         }
         else{};
     }
