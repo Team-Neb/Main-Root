@@ -12,16 +12,16 @@ class Inputs
         virtual ~Inputs();
 
 
-        void keyPressed( StateManager*, _Sound*);
+//        void keyPressed( StateManager*, _Sound*);
         void keyPressed( StateManager*);
 
-        void keyPressed(Model *, StateManager*);
-        void keyPressed(_Sound *);
+//        void keyPressed(Model *, StateManager*);
+//        void keyPressed(_Sound *);
         void keyUp(); // key up function to pause soon
 
 
-        void keyPressed( StateManager*);
-        void keyUp();
+//        void keyPressed( StateManager*);
+//        void keyUp();
 
 
         void manualParallax(Parallax *, float); //move parallax by keys

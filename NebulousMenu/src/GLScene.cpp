@@ -385,17 +385,6 @@ void GLScene::initDropTextures()
 
 
 
-
-
-    // Apply the texture
-    this->dropTextures[0]->loadTexture("images/heart_drop.png");
-    this->dropTextures[1]->loadTexture("images/godmode_drop.png");
-    this->dropTextures[2]->loadTexture("images/key_drop.png");
-}
-
-
-
-
 // RICHARD'S CODE
 // Holds the enemy textures
 // Add textureLoader objects into vector enemyTextures
@@ -428,21 +417,6 @@ void GLScene::initLevelScenes()
 }
 
 
-// RICHARD'S CODE
-// Holds the background scenes for each level
-// Add Parallax Objects into the vector levels up to the defined number of levels
-// Then manually apply the images to each object
-void GLScene::initLevelScenes()
-{
-    // Create the number of parallax objects for the background scene of each level
-    for(int i = 0; i < NUMBER_OF_LEVELS; i++){
-        this->levels.push_back(new Parallax());
-    }
-    // INITIALIZE THE BACKGROUND GAME LEVEL SCENES
-    this->levels[0]->parallaxInit("images/par.png");
-    this->levels[1]->parallaxInit("images/level-2.png");
-}
-
 
 // RICHARDS CODE
 // Create new Parallax objects, up to however many cinematicFrames is defined as
@@ -483,39 +457,6 @@ void GLScene::spawnEnemies(int level)
             }
             break;
         case 2:
-
-
-// RICHARDS CODE
-// Create new Parallax objects, up to however many cinematicFrames is defined as
-// Place them into vector of cinematic
-// Finally parallaxInit all of the newly created objects
-//      TO DO: FIND A BETTER WAY TO INIT THE OBJECTS
-void GLScene::initCinematic()
-{
-    // Add Parallax objects into the vector
-    for(int i = 0; i < this->cinematicFrames; i++){
-        cinematic.push_back(new Parallax());
-    };
-    cinematic[0]->parallaxInit("images/scene01.png");
-    cinematic[1]->parallaxInit("images/scene02.jpg");
-    cinematic[2]->parallaxInit("images/scene03.png");
-    cinematic[3]->parallaxInit("images/scene04.png");
-    cinematic[4]->parallaxInit("images/scene05.png");
-}
-
-
-
-// RICHARDS CODE
-// Create a new enemy object, place into vector of enemy objects
-// Apply texture image to the object and finally place it randomly on the screen
-// Takes in the scenes current level
-void GLScene::spawnEnemies(int level)
-{
-    switch(level){
-
-        // Stevens enemy objects go in here.
-        // My enemy objects are placed in level 1 as place holder for now
-        case 1:
             for(int i = this->enemyType2.size(); i < MAX_ENEMIES; i++){
                 this->enemyType2.push_back(new _npc());
                 this->enemyType2.back()->initEnemy(this->enemyTextures[0]->tex);
@@ -523,11 +464,17 @@ void GLScene::spawnEnemies(int level)
 
             }
             break;
-
         default:
             break;
     }
 }
+
+
+
+
+
+
+
 
 
 
@@ -555,56 +502,9 @@ void GLScene::spawnGameDrop(float x, float y ,float z, int type){
             drops[drops.size() - 1]->setDropType(3);
             break;
         default:
-
-        case 2:
-            for(int i = this->enemyType2.size(); i < MAX_ENEMIES; i++){
-                this->enemyType2.push_back(new _npc());
-                this->enemyType2.back()->initEnemy(this->enemyTextures[0]->tex);
-                this->enemyType2.back()->placeEnemyRandom();
-
-            }
-            break;
-        default:
             break;
     }
 }
-
-
-
-// RICHARDS CODE
-// Create new GameDrop object and place into vector drops at the end
-// Apply texture image to the last object in the vector
-// Place the object based on the enemy's position that spawned this drop
-// Takes in the enemy's x, y, and z Position values
-void GLScene::spawnGameDrop(float x, float y ,float z, int type){
-    drops.push_back(new GameDrops());
-    switch(type){
-        case 1:
-
-            drops[drops.size() - 1]->initDrop(this->dropTextures[0]->tex);
-            drops[drops.size() - 1]->placeDrop(x, y - 0.2, z);
-            drops[drops.size() - 1]->setDropType(1);
-            break;
-
-        case 2:
-            drops[drops.size() - 1]->initDrop(this->dropTextures[1]->tex);
-            drops[drops.size() - 1]->placeDrop(x, y - 0.2, z);
-            drops[drops.size() - 1]->setDropType(2);
-            break;
-        case 3:
-            drops[drops.size() - 1]->initDrop(this->dropTextures[2]->tex);
-            drops[drops.size() - 1]->placeDrop(x, y - 0.2, z);
-            drops[drops.size() - 1]->setDropType(3);
-            break;
-        default:
-            drops[drops.size() - 1]->initDrop(this->dropTextures[0]->tex);
-            drops[drops.size() - 1]->placeDrop(x, y - 0.2, z);
-            drops[drops.size() - 1]->setDropType(1);
-            break;
-    }
-}
-
-
 
 
 // RICHARD'S CODE
@@ -700,120 +600,6 @@ void GLScene::drawDrops()
 
 
 
-
-
-// RICHARD'S CODE
-void GLScene::resetLevel(int level)
-{
-
-    cout<<"RESETTING LEVEL"<<endl;
-    this->level = level;
-    this->is_level_complete = false;
-
-    // Destroy all enemy objects
-    while( !this->enemyType2.empty() ){
-        delete this->enemyType2.back();
-        this->enemyType2.back() = NULL;
-        enemyType2.pop_back();
-    }
-
-
-    // Destroy all gamedrop objects
-    while( !this->drops.empty() ){
-        delete this->drops.back();
-        this->drops.back() = NULL;
-        drops.pop_back();
-    }
-
-
-
-    // Reset player action and variables
-    ply->xPos = 0.0;                    // Reset player position
-    // Reset health here STEVEN
-    // Reset godmode status here
-    ply->setPlayerAttackStatus(false);      // Reset flag determining if attacked
-    ply->setKeyStatus(false);           // Reset flag determining if key obtained
-    ply->setPlayerDirection(1);         // Player starts off facing right
-    ply->actionTrigger = "stand";       // Player starts off with stand animation
-
-}
-
-
-
-
-// RICHARD'S CODE
-// Reset the entire game
-void GLScene::resetGame()
-{
-    this->level = 1;
-    this->is_level_complete = false;
-
-    // Destroy all enemy objects
-    while( !this->enemyType2.empty() ){
-        delete this->enemyType2.back();
-        this->enemyType2.back() = NULL;
-        enemyType2.pop_back();
-
-// RICHARD'S CODE
-// Goes through the vector drops checking to see if player has collided with object
-// Then checks to see if the drop is supposed to be deleted, if so retrieve drop information type
-// and set update proper status flag of player before deleting the object
-void GLScene::updateDrops()
-{
-    for(int i = 0; i < this->drops.size(); i++){
-        this->drops[i]->checkPlayerPickup(ply->xPos, ply->getPlayerDirection());      // update the status of game drop object if collision
-        if(this->drops[i]->getAction() == 9){
-            if(this->drops[i]->getDropType() == 3){
-                ply->setKeyStatus(true);
-                cout<<"Picked up key!"<<endl;
-            }
-            cout<<"PICKED UP GAMEDROP OBJECT"<<endl;
-            delete this->drops[i];
-            this->drops[i] = NULL;
-            this->drops.erase(drops.begin() + i);
-        }
-
-    }
-
-    // Destroy all gamedrop objects
-    while( !this->drops.empty() ){
-        delete this->drops.back();
-        this->drops.back() = NULL;
-        drops.pop_back();
-    }
-
-    // Reset player action and variables
-    ply->xPos = 0.0;                    // Reset player position
-    // Reset health here STEVEN
-    // Reset godmode status here
-    ply->setPlayerAttackStatus(false);      // Reset flag determining if attacked
-    ply->setKeyStatus(false);           // Reset flag determining if key obtained
-    ply->setPlayerDirection(1);         // Player starts off facing right
-    ply->actionTrigger = "stand";       // Player starts off with stand animation
-
-
-    // RESET SOUND
-
-
-    // RESET HEALTH BAR
-}
-
-
-
-// RICHARD'S CODE
-// Draw's any GameDrop object onto the screen.
-// Actions() of drops[i] was/is meant to be IDLE animation.
-void GLScene::drawDrops()
-{
-    // Draw any GameDrops on the screen
-    for(int i = 0; i < this->drops.size(); i++){
-        drops[i]->actions();        // want rotating IDLE animation
-        drops[i]->drawDrop();
-    }
-}
-
-
-
 // RICHARD'S CODE
 // Goes through the vector drops checking to see if player has collided with object
 // Then checks to see if the drop is supposed to be deleted, if so retrieve drop information type
@@ -902,64 +688,7 @@ void GLScene::destroyEnemies()
 
 
 
-// RICHARD'S CODE
-// Goes through the vector enemyType2 updating all of their next action (move left/right)
-// If player has attacked, check if enemy collided with player sword before updating action
-// Afterwards set's player's attack status to false
-void GLScene::updateEnemiesAction()
-{
-
-    // Update all enemies. If player has attacked check if there was a sword collision
-    for(int i = 0; i < this->enemyType2.size(); i++){
-        if(ply->hasPlayerAttacked()){
-            this->enemyType2[i]->swordCollisionCheck(ply->xPos, ply->getPlayerDirection() );
-        }
-        this->enemyType2[i]->actions(ply->xPos);
-    }
-
-    ply->setPlayerAttackStatus(false);
-
-}
 
 
 
-// RICHARD'S CODE
-// Goes through vector enemyType2 deleting any enemy objects whose action value is 9
-// Random chance to spawn 1 of 3 types of drops upon enemy death.
-// Checks to see if the vector enemyType2 is empty after to determine if move onto next level
-void GLScene::destroyEnemies()
-{
-    // Destroy enemy objects if they are supposed to die and while level not complete
-    for(int i = 0; i < this->enemyType2.size(); i++){
-        if(this->enemyType2[i]->action == 9 && !this->is_level_complete){
 
-            // Random chance to spawn a GameDrop
-            int temp = 0;
-            temp = rand() % 10 + 1;
-            if(temp >= 10){
-                this->spawnGameDrop(this->enemyType2[i]->xPos, this->enemyType2[i]->yPos, -5.0, 3);
-            }else if( temp >=7){
-                this->spawnGameDrop(this->enemyType2[i]->xPos, this->enemyType2[i]->yPos, -5.0, 2);
-            }else{
-                this->spawnGameDrop(this->enemyType2[i]->xPos, this->enemyType2[i]->yPos, -5.0, 1);
-            }
-
-
-            // Try to avoid memory leaks
-            delete this->enemyType2[i];       // delete enemy object
-            this->enemyType2[i] = NULL;       // no dangling pointers
-            this->enemyType2.erase(enemyType2.begin() + i);
-
-
-            // If vector is empty and player has obtained key, move onto next level
-            if(this->enemyType2.empty() && ply->getKeyStatus() ){
-                // Put this if statement to prevent game from crashing after 2nd level
-                if(this->level != 2){
-                    this->level += 1;
-                }
-                this->is_level_complete = true;
-            }
-        }
-    }
-
-}

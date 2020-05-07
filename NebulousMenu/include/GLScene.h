@@ -5,7 +5,7 @@
 #include <GL/glut.h>
 #include <StateManager.h>
 
-#include<_Sound.h>
+//#include<_Sound.h>
 
 #include <Timer.h>
 #include <vector>

@@ -34,11 +34,11 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add directory="C:/Users/Richard/Documents/CSCI191/Common/include" />
+			<Add directory="../Common/include" />
 		</Compiler>
 		<Linker>
-			<Add library="../../CSCI191/Common/lib/libSOIL.a" />
-			<Add library="glut32" />
+			<Add library="../Common/lib/libSOIL.a" />
+			<Add library="../Common/lib/glut32.lib" />
 			<Add library="opengl32" />
 			<Add library="glu32" />
 			<Add library="winmm" />
@@ -48,7 +48,6 @@
 		<Unit filename="include/GLLight.h" />
 		<Unit filename="include/GLScene.h" />
 		<Unit filename="include/GameDrops.h" />
-
 		<Unit filename="include/Inputs.h" />
 		<Unit filename="include/Parallax.h" />
 		<Unit filename="include/StateManager.h" />
@@ -62,7 +61,6 @@
 		<Unit filename="src/GLLight.cpp" />
 		<Unit filename="src/GLScene.cpp" />
 		<Unit filename="src/GameDrops.cpp" />
-
 		<Unit filename="src/Inputs.cpp" />
 		<Unit filename="src/Parallax.cpp" />
 		<Unit filename="src/StateManager.cpp" />

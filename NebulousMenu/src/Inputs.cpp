@@ -84,7 +84,7 @@ void Inputs::keyPressed(StateManager *stateManager)
     }
 }
 
-void Inputs::keyPressed(Model * Mdl, StateManager *stateManager)
+/*void Inputs::keyPressed(Model * Mdl, StateManager *stateManager)
 
 {
     switch(wParam){
@@ -214,7 +214,7 @@ void Inputs::keyPressed(Model * Mdl, StateManager *stateManager)
 
 
     }
-}
+}*/
 
 void Inputs::keyUp()
 {

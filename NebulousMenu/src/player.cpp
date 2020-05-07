@@ -36,7 +36,7 @@ player::player()
     yPos = -2;
     zPos = -5.0;
 
-    health = 5;
+//    health = 5;
 
 
     lastKeyHit = false; // Check the last key arrow hit to set the current pos for player. False = Looking at the right
