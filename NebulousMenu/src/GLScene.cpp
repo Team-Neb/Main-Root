@@ -1,4 +1,3 @@
-
 #include <GLLight.h>
 #include "GLScene.h"
 #include<Inputs.h>
@@ -6,17 +5,12 @@
 #include<player.h>
 #include <_enms.h>
 #include <_checkCollision.h>
-#include<_Sound.h>
-#include <HealthBar.h>
-#include <_npc.h>
-#include <Timer.h>
+#include <_npc.h>       // Richard's enemy class
 #include <vector>       // Needed for vector of pointers of various classes
 #include <GameDrops.h>  // Richard's game drop class
 #include <time.h>
 
-
 Inputs *KbMs = new Inputs();
-Model *Mdl = new Model();
 Parallax *plx = new Parallax();
 Parallax *pause = new Parallax();
 player *ply = new player();
@@ -24,34 +18,12 @@ StateManager *stateManager = new StateManager;
 Parallax *tlt = new Parallax();
 Parallax *menu = new Parallax();
 Parallax *help = new Parallax();
-Parallax *options = new Parallax();
-Parallax *storyOne = new Parallax();
-Parallax *storyTwo = new Parallax();
-Parallax *storyThree = new Parallax();
-Parallax *storyFour = new Parallax();
-Parallax *storyFive = new Parallax();
-Parallax *continueScreen = new Parallax();
-Parallax *credits = new Parallax();
-
-
-
-
-// implement story slides thru parallax
 
 _checkCollision *hit = new _checkCollision();
-HealthBar *healthBar = new HealthBar();
 
 textureLoader *enmsTex = new textureLoader();
-_enms enms[1];
+_enms enms[10];
 
-
-// Sound adding
-
-_Sound *snds = new _Sound();
-
-// init second enemy object
-_npc *enemy2 = new _npc();
-textureLoader *enemy2Tex = new textureLoader();
 
 /**************** RICHARD'S CODE *************************/
 
@@ -61,6 +33,7 @@ const int NUMBER_OF_ENEMIES = 1;        // Controls how many textures are create
 const int TME_BTWN_SCNS = 2000;         // How fast the intro cinematic plays. Value represents MILLISECONDS
 
 /*************** END OF RICHARD'S CODE **********************/
+
 
 GLScene::GLScene()
 {
@@ -108,61 +81,33 @@ GLint GLScene::initGL()
 
 
     // Initialize the cinematic vector with all the needed scenes
-    //this->initCinematic();
-   // this->cinematicTimer->start();
+    this->initCinematic();
+    this->cinematicTimer->start();
     /************************** END OF RICHARD'S CODE **************************************/
 
    // images to import for game states
     ply->playerInit("images/walkAndattack.png");
     plx->parallaxInit("images/par.png");
-    pause->parallaxInit("images/pause.png");
+    pause->parallaxInit("images/pause.jpg");
     tlt->parallaxInit("images/title.png");
-    menu->parallaxInit("images/FrontMenu.png");
-    help->parallaxInit("images/help.png");
-    options->parallaxInit("images/options.png");
-    healthBar->initHealthBar("images/heartBar.png");
+    menu->parallaxInit("images/FrontMenu.jpg");
+    help->parallaxInit("images/help.jpg");
     enmsTex->loadTexture("images/mon.png");
-    enemy2Tex->loadTexture("images/monster2.png");  // load the image to the second enemy monster
-    credits->parallaxInit("images/credits.png");
-
-    storyOne->parallaxInit("images/scene01.png");
-    storyTwo->parallaxInit("images/scene02.jpg");
-    storyThree->parallaxInit("images/scene03.png");
-    storyFour->parallaxInit("images/scene04.png");
-    storyFive->parallaxInit("images/scene05.png");
-
-    // Here is where we'll load story slides for the narrative
 
 
     for(int i = 0; i < 1; i++){
         enms[i].initEnemy(enmsTex->tex);
         enms[i].placeEnemy((float)(rand()/float(RAND_MAX))*5-2.5, -0.5, -2.0);
         enms[i].xSize = enms[i].ySize = float(rand()%12)/65.0;
-        if (enms[i].xSize < 0){
-            enms[i].enemyFacing  = false;       // facing right, come from left side of player
-        }
-        else{
-            enms[i].enemyFacing = true;         // facing left, come from right side of player
-        }
     }
-
-
-   // snds->initSounds();
-    //snds->playMusic("sounds/WiiTheme.mp3"); // Switch back to sounds/NebulousTheme.mp3
-
-
-    // placing the enemy and initializing it's values
-    enemy2->initEnemy(enemy2Tex->tex);
-    enemy2->placeEnemy(-1.37, -1.45, -5.0);
-
-
     return true;
 
 }
 
 //function for main to exit game when escape is pressed on certain game states
 GameStates GLScene::sendState(){
-    return stateManager->_gameState;}
+    return stateManager->_gameState;
+}
 
 
 GLint GLScene::drawGLScene()
@@ -180,6 +125,7 @@ GLint GLScene::drawGLScene()
         break;
 
     case MENU:
+
         /***************************** RICHARD'S CODE ***********************************************/
         // Every 2 seconds update the cinematic vector position and as long as all scenes have not been displayed
         if (this->cinematicTimer->getTicks() > TME_BTWN_SCNS && currentCinematicFrame != this->cinematicFrames){
@@ -202,53 +148,10 @@ GLint GLScene::drawGLScene()
         }
         /************************* END OF RICHARD'S CODE *********************************************/
         break;
-
     case HELP:
         glPushMatrix();
         glScaled(.33, 1, 1.0);
         help->drawSquare(screenWidth,screenHeight);
-        glPopMatrix();
-        break;
-
-    case CREDITS:
-        glPushMatrix();
-        glScaled(.33, 1, 1.0);
-        credits->drawSquare(screenWidth,screenHeight);
-        glPopMatrix();
-        break;
-
-    case STORY1:
-        glPushMatrix();
-        glScaled(.33, 1, 1.0);
-        storyOne->drawSquare(screenWidth,screenHeight);
-        glPopMatrix();
-        break;
-
-    case STORY2:
-        glPushMatrix();
-        glScaled(.33, 1, 1.0);
-        storyTwo->drawSquare(screenWidth,screenHeight);
-        glPopMatrix();
-        break;
-
-    case STORY3:
-        glPushMatrix();
-        glScaled(.33, 1, 1.0);
-        storyThree->drawSquare(screenWidth,screenHeight);
-        glPopMatrix();
-        break;
-
-    case STORY4:
-        glPushMatrix();
-        glScaled(.33, 1, 1.0);
-        storyFour->drawSquare(screenWidth,screenHeight);
-        glPopMatrix();
-        break;
-
-    case STORY5:
-        glPushMatrix();
-        glScaled(.33, 1, 1.0);
-        storyFive->drawSquare(screenWidth,screenHeight);
         glPopMatrix();
         break;
 
@@ -287,69 +190,46 @@ GLint GLScene::drawGLScene()
 
         /**************** END OF RICHARD'S CODE ******************************************************/
 
-
         glPushMatrix();
             glTranslated(ply->xPos, ply->yPos , ply->zPos);
             ply->drawPlayer(); // render character
             ply->playerActions(); // render actions
         glPopMatrix();
 
+
+
         for(int i = 0; i < 1; i++){
             if(enms[i].xPos< -2.0){
                 enms[i].action = 0;
                 enms[i].xMove= 0.005;
                 enms[i].rotateZ = 0;
-                enms[i].enemyFacing = false;
                 enms[i].yPos = -0.5;
             }
             else if(enms[i].xPos > 2.0){
                 enms[i].action = 1;
                 enms[i].xMove = -0.005;
                 enms[i].rotateZ = 0;
-                enms[i].enemyFacing = true;
                 enms[i].yPos = -0.5;
             }
 
             enms[i].xPos += enms[i].xMove;
 
-            // check on left. Check if A press, player position - half the size of player is less the position of enms x position + half of enemy size,
-            // and check last key hit is true, meant player facing left, and check enemy facing right.
-            if (ply->actionTrigger == "Attack" && ply->xPos - ply->xSize/2 < enms[i].xPos + enms[i].xSize/2 && ply->lastKeyHit == true && enms[i].enemyFacing == false){
-                if(hit->isLinearCollision(ply->xPos, enms[i].xPos)){
-                    enms[i].action = 9; // enemies die
-                    //cout << enms[i].xPos+ enms[i].xSize/2 << endl;
-                }
-            }
-
-            // check on right
-            else if (ply->actionTrigger == "Attack" && ply->xPos + ply->xSize/2 > enms[i].xPos - enms[i].xSize/2 && ply->lastKeyHit == false && enms[i].enemyFacing == true){
+            if (ply->actionTrigger == "Attack" && ply->xPos > enms[i].xPos){
                 if(hit->isLinearCollision(ply->xPos, enms[i].xPos)){
                     enms[i].action = 9; // enemies die
                 }
             }
-            else if ((ply->actionTrigger == "stand" || ply->actionTrigger == "Left" || ply->actionTrigger == "Right") && (fabs(ply->xPos  - enms[i].xPos + enms[i].xSize/2 < 0.0000001))){
-                ply-> health -=1;
-            }
-            else if ((ply->actionTrigger == "stand" || ply->actionTrigger == "Left" || ply->actionTrigger == "Right") && (ply->xPos  == enms[i].xPos + enms[i].xSize/2)){
-                ply-> health -=1;
-            }
 
+
+            if (ply->actionTrigger == "Attack" && ply->xPos < enms[i].xPos){
+                if(hit->isLinearCollision(ply->xPos, enms[i].xPos)){
+                    enms[i].action = 9; // enemies die
+                }
+            }
             enms[i].actions();
         }
-        //cout<< ply->health;
-        healthBar->healthBarActions(ply->health);
-        healthBar->drawHealthBar();
 
-        /*if(ply->hasPlayerAttacked() ){
-            //check if player sword collided with enemy
-            enemy2->swordCollisionCheck(ply->xPos, ply->getPlayerDirection());
-            ply->setPlayerAttackStatus(false);
-        }
 
-        // This will update the position of the enemy and check for collision
-        // If collision was done by movement - then it will update the action variable
-        // of the enemy2. The next time it updates - the enemy will perform the appropiate action
-        enemy2->actions(ply->xPos);*/
         /************************************** RICHARD'S CODE ***********************************/
         // Check for collision with player sword
         // Then update enemy based on their current action
@@ -367,17 +247,6 @@ GLint GLScene::drawGLScene()
         /************************************************ END OF RICHARD'S CODE ****************************/
         break;
 
-    case HELP_INGAME:
-        glPushMatrix();
-        plx -> drawSquare(screenHeight, screenWidth);// drawing the game behind the pop screen
-        glPopMatrix();
-        glPushMatrix();
-        glScaled(.75, .75, 0.9); // reduced scaling to reduce size
-        options -> drawPopUp(screenHeight, screenWidth);
-        glPopMatrix();
-        break;
-
-
     case PAUSED: // pop up pause menu
 
         glPushMatrix();
@@ -391,11 +260,7 @@ GLint GLScene::drawGLScene()
         break;
         default:
         break;
-
-
     }
-        //plx -> scroll("left", 0.0001);
-
 }
 
 
@@ -420,13 +285,12 @@ int GLScene::winMsg(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             case WM_KEYDOWN:
             {
                 KbMs ->wParam = wParam;    //second variable refernces one here other is in a differnt file
-                KbMs -> keyPressed(Mdl, stateManager);
-                KbMs -> keyPressed(snds);
+                KbMs -> keyPressed(stateManager);
+
 
             if (stateManager->_gameState == GAME) // The game cannot be controlled while paused
                 {
                 KbMs -> playerAction(ply);
-                KbMs -> manualParallax(plx, 0.005);
                 /************************************************** RICHARD'S CODE ***************************************/
                 switch(this->level){
                     case 1:
@@ -453,21 +317,21 @@ int GLScene::winMsg(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 case WM_LBUTTONDOWN:
         {
             KbMs->wParam = wParam;
-            KbMs->mouseEventDown(Mdl,LOWORD(lParam),HIWORD(lParam));
+
         break;
         }
 
    		case WM_RBUTTONDOWN:
         {
             KbMs->wParam = wParam;
-            KbMs->mouseEventDown(Mdl,LOWORD(lParam),HIWORD(lParam));
+
         break;
         }
 
           case WM_MBUTTONDOWN:
         {
             KbMs->wParam = wParam;
-            KbMs->mouseEventDown(Mdl,LOWORD(lParam),HIWORD(lParam));
+
         break;
         }
 
@@ -481,13 +345,12 @@ case WM_LBUTTONDOWN:
 
         case WM_MOUSEMOVE:
         {
-             KbMs->mouseEventMove(Mdl,LOWORD(lParam),HIWORD(lParam));
+
         break;
         }
 
         case WM_MOUSEWHEEL:
         {
-            KbMs->mouseEventWheel(Mdl,(double)GET_WHEEL_DELTA_WPARAM(wParam));
         break;
         }
 
@@ -497,7 +360,6 @@ case WM_LBUTTONDOWN:
     }
 
 }
-
 
 // RICHARD'S CODE
 // Holds the drop textures
@@ -812,43 +674,3 @@ void GLScene::destroyEnemies()
     }
 
 }
-
-/*
-
-GLvoid GLScene::drawGLScene(_Sound* snd)
-{
-    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-    glLoadIdentity();
-    stateManager->_gameState;
-    _Sound -> _gameState;
-    //  State manager used to manipulate game states
-    switch(stateManager->_gameState){
-    case LANDING:
-
-
-        break;
-
-    case MENU:
-
-
-        break;
-
-    case HELP:
-
-        break;
-
-    case GAME:
-
-
-        break;
-
-    case PAUSED: // pop up pause menu
-
-        break;
-        default:
-        break;
-
-
-    }
-}
-*/

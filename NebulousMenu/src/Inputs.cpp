@@ -19,6 +19,71 @@ Inputs::~Inputs()
     // ???
 }
 
+void Inputs::keyPressed(StateManager *stateManager)
+{
+    switch(wParam){
+
+        case VK_LEFT:
+            break;
+
+        case VK_RIGHT:
+            break;
+
+        case VK_UP:
+            break;
+
+        case VK_DOWN:
+            break;
+
+        case VK_ESCAPE: //pause the game and open popup also quit the program for certain states
+            if (stateManager->_gameState == GAME)
+            {
+                stateManager->_gameState = PAUSED;
+            }
+
+            else if (stateManager->_gameState == PAUSED)
+            {
+                stateManager->_gameState = GAME;
+            }
+            else if (stateManager->_gameState == HELP)
+            {
+                stateManager->_gameState = MENU;
+            }
+            else if (stateManager->_gameState == MENU)
+            {
+                stateManager->_gameState = QUIT;
+            }
+            break;
+
+        case VK_RETURN: //Enter key commands
+
+            if (stateManager->_gameState == LANDING)
+            {
+                stateManager->_gameState = MENU; // BAD EDITS
+            }
+            else if (stateManager->_gameState == PAUSED)
+            {
+                stateManager->_gameState = MENU;
+            }
+
+            break;
+
+        case 0x4E: //N for new game
+            if (stateManager->_gameState == MENU)
+            {
+                stateManager->_gameState = GAME;
+            }
+
+        case 0x48: //H for help page
+            if (stateManager->_gameState == MENU)
+            {
+                stateManager->_gameState = HELP;
+            }
+
+
+    }
+}
+
 void Inputs::keyPressed(Model * Mdl, StateManager *stateManager)
 {
     switch(wParam){
@@ -363,5 +428,6 @@ void Inputs::keyPressed(StateManager *stateManager, _Sound* snd)
 
     }
 }
+
 
 

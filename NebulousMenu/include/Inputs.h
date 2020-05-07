@@ -14,6 +14,7 @@ class Inputs
         virtual ~Inputs();
 
         void keyPressed( StateManager*, _Sound*);
+        void keyPressed( StateManager*);
 
         void keyPressed(Model *, StateManager*);
         void keyPressed(_Sound *);

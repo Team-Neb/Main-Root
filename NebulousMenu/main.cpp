@@ -137,7 +137,7 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 
 		dwExStyle=WS_EX_APPWINDOW;								// Window Extended Style
 		dwStyle= WS_POPUP;			// must handle Gsync situations: Windows Style
-		ShowCursor(FALSE);									// Hide Mouse Pointer
+		ShowCursor(TRUE);									// Hide Mouse Pointer
 	}
 	else
 	{
@@ -327,10 +327,10 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
     int	fullscreenHeight = GetSystemMetrics(SM_CYSCREEN);
 
 	// Ask The User Which Screen Mode They Prefer
-	if (MessageBox(NULL,"Would you like to enter full screen mode sir?", "Start FullScreen?",MB_YESNO|MB_ICONQUESTION)==IDNO)
+	/*if (MessageBox(NULL,"Would you like to enter full screen mode sir?", "Start FullScreen?",MB_YESNO|MB_ICONQUESTION)==IDNO)
 	{
 		fullscreen=FALSE;							// Windowed Mode
-	}
+	}*/
 
 	// Create Our OpenGL Window
 	if (!CreateGLWindow("Midterm 1",fullscreenWidth,fullscreenHeight,256,fullscreen))
