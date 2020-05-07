@@ -92,18 +92,18 @@ GLint GLScene::initGL()
    // images to import for game states
     ply->playerInit("images/walkAndattack.png");
     plx->parallaxInit("images/par.png");
-    pause->parallaxInit("images/pause.jpg");
+    pause->parallaxInit("images/pause.png");
     tlt->parallaxInit("images/title.png");
-    menu->parallaxInit("images/FrontMenu.jpg");
+    menu->parallaxInit("images/FrontMenu.png");
     help->parallaxInit("images/help.jpg");
     enmsTex->loadTexture("images/mon.png");
 
 
-    for(int i = 0; i < 1; i++){
+    /*for(int i = 0; i < 1; i++){
         enms[i].initEnemy(enmsTex->tex);
         enms[i].placeEnemy((float)(rand()/float(RAND_MAX))*5-2.5, -0.5, -2.0);
         enms[i].xSize = enms[i].ySize = float(rand()%12)/65.0;
-    }
+    }*/
     return true;
 
 }
@@ -202,7 +202,7 @@ GLint GLScene::drawGLScene()
 
 
 
-        for(int i = 0; i < 1; i++){
+        /*for(int i = 0; i < 1; i++){
             if(enms[i].xPos< -2.0){
                 enms[i].action = 0;
                 enms[i].xMove= 0.005;
@@ -231,7 +231,7 @@ GLint GLScene::drawGLScene()
                 }
             }
             enms[i].actions();
-        }
+        }*/
 
 
         /************************************** RICHARD'S CODE ***********************************/
