@@ -2,7 +2,7 @@
 #define STATEMANAGER_H
 
 
-enum GameStates{LANDING,MENU,GAME,PAUSED,HELP,QUIT}; // Array of different game states to be in.
+enum GameStates{LANDING,MENU,GAME,PAUSED,HELP,QUIT,CREDITS}; // Array of different game states to be in.
 
 
 class StateManager

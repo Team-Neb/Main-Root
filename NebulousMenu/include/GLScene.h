@@ -13,7 +13,7 @@
 #include <GameDrops.h>
 #include <textureLoader.h>
 #include <_npc.h>
-
+#include<_Sound.h>
 
 
 class GLScene
