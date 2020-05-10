@@ -633,9 +633,13 @@ void GLScene::updateDrops()
                 ply->setKeyStatus(true);
                 cout<<"Picked up key!"<<endl;
             }
-            if(this->drops[i]->getDropType() == 1){
+            if(this->drops[i]->getDropType() == 1){             // pick up heart return 1 health
                 cout<<"Picked up heart"<<endl;
                 ply->health +=1;
+            }
+            if(this->drops[i]->getDropType() == 2){
+                cout << "Pick up star" << endl;
+                ply->health = 5;
             }
             cout<<"PICKED UP GAMEDROP OBJECT"<<endl;
 
