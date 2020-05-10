@@ -12,6 +12,16 @@
 #include<HealthBar.h>
 
 
+////// Sound Engine //////////
+
+#include<_Sound.h>
+#include<SNDS/irrKlang.h>
+
+ISoundEngine *SoundEngine = createIrrKlangDevice();
+_Sound *snds = new _Sound();
+
+////////////////////////////
+
 Inputs *KbMs = new Inputs();
 Parallax *plx = new Parallax();
 Parallax *pause = new Parallax();
@@ -20,6 +30,9 @@ StateManager *stateManager = new StateManager;
 Parallax *tlt = new Parallax();
 Parallax *menu = new Parallax();
 Parallax *help = new Parallax();
+Parallax *credits = new Parallax();
+
+
 HealthBar *healthBar = new HealthBar();
 _checkCollision *hit = new _checkCollision();
 
@@ -93,16 +106,23 @@ GLint GLScene::initGL()
     pause->parallaxInit("images/pause.png");
     tlt->parallaxInit("images/title.png");
     menu->parallaxInit("images/FrontMenu.png");
-    help->parallaxInit("images/help.jpg");
+    help->parallaxInit("images/help.png");
     enmsTex->loadTexture("images/mon.png");
     healthBar->initHealthBar("images/heartBar.png");
+    ////////// Added /////////////////
+    credits->parallaxInit("images/credits.png");
 
     /*for(int i = 0; i < 1; i++){
         enms[i].initEnemy(enmsTex->tex);
         enms[i].placeEnemy((float)(rand()/float(RAND_MAX))*5-2.5, -0.5, -2.0);
         enms[i].xSize = enms[i].ySize = float(rand()%12)/65.0;
     }*/
+
+    SoundEngine->play2D("sounds/NebulousTheme.mp3", GL_TRUE);
+    snds->initSounds();
+
     return true;
+
 
 }
 
@@ -154,6 +174,13 @@ GLint GLScene::drawGLScene()
         glPushMatrix();
         glScaled(.33, 1, 1.0);
         help->drawSquare(screenWidth,screenHeight);
+        glPopMatrix();
+        break;
+
+    case CREDITS:
+        glPushMatrix();
+        glScaled(.33, 1, 1.0);
+        credits->drawSquare(screenWidth,screenHeight);
         glPopMatrix();
         break;
 
@@ -292,6 +319,7 @@ int GLScene::winMsg(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             {
                 KbMs ->wParam = wParam;    //second variable refernces one here other is in a differnt file
                 KbMs -> keyPressed(stateManager);
+                KbMs -> keyPressed(snds);
 
 
             if (stateManager->_gameState == GAME) // The game cannot be controlled while paused

@@ -1,4 +1,5 @@
 #include "Inputs.h"
+#include<_Sound.h>
 
 Inputs::Inputs()
 {
@@ -36,6 +37,7 @@ void Inputs::keyPressed(StateManager *stateManager)
             break;
 
         case VK_ESCAPE: //pause the game and open popup also quit the program for certain states
+
             if (stateManager->_gameState == GAME)
             {
                 stateManager->_gameState = PAUSED;
@@ -49,17 +51,26 @@ void Inputs::keyPressed(StateManager *stateManager)
             {
                 stateManager->_gameState = MENU;
             }
+
+            else if (stateManager->_gameState == CREDITS)
+            {
+                stateManager->_gameState = MENU;
+            }
+
             else if (stateManager->_gameState == MENU)
             {
                 stateManager->_gameState = QUIT;
             }
             break;
 
+
+
+
         case VK_RETURN: //Enter key commands
 
             if (stateManager->_gameState == LANDING)
             {
-                stateManager->_gameState = MENU; // BAD EDITS
+                stateManager->_gameState = MENU; // BAD EDITS // Yeah real funky edits here lmao
             }
             else if (stateManager->_gameState == PAUSED)
             {
@@ -79,9 +90,61 @@ void Inputs::keyPressed(StateManager *stateManager)
             {
                 stateManager->_gameState = HELP;
             }
+            else if (stateManager->_gameState == PAUSED)
+            {
+                stateManager->_gameState = HELP;
+            }
 
+
+
+        case 0x43: // C for the credits
+            if (stateManager->_gameState == MENU)
+            {
+                stateManager->_gameState = CREDITS;
+            }
 
     }
+}
+
+
+void Inputs::keyPressed(_Sound* snd) // SOUND EFFECTS CONFIGS
+{
+    switch(wParam)
+    {
+        case 0X41: // A for Attack
+        snd->playSound("sounds/SwordSwing01.mp3");
+            break;
+
+        case VK_SPACE: // Space bar
+            snd->playSound("sounds/MenuSound.mp3");
+            break;
+
+        case VK_RETURN: // Enter button sfx
+        snd->playSound("sounds/MenuSound.mp3");
+            break;
+
+        case 0x4E: // Option sfx
+        snd->playSound("sounds/MenuSound2.mp3");
+            break;
+
+        case VK_ESCAPE: // escape button
+        snd->playSound("sounds/MenuSound2.mp3");
+            break;
+
+        case 0x48: // H for help in the menu
+        snd->playSound("sounds/HelpSound.mp3");
+            break;
+
+        case 0x46: // Press F for respect
+        snd->playSound("sounds/HelpSound.mp3");
+            break;
+
+        case 0x43: // Press F for respect
+        snd->playSound("sounds/MenuSound2.mp3");
+            break;
+
+    }
+
 }
 
 /*void Inputs::keyPressed(Model * Mdl, StateManager *stateManager)
