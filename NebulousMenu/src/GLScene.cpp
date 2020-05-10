@@ -107,7 +107,7 @@ GLint GLScene::initGL()
     tlt->parallaxInit("images/title.png");
     menu->parallaxInit("images/FrontMenu.png");
     help->parallaxInit("images/help.png");
-    enmsTex->loadTexture("images/mon.png");
+
     healthBar->initHealthBar("images/heartBar.png");
     ////////// Added /////////////////
     credits->parallaxInit("images/credits.png");
