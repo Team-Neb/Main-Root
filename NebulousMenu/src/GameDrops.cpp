@@ -104,8 +104,6 @@ void GameDrops::checkPlayerPickup(float playerX, int direction)
 
 
 
-
-
 int GameDrops::getDropType()
 {
     return this->dropType;

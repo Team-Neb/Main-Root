@@ -44,7 +44,7 @@ _enms enms[10];
 
 const int NUMBER_OF_LEVELS = 2;         // Controls how large the levels vector will be
 const int MAX_ENEMIES = 4;              // Controls how large the enemy vector will be and when to end the level
-const int NUMBER_OF_ENEMIES = 1;        // Controls how many textures are created for the enemy object
+const int NUMBER_OF_ENEMIES = 2;        // Controls how many textures are created for the enemy object
 const int TME_BTWN_SCNS = 2000;         // How fast the intro cinematic plays. Value represents MILLISECONDS
 
 /*************** END OF RICHARD'S CODE **********************/
@@ -421,6 +421,7 @@ void GLScene::initEnemyTextures()
     }
 
     this->enemyTextures[0]->loadTexture("images/Skull_Spritesheet.png");
+    this->enemyTextures[1]->loadTexture("images/Demon_SpriteSheet.png");
 }
 
 
@@ -484,7 +485,7 @@ void GLScene::spawnEnemies(int level)
         case 2:
             for(int i = this->enemyType2.size(); i < MAX_ENEMIES; i++){
                 this->enemyType2.push_back(new _npc());
-                this->enemyType2.back()->initEnemy(this->enemyTextures[0]->tex);
+                this->enemyType2.back()->initEnemy(this->enemyTextures[1]->tex);
                 this->enemyType2.back()->placeEnemyRandom();
 
             }
@@ -632,7 +633,12 @@ void GLScene::updateDrops()
                 ply->setKeyStatus(true);
                 cout<<"Picked up key!"<<endl;
             }
+            if(this->drops[i]->getDropType() == 1){
+                cout<<"Picked up heart"<<endl;
+                ply->health +=1;
+            }
             cout<<"PICKED UP GAMEDROP OBJECT"<<endl;
+
             delete this->drops[i];
             this->drops[i] = NULL;
             this->drops.erase(drops.begin() + i);
