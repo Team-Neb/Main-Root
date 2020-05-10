@@ -266,7 +266,7 @@ GLint GLScene::drawGLScene()
 
         this->updateEnemiesHitPlayer();     // Check if enemies collide with player to decrease player health
 
-        // Clean up any drops picked up by player
+        // Clean up any drops picked up by player, also update player status what pick up to update health of player
         this->updateDrops();
 
         // Cleanup any enemies from screen/level if they are supposed to die
@@ -676,6 +676,10 @@ void GLScene::updateEnemiesHitPlayer(){
     for(int i = 0; i < this->enemyType2.size(); i++){
         if(this->enemyType2[i]->getHitStatus()){
             ply->health -= 1;
+            if(ply->health == 0){
+                cout << "player die" << endl;
+                resetGame();
+            }
         }
     }
 }
