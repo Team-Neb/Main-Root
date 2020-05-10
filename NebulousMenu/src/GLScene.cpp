@@ -226,7 +226,6 @@ GLint GLScene::drawGLScene()
         glPopMatrix();
 
 
-
         /************************************** RICHARD'S CODE ***********************************/
         // Check for collision with player sword
         // Then update enemy based on their current action
@@ -557,7 +556,7 @@ void GLScene::resetGame()
     // Reset player action and variables
     ply->xPos = 0.0;                    // Reset player position
     // Reset health here STEVEN
-    ply->health = 5;
+    ply->health = 5;            // RESET HEALTH BAR
     healthBar->healthBarActions(ply->health);
     healthBar->drawHealthBar();
     // Reset godmode status here
@@ -570,7 +569,7 @@ void GLScene::resetGame()
     // RESET SOUND
 
 
-    // RESET HEALTH BAR
+
 }
 
 

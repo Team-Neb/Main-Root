@@ -1,0 +1,23 @@
+Team Nebulous
+Team member:
+Omar Flores
+Steven Nguyen
+Rodolfo Nieblas
+Richard Mojarro
+
+Decription:
+Our game called Nebulous, it is a 2D platformer game. Our game has 2 levels if you kill certain amount of monster
+and pick up the key, you can go to another level. Monsters will go to player and if player don't attack, player will loss health. 
+If player health = 0, the game will reset. You can pause, resume, or quit the game anytime you want.
+
+How to play:
+Use Left Arrow and Right Arrow to move left and right
+Use "A" to attack
+If monters drop items, go forward to the item to pick up
+The game have 3 types of items drop.
+- a Heart: return 1 health to player
+- a Star: return full health to player 
+- a Key: the key to the next level.
+
+Role of member:
+Steven Nguyen: implement player class, health bar class. create player sprite sheet.
