@@ -227,38 +227,6 @@ GLint GLScene::drawGLScene()
 
 
 
-        /*for(int i = 0; i < 1; i++){
-            if(enms[i].xPos< -2.0){
-                enms[i].action = 0;
-                enms[i].xMove= 0.005;
-                enms[i].rotateZ = 0;
-                enms[i].yPos = -0.5;
-            }
-            else if(enms[i].xPos > 2.0){
-                enms[i].action = 1;
-                enms[i].xMove = -0.005;
-                enms[i].rotateZ = 0;
-                enms[i].yPos = -0.5;
-            }
-
-            enms[i].xPos += enms[i].xMove;
-
-            if (ply->actionTrigger == "Attack" && ply->xPos > enms[i].xPos){
-                if(hit->isLinearCollision(ply->xPos, enms[i].xPos)){
-                    enms[i].action = 9; // enemies die
-                }
-            }
-
-
-            if (ply->actionTrigger == "Attack" && ply->xPos < enms[i].xPos){
-                if(hit->isLinearCollision(ply->xPos, enms[i].xPos)){
-                    enms[i].action = 9; // enemies die
-                }
-            }
-            enms[i].actions();
-        }*/
-
-
         /************************************** RICHARD'S CODE ***********************************/
         // Check for collision with player sword
         // Then update enemy based on their current action
