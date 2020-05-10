@@ -48,6 +48,7 @@
 		<Unit filename="include/GLLight.h" />
 		<Unit filename="include/GLScene.h" />
 		<Unit filename="include/GameDrops.h" />
+		<Unit filename="include/HealthBar.h" />
 		<Unit filename="include/Inputs.h" />
 		<Unit filename="include/Parallax.h" />
 		<Unit filename="include/StateManager.h" />
@@ -61,6 +62,7 @@
 		<Unit filename="src/GLLight.cpp" />
 		<Unit filename="src/GLScene.cpp" />
 		<Unit filename="src/GameDrops.cpp" />
+		<Unit filename="src/HealthBar.cpp" />
 		<Unit filename="src/Inputs.cpp" />
 		<Unit filename="src/Parallax.cpp" />
 		<Unit filename="src/StateManager.cpp" />
