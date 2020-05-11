@@ -25,3 +25,6 @@ Steven Nguyen: implement player class, health bar class. create player sprite sh
 Richard Mojarro: Added the enemy class, collision detection method for player with enemy 
 through movement. Also with sword and enemy. Created the GameDrop class which creates 
 the type of drops found in the game - heart/star/key. Added the cinematic intro to the game.
+
+Rodolfo Nieblas: Created some spritesheets for the monsters, created images for menu and sub-menu pages, created 
+introduction. Coding wise I only created a few key binds and introduced the images I created.
