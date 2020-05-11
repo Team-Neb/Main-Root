@@ -20,7 +20,7 @@ The game have 3 types of items drop.
 - a Key: the key to the next level.
 
 Role of member:
-Steven Nguyen: implement player class, health bar class. create player sprite sheet.
+Steven Nguyen: implement player class, health bar class. create player sprite sheet, health bar sprite sheet
 
 Richard Mojarro: Added the enemy class, collision detection method for player with enemy 
 through movement. Also with sword and enemy. Created the GameDrop class which creates 
