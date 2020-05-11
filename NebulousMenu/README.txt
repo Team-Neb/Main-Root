@@ -21,3 +21,5 @@ The game have 3 types of items drop.
 
 Role of member:
 Steven Nguyen: implement player class, health bar class. create player sprite sheet.
+
+Richard Mojarro: Added the enemy class, collision detection method for player with enemy through movement. Also with sword and enemy. Created the GameDrop class which creates the type of drops found in the game - heart/star/key. Added the cinematic intro to the game.
